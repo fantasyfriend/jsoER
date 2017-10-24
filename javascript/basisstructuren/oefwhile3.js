@@ -3,10 +3,10 @@
 var toetsenbord = require('readline-sync');
 
 var geslacht = toetsenbord.question("geslacht m of v : ");
-var leeftijd = parseInt(toetsenbord.question("leeftijd : "), 10);
-var ml = 0; var mh = 0; var vl = 0; var vh = 0;
+var ml = 0; var mh = 0; var vl = 0; var vh = 0;var leeftijd;
 
 while (geslacht == "m" || geslacht == "v") {
+    leeftijd = parseInt(toetsenbord.question("leeftijd : "), 10);
     if (geslacht == "m") {
         if (leeftijd < 25) { ml++ }
         else { mh++ }
@@ -16,9 +16,6 @@ while (geslacht == "m" || geslacht == "v") {
         else { vh++ }
     }
     geslacht = toetsenbord.question("geslacht m of v : ");
-    leeftijd = parseInt(toetsenbord.question("leeftijd : "), 10);
 }
 
-console.log("         <25  >=25");
-console.log("mannen    " + ml + "     " + mh);
-console.log("vrouwen   " + vl + "     " + vh);
+console.log("\t<25\t>=25\nmannen\t" + ml + "\t" + mh+"\nvrouwen\t" + vl + "\t" + vh);
