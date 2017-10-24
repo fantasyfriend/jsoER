@@ -1,8 +1,8 @@
 'use strict';
 var toetsenbord = require('readline-sync');
 
-var getal1 = parseInt(toetsenbord.question('kies uw eerste geheel getal :  '));
-var getal2 = parseInt(toetsenbord.question('kies uw tweede geheel getal :  '));
+var getal1 = parseInt(toetsenbord.question('kies uw eerste getal :  '), 10);
+var getal2 = parseInt(toetsenbord.question('kies uw tweede getal :  '), 10);
 var uitkomst
 var operator = toetsenbord.question('kies de gewenste operator (+,-,* of /) :  ');
 
