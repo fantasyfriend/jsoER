@@ -1,0 +1,24 @@
+body {
+    font-size: 20px;
+    margin-top: 25px;
+}
+p{color: rgb(78, 19, 78);background-color: aquamarine;}
+#eerste{color: blue;background-color: burlywood;}
+.x{border: 5px red solid;width: 500px;margin: 10px auto;padding:15px;}
+em:first-child{text-decoration: underline;padding:10px;background-color: gold;}
+a {
+    text-decoration: none;
+    }
+    a:link {
+    color:greenyellow;
+    }
+    a:visited{
+    color:rgb(131, 35, 43);
+    }
+    a:hover {
+    background-color: black;
+    }
+    a:active{
+    font-weight: bold;
+    }
+    
