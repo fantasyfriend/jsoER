@@ -1,0 +1,13 @@
+* {box-sizing:border-box;}
+.formcontainer {
+    width:400px;
+    overflow:hidden;
+}
+.formlabel, .forminput {
+    width:50%;
+    float:left;
+    margin-bottom:5px;
+}
+.formbutton{margin:0 0 0 50%;}
+.form-radiogroup > label{display:block;}
+.formlabel{padding:0 5px 0 0;text-align: right;}

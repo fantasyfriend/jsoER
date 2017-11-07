@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Broodjes</title>
+
+<style>
+    * {box-sizing: border-box;margin:0;}
+    body{background-color: plum;margin:0 auto;height:100vh;max-width: 1024px}
+    header{background-color: plum;height:50px;}
+    .wrapper{display:flex;flex-wrap:wrap;width:100%;min-width:480px;}
+    #main{display:flex;flex-wrap:wrap;justify-content:space-around;background-color: beige;width:75%;min-width:730px;}
+    #side{display:flex;flex-wrap:wrap;justify-content:space-around;background-color: bisque;max-width:25%;min-width:240px;}
+    footer{background-color: plum;}
+    footer p, header h1{text-align: center;}
+    .item{background-color: purple;width:200Px;margin:10px;}
+    .item p{color:beige;text-align: center;margin:5px;}
+    .bod{background: url("broodje.jpg") 0 0/100% no-repeat;width:180px;height:120px;margin:10px;}
+    .brood{background: url("broodje.jpg") 0 0/100% no-repeat;width:180px;height:120px;margin:10px;}
+</style>
+
+</head>
+<body>
+    <header>
+        <h1>Topper Broodjes</h1>
+        <nav id="index">
+
+        </nav>
+    </header>
+    <div class="wrapper">
+    <section id="main">
+        <div class="item">
+            <p>Ham-Kaas</p>
+            <figure class="brood"></figure>
+            <p>2.45 Euro</p>
+        </div>
+        <div class="item">
+            <p>Hot-bun</p>
+            <figure class="brood"></figure>
+            <p>2.75 Euro</p>
+        </div>
+        <div class="item">
+            <p>Kip</p>
+            <figure class="brood"></figure>
+            <p>3.20 Euro</p>
+        </div>
+        <div class="item">
+            <p>ham</p>
+            <figure class="brood"></figure>
+            <p>2.45 Euro</p>
+        </div>
+        <div class="item">
+            <p>Warrior</p>
+            <figure class="brood"></figure>
+            <p>3.00 Euro</p>
+        </div>
+        <div class="item">
+            <p>Krab</p>
+            <figure class="brood"></figure>
+            <p>3.50 Euro</p>
+        </div>
+    </section> 
+    <aside id="side">
+        <div class="item">
+                <p><b>Topper!</b></p>
+                <p>warrior</p>
+                <figure class="bod"></figure>
+                <p>3.00 Euro</p>
+        </div>
+    </aside>
+    </div>
+    <footer>
+        <p>created by Erwin van Houten</p>
+    </footer>
+</body>
+</html>

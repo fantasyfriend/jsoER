@@ -1,0 +1,10 @@
+* {box-sizing:border-box;}
+.formcontainer {
+    width:400px;
+    display:flex;
+    flex-wrap:wrap;
+}
+.formlabel, .forminput {width:50%;margin-bottom:5px;}
+.form-radiogroup label{display:block;}
+.formbutton{position:relative;left:50%;}
+.formlabel{padding:0 5px 0 0;text-align: right;}
