@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    
+    <script>
+        'use strict';
+        function som() {
+            frm.resultaat.value = 1*(frm.getal1.value)+1*(frm.getal2.value);
+        }
+        
+        function startJS(){
+            document.getElementById("btn").onclick = som;
+        }
+        window.onload = startJS;
+    </script>
+</head>
+
+<body>
+    <form name="frm">
+        <input type="number" name="getal1"/> +
+        <input type="number" name="getal2"/>
+        <input type="button" value="=" id="btn" />
+        <input type="number" name="resultaat" readonly/>
+    </form>
+</body>
+
+</html>

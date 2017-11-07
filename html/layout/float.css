@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .formcontainer{
     width: 400px;
 }
@@ -18,3 +19,18 @@
     float: left;
     margin-left: 50%;
 }
+=======
+* {box-sizing:border-box;}
+.formcontainer {
+    width:400px;
+    overflow:hidden;
+}
+.formlabel, .forminput {
+    width:50%;
+    float:left;
+    margin-bottom:5px;
+}
+.formbutton{margin:0 0 0 50%;}
+.form-radiogroup > label{display:block;}
+.formlabel{padding:0 5px 0 0;text-align: right;}
+>>>>>>> b990e6461915ed3f31682d377fd97d8c19f8de8c

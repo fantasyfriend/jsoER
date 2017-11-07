@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <script>
+        'use strict';
+        function copyNaam() {
+            frm.copyVeld.value = frm.naamVeld.value;
+        }
+        
+        function startJS(){
+            frm.btn.onclick = copyNaam;
+        }
+        window.onload = startJS;
+    </script>
+</head>
+
+<body>
+    <form name="frm">
+        <input type="text" name="naamVeld" />
+        <input type="button" value="klik" name="btn" />
+        <input type="text" name="copyVeld"/>
+    </form>
+</body>
+
+</html>

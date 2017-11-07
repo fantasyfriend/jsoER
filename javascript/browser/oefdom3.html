@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <script>
+        'use strict';
+        function naarEuro() {
+            frm.euro.value = Math.round(1*(frm.bef.value)/.403399)/100;
+        }
+        function naarBEF() {
+            frm.bef.value = Math.round(1*(frm.euro.value)*40.3399);
+        }
+        
+        function startJS(){
+            document.getElementById("btn1").onclick = naarEuro;
+            document.getElementById("btn2").onclick = naarBEF;
+        }
+        window.onload = startJS;
+    </script>
+</head>
+
+<body>
+    <form name="frm">
+        <input type="text" name="bef" size=8/>
+        <input type="button" value="naar Euro =>" id="btn1" />
+        <input type="button" value="<= naar BEF" id="btn2" />
+        <input type="text" name="euro" size=8/>
+    </form>
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+    window.onload=function(){
+        
+        frm.kleur.onclick = verander;
+        frm.verz.onclick = verander;
+        frm.sterkte.onclick = verander;
+
+        function verander(){
+        var kleur="hsl("+frm.kleur.value+","+frm.verz.value+"%,"+frm.sterkte.value+"%)";
+        document.getElementById("map").style.backgroundColor=kleur;
+        frm.waarde.value=kleur;
+        }
+    }
+    </script>
+    <style>
+        #map{
+            width:200px;
+            height:100px;
+            border:2px solid red;
+        }
+        
+    </style>
+</head>
+<body>
+<h2>Kleur in hsl</h2>
+<div id="map"></div>
+<form name="frm">
+        kleur : <input type="range" min="0" max="360" name="kleur"/><br>
+        verzadiging : <input type="range" min="0" max="100" name="verz"/><br>
+        licht sterkte : <input type="range" min="0" max="100" name="sterkte"/><br><br>
+        <input type="text" name="waarde"/>
+</form>
+    
+</body>
+</html>
