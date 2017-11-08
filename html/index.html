@@ -7,17 +7,20 @@
 
 <style>
     * {box-sizing: border-box;margin:0;}
-    body{background-color: plum;margin:0 auto;height:100vh;max-width: 1024px}
-    header{background-color: plum;height:50px;}
-    .wrapper{display:flex;flex-wrap:wrap;width:100%;min-width:480px;}
-    #main{display:flex;flex-wrap:wrap;justify-content:space-around;background-color: beige;width:75%;min-width:730px;}
-    #side{display:flex;flex-wrap:wrap;justify-content:space-around;background-color: bisque;max-width:25%;min-width:240px;}
-    footer{background-color: plum;}
-    footer p, header h1{text-align: center;}
-    .item{background-color: purple;width:200Px;margin:10px;}
+    html{background-color:black;}
+    body{background-color: black;margin:0 auto;height:100vh;max-width: 1200px}
+    header{background-color: plum;height:50px;border-bottom:1px solid purple;}
+    .wrapper{display:flex;flex-flow:row wrap;width:100%;min-width:480px;}
+    .mainwrapper{display:flex;flex-wrap:wrap;justify-content:space-around;}
+    .sidewrapper{align-items:flex-start; display:flex;flex-wrap:wrap;justify-content:space-around;}
+    #main{flex:1 1 66%;;background-color: beige;min-width:210px;border:1px solid purple;}
+    #side{flex:1 0 210px;background-color: bisque;min-width:210px;border:1px solid purple;}
+    footer{background-color: plum;border-top :1px solid purple;}
+    p,h1,h2{text-align: center;}
+    .item{background-color: purple;width:200Px;margin:5px;}
     .item p{color:beige;text-align: center;margin:5px;}
-    .bod{background: url("broodje.jpg") 0 0/100% no-repeat;width:180px;height:120px;margin:10px;}
-    .brood{background: url("broodje.jpg") 0 0/100% no-repeat;width:180px;height:120px;margin:10px;}
+    .bod{width:180px;height:120px;margin:10px;}
+    .brood{width:180px;height:120px;margin:10px;}
 </style>
 
 </head>
@@ -30,43 +33,45 @@
     </header>
     <div class="wrapper">
     <section id="main">
+        <h2>Onze top broodjes</h2>
+        <div class="mainwrapper">
         <div class="item">
             <p>Ham-Kaas</p>
-            <figure class="brood"></figure>
+            <img src="broodje.jpg" alt="ham-kaas broodje" class="brood">
             <p>2.45 Euro</p>
         </div>
         <div class="item">
-            <p>Hot-bun</p>
-            <figure class="brood"></figure>
-            <p>2.75 Euro</p>
+            <p>Hot-bun</p><img src="broodje.jpg" alt="ham-kaas broodje" class="brood"><p>2.75 Euro</p>
         </div>
         <div class="item">
-            <p>Kip</p>
-            <figure class="brood"></figure>
-            <p>3.20 Euro</p>
+            <p>Kip</p><img src="broodje.jpg" alt="ham-kaas broodje" class="brood"><p>3.20 Euro</p>
         </div>
         <div class="item">
-            <p>ham</p>
-            <figure class="brood"></figure>
-            <p>2.45 Euro</p>
+            <p>ham</p><img src="broodje.jpg" alt="ham-kaas broodje" class="brood"><p>2.45 Euro</p>
         </div>
         <div class="item">
-            <p>Warrior</p>
-            <figure class="brood"></figure>
-            <p>3.00 Euro</p>
+            <p>Warrior</p><img src="broodje.jpg" alt="ham-kaas broodje" class="brood"><p>3.00 Euro</p>
         </div>
         <div class="item">
-            <p>Krab</p>
-            <figure class="brood"></figure>
-            <p>3.50 Euro</p>
+            <p>Krab</p><img src="broodje.jpg" alt="ham-kaas broodje" class="brood"><p>3.50 Euro</p>
+        </div>
+        <div class="item">
+            <p>Krab</p><img src="broodje.jpg" alt="ham-kaas broodje" class="brood"><p>3.50 Euro</p>
+        </div>
+        <div class="item">
+            <p>Krab</p><img src="broodje.jpg" alt="ham-kaas broodje" class="brood"><p>3.50 Euro</p>
+        </div>
+        <div class="item">
+            <p>Krab</p><img src="broodje.jpg" alt="ham-kaas broodje" class="brood"><p>3.50 Euro</p>
+        </div>
         </div>
     </section> 
     <aside id="side">
+        <h2>Broodje van de week</h2>
+        <div class="sidewrapper">
         <div class="item">
-                <p><b>Topper!</b></p>
-                <p>warrior</p>
-                <figure class="bod"></figure>
-                <p>3.00 Euro</p>
+            <p>warrior</p><img src="broodje.jpg" alt="ham-kaas broodje" class="brood"><p>3.00 Euro</p>
+        </div>
         </div>
     </aside>
     </div>

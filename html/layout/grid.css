@@ -1,3 +1,21 @@
+<<<<<<< HEAD
+.formcontainer{
+    width: 400px;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-row-gap: 5px;
+}
+.form-radiogroup > label{
+    display: block;
+}
+.formlabel{
+    text-align: right;
+    padding-right: 5px;
+}
+.formbutton{
+    grid-column: 2/3;
+}
+=======
 .formcontainer {
     width:400px;
     display:grid;
@@ -9,3 +27,4 @@
 .formbutton{grid-column:2/3;width:100px;}
 .form-radiogroup label{display:block}
 .formlabel{padding:0 5px 0 0;text-align: right;}
+>>>>>>> b990e6461915ed3f31682d377fd97d8c19f8de8c

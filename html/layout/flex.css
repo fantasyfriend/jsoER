@@ -1,3 +1,25 @@
+<<<<<<< HEAD
+.formcontainer{
+    width: 400px;
+    display: flex;
+    flex-flow: row wrap;
+}
+.formlabel, .forminput{
+    box-sizing: border-box;
+    flex: 0 1 50%;
+    margin-bottom: 5px;
+}
+.formlabel{
+    text-align: right;
+    padding-right: 5px;
+}
+.form-radiogroup > label{
+    display: block;
+}
+.formbutton{
+    margin-left: 50%;
+}
+=======
 * {box-sizing:border-box;}
 .formcontainer {
     width:400px;
@@ -8,3 +30,4 @@
 .form-radiogroup label{display:block;}
 .formbutton{position:relative;left:50%;}
 .formlabel{padding:0 5px 0 0;text-align: right;}
+>>>>>>> b990e6461915ed3f31682d377fd97d8c19f8de8c
