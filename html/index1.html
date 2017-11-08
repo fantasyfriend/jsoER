@@ -7,10 +7,22 @@
 
     <script>
     'use strict';
-    var br0=["vis broodje","vis",3.45];
-    var br1=["lekker broodje ham","h",3.45];
-    var br2=["super kaas brood","kaas",3.25];
-    var broodjes=[br0,br1,br2];
+    var d=new Date;
+    var broodjes=[];
+    broodjes[0]=["zalm broodje","vis",3.50];
+    broodjes[1]=["broodje ham","h",2.75];
+    broodjes[2]=["Franse kaas brood","kaas",3.25];
+    broodjes[3]=["garnalen broodje","g",4.00];
+    broodjes[4]=["hamburger","hamb",3.00];
+    broodjes[5]=["vlees-kerry brood","hs",3.50];
+    broodjes[6]=["rib burger brood","vl",4.00];
+    broodjes[7]=["ham-kaas broodje","hk",2.75];
+    broodjes[8]=["ham-kaas-ei broodje","hkei",3.00];
+    broodjes[9]=["dubbele kip brood","kip",3.50];
+    broodjes[10]=["broodje kroket","krok",3.00];
+    broodjes[11]=["vlees salade brood","sal",3.25];
+       
+    
 
         function omdraai() {
         //frm.resultaat.value=frm.input.value.split("").reverse().join("");
@@ -18,24 +30,27 @@
                     
         function startJS(){
         //document.getElementById("btn").addEventListener("click", omdraai);
-        alert(broodjes.length);
+        
             var html="";
             for (var i=0;i<broodjes.length;i++){
-                html+="<div><p>"+broodjes[i][0]+"</p><img src='images/"+broodjes[i][1]+".jpg'></div>";}
-            document.getElementById("main").innerHTML = html;
+                html+="<div class='item'><h3>"+broodjes[i][0]+"</h3><img src='images/"+broodjes[i][1]+".jpg'><p class='prijs'>"+broodjes[i][2]+" Euro</p></div>";}
+            document.getElementById("main").innerHTML = "<h2>ons assortiment</h2><div class='flexwrapper'>"+html+"</div>";
+            var dag=(d.getDate()+11)%12;
+            document.getElementById("side").innerHTML = "<h2>broodje van de dag</h2><div class='item'><h3>"+broodjes[dag][0]+"</h3><img src='images/"+broodjes[dag][1]+".jpg'><p class='prijs'>"+broodjes[dag][2]+" Euro</p></div>";
             
         }
         window.onload = startJS;
     </script>
 
     <style>
-    * {border:1px solid red;}
-    body{margin:0 auto;max-width:1000px;height:100vh;}
+    * {box-sizing: border-box;}
+    html{background-color: black;}
+    body{margin:0 auto;max-width:1240px;height:100vh;}
 
     body{
     display: grid;
     grid-template-columns: 240px auto;
-    grid-auto-rows: 50px 1fr 20px;
+    grid-auto-rows: 96px 1fr 24px;
     grid-template-areas:"header header"
     "side main"
     "footer footer"; 
@@ -47,15 +62,31 @@
     #main{grid-area:main;}
     #footer{grid-area:footer;}
 
-    img{width:150px;height:auto;}
+    #header,#side,#main,#footer{background-color: beige;border-radius: 5px;}
+    .flexwrapper{display:flex;flex-flow:row wrap;justify-content:space-around;}
     
+    h1,h2,h3,p{text-align:center;margin:4px;}
+    
+    .item{display:inline-block;width:220px;height:300px;background-color: darkcyan;margin:10px;
+        padding:10px;border:1px solid black;border-radius: 5px;}
+    img{width:200px;height:120px;border:1px solid black;border-radius: 5px;}
+    .prijs{border:1px solid black;background-color:beige;border-radius: 10px;box-shadow:gray 5px 5px 5px;}
+
+    #menu{position:absolute;left:320px;top:55px;}
+    li{display:inline-block;border:1px solid black;border-top-left-radius:10px;border-top-right-radius:10px;
+        margin:0 10px;padding:5px;background-color:beige;box-shadow:gray 0 -5px 15px inset;}
+    #active{box-shadow:none;border-bottom: 1px solid beige;}
+    li:hover{box-shadow:gray 0 -5px 15px;}
     </style>
 
 </head>
 <body>
-    <header id="header"></header>
+    <header id="header">
+        <h1>Topper Brood</h1>
+        <nav id="menu"><ul><li id="active">HOME</li><li>BESTELLEN</li><li>INFOERMATIE</li></ul></nav>
+    </header>
     <aside id="side"></aside>
     <section id="main"></section>
-    <footer id="footer"></footer>
+    <footer id="footer"><p><b>created by Erwin van Houten</b></p></footer>
 </body>
 </html>
