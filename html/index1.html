@@ -9,7 +9,7 @@
     'use strict';
     var br0=["vis broodje","vis",3.45];
     var br1=["lekker broodje ham","h",3.45];
-    var br2=["super kaas brood","k",3.25];
+    var br2=["super kaas brood","kaas",3.25];
     var broodjes=[br0,br1,br2];
 
         function omdraai() {
@@ -18,9 +18,10 @@
                     
         function startJS(){
         //document.getElementById("btn").addEventListener("click", omdraai);
-        alert(broodjes[1][1]);
+        alert(broodjes.length);
             var html="";
-            for (var i=0;i<broodjes.lenght;i++){html+="<p>"+broodjes[1][1]+"</p>";}
+            for (var i=0;i<broodjes.length;i++){
+                html+="<div><p>"+broodjes[i][0]+"</p><img src='images/"+broodjes[i][1]+".jpg'></div>";}
             document.getElementById("main").innerHTML = html;
             
         }
@@ -45,6 +46,8 @@
     #side{grid-area:side;}
     #main{grid-area:main;}
     #footer{grid-area:footer;}
+
+    img{width:150px;height:auto;}
     
     </style>
 
