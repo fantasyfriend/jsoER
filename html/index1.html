@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+    'use strict';
+    var br0=["vis broodje","vis",3.45];
+    var br1=["lekker broodje ham","h",3.45];
+    var br2=["super kaas brood","k",3.25];
+    var broodjes=[br0,br1,br2];
+
+        function omdraai() {
+        //frm.resultaat.value=frm.input.value.split("").reverse().join("");
+        }
+                    
+        function startJS(){
+        //document.getElementById("btn").addEventListener("click", omdraai);
+        alert(broodjes[1][1]);
+            var html="";
+            for (var i=0;i<broodjes.lenght;i++){html+="<p>"+broodjes[1][1]+"</p>";}
+            document.getElementById("main").innerHTML = html;
+            
+        }
+        window.onload = startJS;
+    </script>
+
+    <style>
+    * {border:1px solid red;}
+    body{margin:0 auto;max-width:1000px;height:100vh;}
+
+    body{
+    display: grid;
+    grid-template-columns: 240px auto;
+    grid-auto-rows: 50px 1fr 20px;
+    grid-template-areas:"header header"
+    "side main"
+    "footer footer"; 
+    grid-column-gap: 5px;
+    grid-row-gap: 5px;
+    }
+    #header{grid-area:header;}
+    #side{grid-area:side;}
+    #main{grid-area:main;}
+    #footer{grid-area:footer;}
+    
+    </style>
+
+</head>
+<body>
+    <header id="header"></header>
+    <aside id="side"></aside>
+    <section id="main"></section>
+    <footer id="footer"></footer>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<html lang="en">
+    
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        
+        <script>
+            'use strict';
+            function reken1() {
+            frm.resultaat.value=(frm.getal1.value*1)+(frm.getal2.value*1);
+            }
+            function reken2() {
+            frm.resultaat.value=(frm.getal1.value*1)-(frm.getal2.value*1);
+            }
+            function reken3() {
+            frm.resultaat.value=(frm.getal1.value*1)/(frm.getal2.value*1);
+            }
+            function reken4() {
+            frm.resultaat.value=(frm.getal1.value*1)*(frm.getal2.value*1);
+            }
+                    
+            function startJS(){
+                document.getElementById("btn1").addEventListener("click", reken1);
+                document.getElementById("btn2").addEventListener("click", reken2);
+                document.getElementById("btn3").addEventListener("click", reken3);
+                document.getElementById("btn4").addEventListener("click", reken4);
+            }
+            window.onload = startJS;
+        </script>
+    </head>
+    
+    <body>
+        <form name="frm">
+            <input type="number" name="getal1" size=8/>
+            <input type="button" value="+" id="btn1" />
+            <input type="button" value="-" id="btn2" />
+            <input type="button" value="/" id="btn3" />
+            <input type="button" value="x" id="btn4" />
+            <input type="number" name="getal2" size=8/>
+            =
+            <input type="text" name="resultaat" size=8/>
+        </form>
+    </body>
+    
+    </html>

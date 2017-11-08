@@ -1,0 +1,30 @@
+<html lang="en">
+    
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        
+        <script>
+            'use strict';
+            function omdraai() {
+            frm.resultaat.value=frm.input.value.split("").reverse().join("");
+            }
+                    
+            function startJS(){
+                var btn = document.getElementById("btn");
+                btn.addEventListener("click", omdraai);
+            }
+            window.onload = startJS;
+        </script>
+    </head>
+    
+    <body>
+        <form name="frm">
+            <input type="text" name="input" size=8/>
+            <input type="button" value="turn" id="btn" />
+            <input type="text" name="resultaat" size=8/>
+        </form>
+    </body>
+    
+    </html>

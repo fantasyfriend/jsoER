@@ -1,0 +1,56 @@
+<html lang="en">
+    
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        
+        <script>
+            'use strict';
+            var getal=Math.floor(Math.random()*100)+1;
+            var poging=2;
+
+            function reset() {
+                getal=Math.floor(Math.random()*100)+1;
+                poging=2;
+                frm.resultaat.value="poging 1";
+                frm.input.value="";
+                document.getElementById("btn").disabled=false;
+                document.getElementById("reset").value="opnieuw";
+            }
+            function controle() {
+                if(frm.input.value<1 || frm.input.value>100){alert("Let op! U moet een waarde van 1-100 invoeren.");}
+                else {gok();}
+            }
+            function gok() {
+                var input=frm.input.value;
+                frm.resultaat.value="poging "+poging;poging++;
+                if (frm.input.value<getal){alert("te laag");
+                frm.input.value="";}
+                else if(frm.input.value>getal){alert("te hoog");
+                frm.input.value="";}
+                else {frm.resultaat.value="goed in "+(poging-2)+" keer.";
+                document.getElementById("btn").disabled=true;
+                document.getElementById("reset").value="nog een keer";
+                }
+            }
+                    
+            function startJS(){
+                document.getElementById("btn").addEventListener("click", controle);
+                document.getElementById("reset").addEventListener("click", reset);
+            }
+            window.onload = startJS;
+        </script>
+    </head>
+    
+    <body>
+        <form name="frm">
+            <p>Geef een getal in 1-100:</p>
+            <input type="text" name="input" size=8/>
+            <input type="button" value="controleer" id="btn" />
+            <input type="text" value="poging 1" name="resultaat" size=8 readonly/>
+            <input type="button" value="opnieuw" id="reset" />
+        </form>
+    </body>
+    
+    </html>
