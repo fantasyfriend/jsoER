@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="scriptbrood.js"></script>
+    <link href="stylebrood.css" rel="stylesheet"></link>
+
+</head>
+<body>
+    <header id="header">
+        <h1>Topper Brood</h1>
+        <nav id="menu"><ul>
+            <a href="index.html"><li>HOME</li></a>
+            <li id="active">BESTELLEN</li>
+            <li>INFOERMATIE</li>
+        </ul></nav>
+    </header>
+    <aside id="side"></aside>
+    <section id="main">
+        <h2>Uw bestelling</h2>
+        <div class="flexwrapper">
+        <form name="bestelfrm" id="formbestel">
+            <h3>kies uw broodje</h3><br>
+            <select name="brood" id="br"></select><br><br>
+            <input type="radio" name="soort" value="0" checked/>wit brood<br>
+            <input type="radio" name="soort" value="1"/>bruin brood<br><br>
+            <input type="checkbox" name="smos" value="smos" id="sm"/>smos
+            <input type="button" name="btn" value="bestel" id="bestelbtn"/>
+        </form>
+        <table id="tabel">
+            <thead>
+                <tr><th colspan="4">Uw bestellings totaal</th></tr>
+                <tr><th>aantal</th><th>broodje</th><th>prijs</th><th>totaal</th></tr>
+            </thead>
+        </table>
+        </div>
+    </section>
+    <footer id="footer"><p><b>created by Erwin van Houten</b></p></footer>
+</body>
+</html>

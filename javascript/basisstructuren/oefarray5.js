@@ -14,5 +14,5 @@ while(invoer!="" || teller<10){
     }
 }
 positie = toetsenbord.question('welke positie: ');
-if (positie<0 || positie>naam.length){console.log("deze positie bestaat niet!");}
-else {console.log(naam[positie]);}
+if (positie<1 || positie>=naam.length){console.log("deze positie bestaat niet!");}
+else {console.log(naam[positie-1]);}
