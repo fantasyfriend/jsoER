@@ -45,3 +45,5 @@ margin:15px 0;padding:15px;}
 td{text-align: right;}
 th,td{border-bottom:1px solid darkcyan;}
 tfoot th{border-bottom:1px solid cornsilk;}
+.min{border-radius: 50%;background-color: lightcoral;padding:0 6px;font-size:12px;box-shadow:gray 5px 5px 15px;}
+.min:hover{background-color: coral;box-shadow:none;cursor:pointer;}

@@ -6,8 +6,22 @@
     <title>Document</title>
 
     <script src="scriptbrood.js"></script>
-    <link href="stylebrood.css" rel="stylesheet"></link>
+    <script>
+    function startJS(){
+        
+    var locatie=document.getElementById("br");
+    if (locatie){locatie.innerHTML =htmllijst;}
 
+    var dag=(d.getDate()+11)%12;
+    document.getElementById("side").innerHTML = "<h2>broodje van de dag</h2><div class='item'><h3>"+broodjes[dag][0]+"</h3><img src='images/"+broodjes[dag][1]+".jpg'><p class='prijs'>"+(broodjes[dag][2]).toFixed(2)+" Euro</p></div>";
+    
+    var bestellen=bestelfrm.btn;
+    if (bestellen){bestellen.onclick = opmaak;}
+    }
+    window.onload = startJS;
+    </script>
+
+    <link href="stylebrood.css" rel="stylesheet"></link>
 </head>
 <body>
     <header id="header">

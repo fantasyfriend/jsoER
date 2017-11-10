@@ -22,7 +22,7 @@ function toonTweeDimTabel(tabel, hoofding) {
       result += "\t" + tabel[rij][kol];
     }
   }
-  console.log(result);
+  console.log(result);return tabel;
 }
 
 
@@ -36,4 +36,10 @@ leesTweeDimTabel(puntenTabel, "Geef punten voor vak ");
 toonTweeDimTabel(puntenTabel, "Behaalde punten");
 
 /* oefening: */
-// console.log("Het maximum = %d", maximum(puntenTabel));
+function maximum(puntenTabel){
+var x=[];
+for(var i=0;i<aantalvakken;i++){x[i]=Math.max(...puntenTabel[i]);}
+return Math.max(...x);
+}
+
+console.log("Het maximum = %d", maximum(puntenTabel));

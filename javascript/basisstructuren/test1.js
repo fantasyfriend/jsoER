@@ -1,24 +1,20 @@
-'use strict';
+'use strict'
 
-function maakString(lengte, karakter=" "){
-    // TODO: geef een string bestaande uit lengte keer karakter naast elkaar terug
-    // gebruik een spatie als karakter als het karakter niet doorgegeven wordt
-    var output="";
-    for (var i=0;i<lengte;i++){
-        output+=karakter;
-    }
-    return output;
-}
+const rij=4,kol=4;
 
-function tekenGetallenPiramide(hoogte){
-      // TODO: vul aan zodat deze lus hoogte keer uitgevoerd wordt
-      // TODO: gebruik functie maakString om een string te maken die
-      // bestaat uit hoogte-i spaties gevolgd door i*2-1 keer het cijfer i
-      // TODO: teken deze string op het scherm
-    for(var i=1;i<=hoogte;i++){
-        console.log(maakString(hoogte-i)+maakString(i*2-1,i));
-    }
-}
+//2d array
+var speelbord = new Array(rij);
+for(var i=0;i<kol;i++){speelbord[i] = new Array(kol);}
 
-// TODO: teken een getallenpiramide van 5 hoog. Gebruik hiervoor een zelfgeschreven functie
-tekenGetallenPiramide(5);
+for(var r=0;r<speelbord.length;r++){for(var k=0;k<speelbord[r].length;k++){
+    speelbord[r][k]=r+" "+k;
+}}
+
+console.log(speelbord);
+
+var iets=new Array();{iets[]=new Array();}
+iets[0][0]="1";
+iets[0][1]="2";
+iets[1][0]="3";
+iets[1][1]="4";
+console.log(iets);
