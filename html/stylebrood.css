@@ -1,0 +1,50 @@
+* {box-sizing: border-box;box-shadow:none;}
+html{background-color: black;}
+body{margin:0 auto;max-width:1240px;height:100vh;}
+
+body{
+display: grid;
+grid-template-columns: auto 240px;
+grid-auto-rows: 96px 1fr 24px;
+grid-template-areas:"header header"
+"main side"
+"footer footer"; 
+grid-column-gap: 5px;
+grid-row-gap: 5px;
+}
+#header{grid-area:header;}
+#side{grid-area:side;}
+#mainindex,#main{grid-area:main;}
+#footer{grid-area:footer;}
+
+#header,#side,#main,#mainindex,#footer{background-color: beige;border-radius: 5px;}
+#mainindex,#main{min-width:320px;}
+.flexwrapper{display:flex;flex-flow:row wrap;justify-content:space-around;}
+
+h1,h2,h3,p{text-align:center;margin:4px;}
+
+.item{display:inline-block;width:220px;height:300px;background-color: darkcyan;margin:10px;
+    padding:10px;border:1px solid black;border-radius: 5px;}
+img{width:200px;height:120px;border:1px solid black;border-radius: 5px;}
+.prijs{border:1px solid black;background-color:beige;border-radius: 10px;box-shadow:black 5px 5px 5px;}
+
+#menu{position:relative;top:24px;}
+ul{margin:0;padding:0;}
+li{display:inline-block;border:2px solid black;border-top-left-radius:10px;border-top-right-radius:10px;
+    margin:0 5px;padding:5px;background-color:beige;box-shadow:gray 0 -5px 15px inset;}
+#active{box-shadow:none;border-bottom: 2px solid beige;}
+li:hover{box-shadow:gray 0 -5px 15px;}
+
+#formbestel{background-color: darkcyan;border-radius: 5px;border:1px solid black;box-shadow:gray 5px 5px 15px;
+margin:15px 0;padding:15px;display:inline-block;font-size: 24px;color:beige;}
+option, select{font-size: 20px;}
+#bestelbtn,button{font-size: 20px;}
+
+#tabelwrap{background-color: linen;border:1px solid black;box-shadow:gray 5px 5px 15px;
+margin:15px 0;padding:15px;}
+td{text-align: right;}
+th,td{border-bottom:1px solid darkcyan;}
+tfoot th{border-bottom:1px solid linen;}
+.min, .plus{text-shadow:1px 1px 1px black;}
+.min:hover{color: red;text-shadow:0 0 1px red;cursor:pointer;}
+.plus:hover{color: green;text-shadow:0 0 1px green;cursor:pointer;}

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="scriptbrood.js"></script>
+    <script>
+    function startJS(){
+        
+    var locatie=document.getElementById("br");
+    if (locatie){locatie.innerHTML =htmllijst;}
+
+    var dag=(d.getDate()+11)%12;
+    document.getElementById("side").innerHTML = "<h2>broodje van de dag</h2><div class='item'><h3>"+broodjes[dag][0]+"</h3><img src='images/"+broodjes[dag][1]+".jpg'><p class='prijs'>"+(broodjes[dag][2]).toFixed(2)+" Euro</p></div>";
+    
+    var bestellen=bestelfrm.btn;
+    if (bestellen){bestellen.onclick = opmaak;}
+    }
+    window.onload = startJS;
+    </script>
+
+    <link href="stylebrood.css" rel="stylesheet"></link>
+</head>
+<body>
+    <header id="header">
+        <h1>Topper Brood</h1>
+        <nav id="menu"><ul>
+            <a href="index.html"><li>HOME</li></a>
+            <li id="active">BESTELLEN</li>
+            <li>INFORMATIE</li>
+        </ul></nav>
+    </header>
+    <aside id="side"></aside>
+    <main id="main">
+        <h2>Uw bestelling</h2>
+        <div class="flexwrapper">
+        <form name="bestelfrm" id="formbestel">
+            <h3>kies uw broodje</h3><br>
+            <select name="brood" id="br"></select><br><br>
+            <input type="radio" name="soort" value="0" checked/>wit brood<br>
+            <input type="radio" name="soort" value="1"/>bruin brood<br><br>
+            <input type="checkbox" name="smos" value="smos" id="sm"/>smos + 0.50<br><br>
+            <input type="button" name="btn" value="bestel" id="bestelbtn"/>
+        </form>
+        <div id="tabelwrap">
+                <h3>bestel lijstje</h3><br>
+        <div id="tab">
+            
+        </div>
+        </div>
+        </div>
+    </main>
+    <footer id="footer"><p><b>created by Erwin van Houten</b></p></footer>
+</body>
+</html>
