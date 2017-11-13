@@ -4,23 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-
+    <style>
+    div{display:inline-block;}
+    .wrapper{display:flex;align-items:center;}
+    select{width:100px;}
+    </style>
     <script>
         'use strict';
-        
-        var optionTag = document.createElement('option');
-                
+
+
         function toevoegen() {
-            //frm.opties1.appendChild(optionTag);
-            optionTag.value=frm.naam.value;
-            optionTag.text=frm.naam.value;
-            alert(frm.optionTag);
-            
+            var optionTag = document.createElement('option');
+            optionTag.value = frm.naam.value;
+            optionTag.text = frm.naam.value;
+            frm.opties1.add(optionTag);
+            //frm.opties1.options[frm.opties1.options.length]=optionTag;
+            frm.naam.value = "";
+        }
+
+        function goRight() {
+            var x = frm.opties1.selectedIndex;
+            /*if (x >= 0) {
+                var optionTag = document.createElement('option');
+                optionTag.value = frm.opties1.options[x].value;
+                optionTag.text = frm.opties1.options[x].value;
+                frm.opties1.remove(x);
+                frm.opties2.add(optionTag);
+            }
+            else{alert("geen optie geselecteerd");}*/
+            frm.opties2.options[frm.opties2.options.length]=frm.opties1.options[x];
+        }
+
+        function goLeft() {
+            var x = frm.opties2.selectedIndex;
+            if (x >= 0) {
+                var optionTag = document.createElement('option');
+                optionTag.value = frm.opties2.options[x].value;
+                optionTag.text = frm.opties2.options[x].value;
+                frm.opties2.remove(x);
+                frm.opties1.add(optionTag);
+            }
+            else{alert("geen optie geselecteerd");}
         }
 
         function startJS() {
-            frm.opties1.appendChild(optionTag);
             frm.input.onclick = toevoegen;
+            frm.goL.onclick = goLeft;
+            frm.goR.onclick = goRight;
         }
         window.onload = startJS;
     </script>
@@ -28,17 +58,23 @@
 
 <body>
     <form name="frm">
-        name: <input type="text" name="naam" size=12/>
-        <input type="button" name="input" value="Toevoegen"/><br><br>
-        <select name="opties1" id="sel1" size="3">
-                
-        </select>
-        <input type="button" name="goL" value="&lt;"/>
-        <input type="button" name="goR" value="&gt;"/>
-        <select name="opties2" id="sel2" size="3">
-                
-        </select>
-
+        name:
+        <input type="text" name="naam" size=12/>
+        <input type="button" name="input" value="Toevoegen" />
+        <br>
+        <br>
+        <div class="wrapper">
+        <div>
+        <select name="opties1" id="sel1" size="5"></select>
+        </div>
+        <div>
+        <input type="button" name="goL" value="&lt;" />
+        <input type="button" name="goR" value="&gt;" />
+        </div>
+        <div>
+        <select name="opties2" id="sel2" size="5"></select>
+        </div>
+        </div>
     </form>
 </body>
 

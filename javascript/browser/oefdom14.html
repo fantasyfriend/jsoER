@@ -1,0 +1,43 @@
+<html lang="en">
+    
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        
+        <script>
+            'use strict';
+
+            function check() {
+                //var text="-";
+                var form=document.forms[0];
+                for (var i=0;i<form.elements.length;i++){
+                    //text+=form.elements[i].type+": "+form.elements[i].value+"\n";
+                    if (form.elements[i].type=="checkbox"){form.elements[i].checked=true;}
+                }
+            }
+                
+            function startJS(){
+                frm.btn.onclick=check;
+            }
+            window.onload = startJS;
+        </script>
+    </head>
+    
+    <body>
+        <form name="frm">
+            <input type="radio" value="keuze1" name="keuze" checked/>keuze1
+            <input type="radio" value="keuze2" name="keuze" />keuze2
+
+            <select name="optie" id="sel">
+            <option value="keuze1">keuze1</option>
+            <option value="keuze2">keuze2</option>
+            </select>
+            <input type="checkbox" value="iets"/> groen
+            <input type="button" name="btn" value="=">
+            
+            
+        </form>
+    </body>
+    
+</html>
