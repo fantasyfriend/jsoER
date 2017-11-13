@@ -1,0 +1,45 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+        'use strict';
+        
+        var optionTag = document.createElement('option');
+                
+        function toevoegen() {
+            //frm.opties1.appendChild(optionTag);
+            optionTag.value=frm.naam.value;
+            optionTag.text=frm.naam.value;
+            alert(frm.optionTag);
+            
+        }
+
+        function startJS() {
+            frm.opties1.appendChild(optionTag);
+            frm.input.onclick = toevoegen;
+        }
+        window.onload = startJS;
+    </script>
+</head>
+
+<body>
+    <form name="frm">
+        name: <input type="text" name="naam" size=12/>
+        <input type="button" name="input" value="Toevoegen"/><br><br>
+        <select name="opties1" id="sel1" size="3">
+                
+        </select>
+        <input type="button" name="goL" value="&lt;"/>
+        <input type="button" name="goR" value="&gt;"/>
+        <select name="opties2" id="sel2" size="3">
+                
+        </select>
+
+    </form>
+</body>
+
+</html>

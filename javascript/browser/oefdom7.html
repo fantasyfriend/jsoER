@@ -1,0 +1,37 @@
+<html lang="en">
+    
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        
+        <script>
+            'use strict';
+            function order() {
+                var a=[];
+                for(var i=0;i<5;i++){a[i]=document.getElementById(""+i).value;}
+                a.sort();
+                for(var i=0;i<5;i++){document.getElementById(""+i).value=a[i];}
+            }
+                    
+            function startJS(){
+                var btn = document.getElementById("btn");
+                btn.addEventListener("click", order);
+            }
+            window.onload = startJS;
+        </script>
+    </head>
+    
+    <body>
+        <form name="frm">
+            <p>voer 5 namen in:</p><br>
+            <input type="text" name="input1" id="0" size=8/><br>
+            <input type="text" name="input2" id="1" size=8/><br>
+            <input type="text" name="input3" id="2" size=8/><br>
+            <input type="text" name="input4" id="3" size=8/><br>
+            <input type="text" name="input5" id="4" size=8/><br>
+            <input type="button" value="order" id="btn" />
+        </form>
+    </body>
+    
+    </html>

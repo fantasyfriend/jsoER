@@ -1,0 +1,39 @@
+<html lang="en">
+        
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Document</title>
+            
+            <script>
+                'use strict';
+                function reken() {
+                frm.resultaat.value=
+                frm.keuze[0].checked?(frm.getal1.value*1)+(frm.getal2.value*1):
+                frm.keuze[1].checked?(frm.getal1.value*1)-(frm.getal2.value*1):
+                frm.keuze[2].checked?(frm.getal1.value*1)/(frm.getal2.value*1):
+                (frm.getal1.value*1)*(frm.getal2.value*1);
+                }
+                    
+                function startJS(){
+                    frm.btn.onclick=reken;
+                }
+                window.onload = startJS;
+            </script>
+        </head>
+        
+        <body>
+            <form name="frm">
+                <input type="number" name="getal1" size=8/>
+                <input type="radio" value="+" name="keuze" checked/>+
+                <input type="radio" value="-" name="keuze" />-
+                <input type="radio" value="/" name="keuze" />/
+                <input type="radio" value="x" name="keuze" />x
+                <input type="number" name="getal2" size=8/>
+                <input type="button" name="btn" value="=">
+                <input type="text" name="resultaat" size=8/>
+                
+            </form>
+        </body>
+        
+        </html>

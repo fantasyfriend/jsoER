@@ -1,0 +1,50 @@
+<html lang="en">
+        
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Document</title>
+            
+            <script>
+                'use strict';
+                var a=new Array(70);a.fill(".");
+
+                function random(d){return Math.floor(Math.random()*d)+1}
+
+                function stand(s,h){
+                    var lijn="";
+                    if(h>69){a[69]='🏁 Haas heeft gewonnen';}
+                    if(s>69){a[69]+='🏁 Schilpad heeft gewonnen';}
+                    for(var i=0;i<70;i++){lijn+=a[i];}
+                    document.write(lijn+"<br>");}
+
+                function startJS() {
+                    var s=0,h=0,v;
+                    do {
+                       a[s]=".";a[h]=".";
+
+                       v=random(10);
+                       v<6?s+=3:v<8?s-=6:s+=1;
+                       if(s<0){s=0;}
+                       a[s]="🐢";
+
+                       v=random(10);
+                       v<3?h+=0:v<5?h+=9:v<6?h-=12:v<9?h+=1:h-=2;
+                       if(h<0){h=0;}
+                       a[s]==a[h]?a[h]="💢":a[h]="🐇";
+
+                       stand(s,h);
+                    }
+                    while (s<70 && h<70);
+                }
+                        
+                window.onload = startJS;
+            </script>
+        </head>
+        
+        <body>
+            <div id="start">
+            </div>
+        </body>
+        
+        </html>

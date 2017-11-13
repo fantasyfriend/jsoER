@@ -1,0 +1,41 @@
+<html lang="en">
+        
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Document</title>
+            
+            <script>
+                'use strict';
+                function reken() {
+                    var waarde;
+                    for (var i=0;i<frm.keuze.length;i++){
+                        if(frm.keuze[i].checked){waarde=i;break;}
+                    }
+                    frm.optie.value =frm.keuze[i].value;
+                }
+                    
+                function startJS(){
+                    frm.btn.onclick=reken;
+                }
+                window.onload = startJS;
+            </script>
+        </head>
+        
+        <body>
+            <form name="frm">
+                <input type="radio" value="keuze1" name="keuze" checked/>keuze1
+                <input type="radio" value="keuze2" name="keuze" />keuze2
+
+                <select name="optie" id="sel">
+                <option value="keuze1">keuze1</option>
+                <option value="keuze2">keuze2</option>
+                </select>
+                
+                <input type="button" name="btn" value="=">
+                
+                
+            </form>
+        </body>
+        
+</html>
