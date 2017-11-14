@@ -1,81 +1,49 @@
-<html lang="en">
-
+﻿<!DOCTYPE html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-    div{display:inline-block;}
-    .wrapper{display:flex;align-items:center;}
-    select{width:100px;}
-    </style>
-    <script>
-        'use strict';
-
-
-        function toevoegen() {
-            var optionTag = document.createElement('option');
-            optionTag.value = frm.naam.value;
-            optionTag.text = frm.naam.value;
-            frm.opties1.add(optionTag);
-            //frm.opties1.options[frm.opties1.options.length]=optionTag;
-            frm.naam.value = "";
-        }
-
-        function goRight() {
-            var x = frm.opties1.selectedIndex;
-            /*if (x >= 0) {
-                var optionTag = document.createElement('option');
-                optionTag.value = frm.opties1.options[x].value;
-                optionTag.text = frm.opties1.options[x].value;
-                frm.opties1.remove(x);
-                frm.opties2.add(optionTag);
-            }
-            else{alert("geen optie geselecteerd");}*/
-            frm.opties2.options[frm.opties2.options.length]=frm.opties1.options[x];
-        }
-
-        function goLeft() {
-            var x = frm.opties2.selectedIndex;
-            if (x >= 0) {
-                var optionTag = document.createElement('option');
-                optionTag.value = frm.opties2.options[x].value;
-                optionTag.text = frm.opties2.options[x].value;
-                frm.opties2.remove(x);
-                frm.opties1.add(optionTag);
-            }
-            else{alert("geen optie geselecteerd");}
-        }
-
-        function startJS() {
-            frm.input.onclick = toevoegen;
-            frm.goL.onclick = goLeft;
-            frm.goR.onclick = goRight;
-        }
-        window.onload = startJS;
-    </script>
+<title>Oefening DOM 13</title>
+<script>
+function naarRechts(){
+	var optieIndex = frm.namenLinks.selectedIndex;
+	var optie = frm.namenLinks.options[optieIndex];
+//	frm.namenLinks.remove(optieIndex); // overbodig>
+	frm.namenRechts.options[frm.namenRechts.options.length]=optie;
+}
+function naarLinks(){
+	var optieIndex = frm.namenRechts.selectedIndex;
+	var optie = frm.namenRechts.options[optieIndex];
+//	frm.namenRechts.remove(optieIndex);  // overbodig>
+	frm.namenLinks.options[frm.namenLinks.options.length]=optie;
+}
+function voegToe(){
+	var naam = frm.naamVeld.value;
+	var optie = document.createElement('option');
+	optie.text = naam;
+	frm.namenLinks.options[frm.namenLinks.options.length]=optie;
+	frm.naamVeld.value="";
+	frm.naamVeld.focus();
+}
+function init(){
+	document.getElementById("btnVoegToe").onclick = voegToe;
+  	document.getElementById("btnNaarLinks").onclick = naarLinks;
+  	document.getElementById("btnNaarRechts").onclick = naarRechts;
+}
+window.onload = init;
+</script>
 </head>
-
 <body>
-    <form name="frm">
-        name:
-        <input type="text" name="naam" size=12/>
-        <input type="button" name="input" value="Toevoegen" />
-        <br>
-        <br>
-        <div class="wrapper">
-        <div>
-        <select name="opties1" id="sel1" size="5"></select>
-        </div>
-        <div>
-        <input type="button" name="goL" value="&lt;" />
-        <input type="button" name="goR" value="&gt;" />
-        </div>
-        <div>
-        <select name="opties2" id="sel2" size="5"></select>
-        </div>
-        </div>
-    </form>
+<form name="frm">
+Naam: <input type="text" name="naamVeld" /><input type="button" value="Toevoegen" id="btnVoegToe" /><br />
+<select name="namenLinks" size="5" style="width:100px">
+<option>Jan</option>
+<option>Piet</option>
+</select>
+<input type="button" style="width:25px" value=">" id="btnNaarRechts" />
+<input type="button" style="width:25px" value="<" id="btnNaarLinks" />
+<select name="namenRechts" size="5" style="width:100px">
+<option>Joris</option>
+<option>Corneel</option>
+</select>
+</form>
 </body>
-
 </html>

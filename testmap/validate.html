@@ -1,0 +1,69 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .verborgen {
+            display: none;
+        }
+
+        .getoond {
+            color:red;
+            display: inline;
+        }
+    </style>
+    <script>
+        'use strict';
+
+        function controle() {
+            if (form1.q.value != "") {
+                error.className = "verborgen";
+                if (!isNaN(form1.jaar.value) && form1.jaar.value != "") {
+                    nummer.className = "verborgen";
+                    if (form1.jaar.value >= 18) {
+                        jong.className = "verborgen";
+                        return true;
+                    }
+                    else {
+                        jong.className = "getoond";
+                        return false;
+                    }
+                }
+                else {
+                    jong.className = "verborgen";
+                    nummer.className = "getoond";
+                    return false;
+                }
+            }
+            else {
+                error.className = "getoond";
+                return false;
+            }
+
+        }
+
+        function startJS() {
+            btn.onclick = controle;
+        }
+        window.onload = startJS;
+    </script>
+</head>
+
+<body>
+    <form id="form1" action="http://www.google.be/search" method="get">
+        zoekterm :
+        <input type="text" name="q" />
+        <span id="error" class="verborgen"> Error, geen invoer!</span>
+        <br>
+        <br> leeftijd :
+        <input type="text" name="jaar" />
+        <span id="jong" class="verborgen"> Je bent nog te jong!</span>
+        <span id="nummer" class="verborgen"> Dit is geen nummer!</span>
+        <br><br>
+        <input type="submit" value="verzenden" id="btn" />
+    </form>
+</body>
+
+</html>

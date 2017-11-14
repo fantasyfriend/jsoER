@@ -1,42 +1,52 @@
-<html lang="en">
-
+<!DOCTYPE html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-
-    <script>
-        'use strict';
-        function reken() {
-            var resultaat = frm.keuze[frm.keuze.selectedIndex].value;
-            frm.resultaat.value =
-                resultaat == "+" ? (frm.getal1.value * 1) + (frm.getal2.value * 1) :
-                    resultaat == "-" ? (frm.getal1.value * 1) - (frm.getal2.value * 1) :
-                        resultaat == "/" ? (frm.getal1.value * 1) / (frm.getal2.value * 1) :
-                            (frm.getal1.value * 1) * (frm.getal2.value * 1);
-        }
-
-        function startJS() {
-            frm.btn.onclick = reken;
-        }
-        window.onload = startJS;
-    </script>
+<title>Oefening DOM 11</title>
+<script >
+function bewerk(){
+    switch(frmTekst.bewerking.selectedIndex){
+        case 1: telOp(); break;
+        case 2: berekenVerschil(); break;
+        case 3: deel(); break;
+        case 4: vermenigvuldig();break;
+        default: alert("U moet een keuze maken");
+    }
+}
+function telOp(){
+  frmTekst.txtResultaat.value = parseInt(frmTekst.txtGetal1.value) +
+                                parseInt(frmTekst.txtGetal2.value)
+}
+function berekenVerschil(){
+  frmTekst.txtResultaat.value = parseInt(frmTekst.txtGetal1.value) -
+                                parseInt(frmTekst.txtGetal2.value)
+}
+function deel(){
+  frmTekst.txtResultaat.value = parseInt(frmTekst.txtGetal1.value) /
+                                parseInt(frmTekst.txtGetal2.value)
+}
+function vermenigvuldig(){
+  frmTekst.txtResultaat.value = parseInt(frmTekst.txtGetal1.value) *
+                                parseInt(frmTekst.txtGetal2.value)
+}
+function init(){
+  document.getElementById("btn").onclick = bewerk;
+}
+window.onload = init;
+</script>
 </head>
-
 <body>
-    <form name="frm">
-        <input type="number" name="getal1" size=8/>
-        <select name="keuze">
-            <option value="+">+</option>
-            <option value="-">-</option>
-            <option value="/">/</option>
-            <option value="x">x</option>
-        </select>
-        <input type="number" name="getal2" size=8/>
-        <input type="button" name="btn" value="=">
-        <input type="text" name="resultaat" size=8/>
-
-    </form>
+<form name="frmTekst">
+<input type="number" name="txtGetal1" /><br />
+<select name="bewerking">
+<option selected="selected">&lt;Maak uw keuze&gt;</option>
+<option>Optelling</option>
+<option>Aftrekking</option>
+<option>Deling</option>
+<option>Vermenigvuldiging</option>
+</select><br/>
+<input type="number" name="txtGetal2" /><br />
+<input type="button" value=" = " id="btn" /><br />
+<input type="number"" name="txtResultaat" readonly/><br />
+</form>
 </body>
-
 </html>

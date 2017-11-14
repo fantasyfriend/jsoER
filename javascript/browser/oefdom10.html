@@ -1,39 +1,52 @@
-<html lang="en">
-        
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Document</title>
-            
-            <script>
-                'use strict';
-                function reken() {
-                frm.resultaat.value=
-                frm.keuze[0].checked?(frm.getal1.value*1)+(frm.getal2.value*1):
-                frm.keuze[1].checked?(frm.getal1.value*1)-(frm.getal2.value*1):
-                frm.keuze[2].checked?(frm.getal1.value*1)/(frm.getal2.value*1):
-                (frm.getal1.value*1)*(frm.getal2.value*1);
-                }
-                    
-                function startJS(){
-                    frm.btn.onclick=reken;
-                }
-                window.onload = startJS;
-            </script>
-        </head>
-        
-        <body>
-            <form name="frm">
-                <input type="number" name="getal1" size=8/>
-                <input type="radio" value="+" name="keuze" checked/>+
-                <input type="radio" value="-" name="keuze" />-
-                <input type="radio" value="/" name="keuze" />/
-                <input type="radio" value="x" name="keuze" />x
-                <input type="number" name="getal2" size=8/>
-                <input type="button" name="btn" value="=">
-                <input type="text" name="resultaat" size=8/>
-                
-            </form>
-        </body>
-        
-        </html>
+<!DOCTYPE html>
+<html>
+<head>
+<title>Oefening DOM 10</title>
+<script>
+function bewerk(){
+  if (frmTekst.bewerking[0].checked) {telOp();}
+  else{ 
+    if (frmTekst.bewerking[1].checked) {berekenVerschil();}
+    else{ 
+        if (frmTekst.bewerking[2].checked) {vermenigvuldig();}
+        else{ 
+        if (frmTekst.bewerking[3].checked) {deel();}
+        } 
+    }
+  }
+}
+function telOp(){
+  frmTekst.txtResultaat.value = parseInt(frmTekst.txtGetal1.value) +
+                                parseInt(frmTekst.txtGetal2.value)
+}
+function berekenVerschil(){
+  frmTekst.txtResultaat.value = parseInt(frmTekst.txtGetal1.value) -
+                                parseInt(frmTekst.txtGetal2.value)
+}
+function deel(){
+  frmTekst.txtResultaat.value = parseInt(frmTekst.txtGetal1.value) /
+                                parseInt(frmTekst.txtGetal2.value)
+}
+function vermenigvuldig(){
+  frmTekst.txtResultaat.value = parseInt(frmTekst.txtGetal1.value) *
+                                parseInt(frmTekst.txtGetal2.value)
+}
+function init(){
+  document.getElementById("btn").onclick = bewerk;
+}
+window.onload = init;
+</script>
+</head>
+<body>
+<form name="frmTekst">
+<input type="number" name="txtGetal1" /><br />
+<input type="radio" name="bewerking" /> + <br />
+<input type="radio" name="bewerking" /> - <br />
+<input type="radio" name="bewerking" /> x <br />
+<input type="radio" name="bewerking" /> / <br />
+<input type="number"" name="txtGetal2" /><br />
+<input type="button" value=" = " id="btn" /><br />
+<input type="number" name="txtResultaat"  readonly/><br />
+</form>
+</body>
+</html>
