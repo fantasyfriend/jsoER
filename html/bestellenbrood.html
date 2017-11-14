@@ -13,7 +13,7 @@
     if (locatie){locatie.innerHTML =htmllijst;}
 
     var dag=(d.getDate()+11)%12;
-    document.getElementById("side").innerHTML = "<h2>broodje van de dag</h2><div class='item'><h3>"+broodjes[dag][0]+"</h3><img src='images/"+broodjes[dag][1]+".jpg'><p class='prijs'>"+(broodjes[dag][2]).toFixed(2)+" Euro</p></div>";
+    document.getElementById("inside").innerHTML = "<div class='item'><h3>"+broodjes[dag][0]+"</h3><img src='images/"+broodjes[dag][1]+".jpg'><p class='prijs'>"+(broodjes[dag][2]).toFixed(2)+" Euro</p></div>";
     
     var bestellen=bestelfrm.btn;
     if (bestellen){bestellen.onclick = opmaak;}
@@ -32,7 +32,7 @@
             <li>INFORMATIE</li>
         </ul></nav>
     </header>
-    <aside id="side"></aside>
+    <aside id="side"><h2>broodje van de dag</h2><div class="flexwrapper" id="inside"></div></aside>
     <main id="main">
         <h2>Uw bestelling</h2>
         <div class="flexwrapper">

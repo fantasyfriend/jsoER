@@ -17,6 +17,16 @@ grid-row-gap: 5px;
 #mainindex,#main{grid-area:main;}
 #footer{grid-area:footer;}
 
+@media only screen and (max-width:600px) {
+    body{
+        grid-auto-rows: 96px 1fr 1fr 24px;
+        grid-template-areas:"header"
+        "side"
+        "main"
+        "footer"; 
+        }
+}
+
 #header,#side,#main,#mainindex,#footer{background-color: beige;border-radius: 5px;}
 #mainindex,#main{min-width:320px;}
 .flexwrapper{display:flex;flex-flow:row wrap;justify-content:space-around;}
