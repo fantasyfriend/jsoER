@@ -1,0 +1,32 @@
+<html lang="en">
+        
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Document</title>
+            
+            <script>
+                'use strict';
+                function verander(e) {
+                    e.target.value=e.target.value.replace(/&/g,"and");
+                    }
+                        
+                function startJS(){
+                   var inputs=document.getElementsByTagName('input');
+                   for(var i=0;i<inputs.length;i++){
+                       if(inputs[i].type=="text"){inputs[i].onblur=verander;}
+                   } 
+                }
+                window.onload = startJS;
+            </script>
+        </head>
+        
+        <body>
+            <form name="frm">
+                <input type="text" name="input1" id="0"/><br>
+                <input type="text" name="input2" id="1"/><br>
+                <input type="button" name="input2" value="& en and" id="3"/>
+            </form>
+        </body>
+        
+        </html>

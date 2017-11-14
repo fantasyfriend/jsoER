@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Events 2</title>
+<script>
+        'use strict';
+        function show() {
+            zero.src="images/zero.jpg";
+        }
+                
+        function startJS(){
+            var data=["five","four","three","two","one","zero"];var html="";
+            for(var i=0;i<data.length;i++){html+="<img id='"+data[i]+"' src='images/"+data[i]+".jpg'>"+data[i]+"</img>"}
+            images.innerHTML=html;
+
+            //for(var i=0;i<data.length;i++){html+="<img id='"+data[i]+"' src='images/"+data[i]+".jpg'>"+data[i]+"</img>"}
+            //document.getElementById("zero").onclick=show;
+        }
+        window.onload = startJS;
+    </script>
+</head>
+<body>
+<h1>Raad wie of wat op onderstaande figuur staat.  Klik op de figuur om je antwoord te controleren.</h1>
+<div id="images"></div>
+</body>
+</html>

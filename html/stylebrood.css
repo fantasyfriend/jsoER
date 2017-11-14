@@ -5,7 +5,7 @@ body{margin:0 auto;max-width:1240px;height:100vh;}
 body{
 display: grid;
 grid-template-columns: auto 240px;
-grid-auto-rows: 96px 1fr 24px;
+grid-auto-rows: 88px 1fr 24px;
 grid-template-areas:"header header"
 "main side"
 "footer footer"; 
@@ -17,14 +17,15 @@ grid-row-gap: 5px;
 #mainindex,#main{grid-area:main;}
 #footer{grid-area:footer;}
 
-@media only screen and (max-width:600px) {
+@media only screen and (max-width:575px) {
     body{
-        grid-auto-rows: 96px 1fr 1fr 24px;
+        grid-auto-rows: 88px 1fr 1fr 24px;
         grid-template-areas:"header"
         "side"
         "main"
         "footer"; 
         }
+    
 }
 
 #header,#side,#main,#mainindex,#footer{background-color: beige;border-radius: 5px;}
@@ -32,13 +33,14 @@ grid-row-gap: 5px;
 .flexwrapper{display:flex;flex-flow:row wrap;justify-content:space-around;}
 
 h1,h2,h3,p{text-align:center;margin:4px;}
+h1{color:crimson;text-shadow:5px 5px 15px darkcyan;font-size:40px;}
 
 .item{display:inline-block;width:220px;height:300px;background-color: darkcyan;margin:10px;
     padding:10px;border:1px solid black;border-radius: 5px;}
 img{width:200px;height:120px;border:1px solid black;border-radius: 5px;}
 .prijs{border:1px solid black;background-color:beige;border-radius: 10px;box-shadow:black 5px 5px 5px;}
 
-#menu{position:relative;top:24px;}
+#menu{position:relative;top:6px;}
 ul{margin:0;padding:0;}
 li{display:inline-block;border:2px solid black;border-top-left-radius:10px;border-top-right-radius:10px;
     margin:0 5px;padding:5px;background-color:beige;box-shadow:gray 0 -5px 15px inset;}
@@ -58,3 +60,12 @@ tfoot th{border-bottom:1px solid linen;}
 .min, .plus{text-shadow:1px 1px 1px black;}
 .min:hover{color: red;text-shadow:0 0 1px red;cursor:pointer;}
 .plus:hover{color: green;text-shadow:0 0 1px green;cursor:pointer;}
+
+h1{animation-name: val;animation-duration: 20s;position:relative;}
+@keyframes val {
+    0%   {color:red; left:0px; top:0px;}
+    25%  {color:yellow; left:200px; top:0px;}
+    50%  {color:blue; left:200px; top:200px;}
+    75%  {color:green; left:0px; top:200px;}
+    100% {color:red; left:0px; top:0px;}
+}

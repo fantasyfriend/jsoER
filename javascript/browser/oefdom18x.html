@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Events 3</title>
+  <style>
+	#volger{ position:relative; }
+  </style>
+  <script>
+	window.onload = function () {
+		
+            document.onmousemove = volgen;
+            document.ondblclick= stop;
+            document.onmousedown= start;
+    }
+    
+	function volgen(e) {
+        volger.style.left=""+e.pageX+"px";
+        volger.style.top=""+e.pageY+"px"
+    }
+
+    function stop(){
+        volger.style.position="static";
+    }
+
+    function start(e){
+        if(e.button==0){volger.style.position="relative";}
+    }
+    
+    
+    
+  </script>
+</head>
+<body>
+<h1 id="volger">ik volg je</h1>
+</body>
+</html>

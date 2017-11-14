@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Oefening DOM 16</title>
+<script>
+function verander(){
+    var optie = frm.keuze.selectedIndex;
+    text.style.fontSize=""+frm.keuze.options[optie].value+"px";
+}    
+function init(){
+    var data=["xx-small","x-small","small","medium","large","x-large","xx-large"];
+    var html="";
+    for(var i=0;i<data.length;i++){
+        html+="<option value='"+(i+1)*8+"'>"+data[i]+"</option>"
+    }
+    frm.keuze.innerHTML=html;
+    
+  	document.getElementById("actie").onclick = verander;
+}
+window.onload = init;
+</script>
+</head>
+<body>
+<form name="frm">
+<select name="keuze" size="4" id="font" style="width:100px"></select>
+<input type="button" value="klik" id="actie" />
+</form>
+<span id="text">Dit is een tekst</span>
+</body>
+</html>
