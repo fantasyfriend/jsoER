@@ -4,19 +4,20 @@
 <meta charset="ISO-8859-1">
 <title>Events 3</title>
   <style>
-	#volger{ position:relative; }
+	#volger{ position:absolute; }
   </style>
   <script>
 	window.onload = function () {
-		
+		//var go="on";
             document.onmousemove = volgen;
             document.ondblclick= stop;
             document.onmousedown= start;
     }
     
 	function volgen(e) {
+        
         volger.style.left=""+e.pageX+"px";
-        volger.style.top=""+e.pageY+"px"
+        volger.style.top=""+e.pageY+"px";
     }
 
     function stop(){
@@ -24,7 +25,7 @@
     }
 
     function start(e){
-        if(e.button==0){volger.style.position="relative";}
+        if(e.button==0){volger.style.position="absolute";}
     }
     
     
