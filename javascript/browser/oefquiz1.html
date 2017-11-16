@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>quiz</title>
+
+    <script>
+        'use strict';
+        function controle() {
+            frm.vraag[0].checked ? alert("goed geraden") : alert("helaas fout!");
+        }
+
+        window.onload = function () {
+            btn.onclick = controle;
+        }
+    </script>
+</head>
+
+<body>
+    <form name="frm">
+        <h2>Is dit een vraag?</h2>
+        <input type="radio" name="vraag" />ja
+        <br>
+        <input type="radio" name="vraag" />nee
+        <br>
+        <input type="radio" name="vraag" />undefined
+        <br>
+        <br>
+        <input type="button" value="controle" id="btn" />
+    </form>
+</body>
+
+</html>

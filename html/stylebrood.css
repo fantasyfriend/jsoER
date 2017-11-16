@@ -61,11 +61,3 @@ tfoot th{border-bottom:1px solid linen;}
 .min:hover{color: red;text-shadow:0 0 1px red;cursor:pointer;}
 .plus:hover{color: green;text-shadow:0 0 1px green;cursor:pointer;}
 
-h1{animation-name: val;animation-duration: 20s;position:relative;}
-@keyframes val {
-    0%   {left:0px; top:0px;}
-    25%  {left:10px; top:0px;transform:rotate(45deg);}
-    50%  {left:50px; top:200px;transform:rotate(90deg)}
-    75%  {left:0px; top:200px;}
-    100% {left:0px; top:0px;}
-}

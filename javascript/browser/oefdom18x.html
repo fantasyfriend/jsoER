@@ -7,29 +7,30 @@
 	#volger{ position:absolute; }
   </style>
   <script>
+    var go="on";
 	window.onload = function () {
-		//var go="on";
-            document.onmousemove = volgen;
-            document.ondblclick= stop;
-            document.onmousedown= start;
+        document.onmousemove = volgen;
+        document.ondblclick= stop;
+        document.onmousedown= start;
     }
     
 	function volgen(e) {
-        
+        if(go=="on"){
         volger.style.left=""+e.pageX+"px";
-        volger.style.top=""+e.pageY+"px";
+        volger.style.top=""+e.pageY+"px";}
     }
 
     function stop(){
-        volger.style.position="static";
+        //volger.style.position="static";
+        go="off";
     }
 
     function start(e){
-        if(e.button==0){volger.style.position="absolute";}
+        if(e.button==0){
+          //volger.style.position="absolute";
+          go="on";
+        }
     }
-    
-    
-    
   </script>
 </head>
 <body>

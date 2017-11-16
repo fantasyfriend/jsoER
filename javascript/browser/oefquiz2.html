@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>quiz</title>
+
+    <script>
+        'use strict';
+        function controle() {
+            var woord=0;
+            if(frm.vraag1[0].checked)woord++;
+            if(frm.vraag2[1].checked)woord++;
+            if(frm.vraag3[2].checked)woord++;
+            woord==0?woord="U heeft geen enkel andwoord goed.": woord==1?woord="U heeft een andwoord goed.":woord="U heeft "+woord+" andwoorden goed.";
+            alert(woord)
+        }
+
+        window.onload = function () {
+            btn.onclick = controle;
+        }
+    </script>
+</head>
+
+<body>
+    <form name="frm">
+        <h2>Is dit een vraag?</h2>
+        <input type="radio" name="vraag1" />ja
+        <br>
+        <input type="radio" name="vraag1" />nee
+        <br>
+        <input type="radio" name="vraag1" />onbekend
+        <br>
+        <br>
+        <h2>Was dit een goede vraag?</h2>
+        <input type="radio" name="vraag2" />ja
+        <br>
+        <input type="radio" name="vraag2" />nee
+        <br>
+        <input type="radio" name="vraag2" />onbekend
+        <br>
+        <br>
+        <h2>is dit de laatste vraag?</h2>
+        <input type="radio" name="vraag3" />ja
+        <br>
+        <input type="radio" name="vraag3" />nee
+        <br>
+        <input type="radio" name="vraag3" />onbekend
+        <br>
+        <br>
+        <input type="button" value="controle" id="btn" /><br><br>
+    </form>
+</body>
+
+</html>

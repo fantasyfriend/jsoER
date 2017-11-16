@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Events 5</title>
+<style>
+    #klok{position:absolute;left:50px;top:100px;}
+    #wijzer{position:absolute;left:10px;top:20px;display:inline-block;}
+    #rond{position:absolute;left:110px;top:15px;border:2px solid red;border-radius:50%;width:90px;height:90px;}
+</style>
+<script>
+var dag=["zondag","maandag","dinsdag","woensdag","donderdag","vrijdag","zaterdag"];
+function start(){
+	setInterval(klokje, 1000);
+}
+function klokje(){
+    var tijd=new Date();
+    klok.innerHTML="<p>"+dag[tijd.getDay()]+" : "+tijd.getHours()+" uur "+tijd.getMinutes()+" min "+tijd.getSeconds()+" sec</p>";
+    wijzer.style.transform="rotate("+((tijd.getSeconds()*6)+90)+"deg)";
+}
+
+window.onload = function () {
+    btn.onclick=start;
+    
+}
+</script>
+</head>
+<body>
+<button id="btn">klokje</button>
+<div id="klok"></div>
+<div id="rond">
+<p id="wijzer"><===&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+</div>
+</body>
+</html>

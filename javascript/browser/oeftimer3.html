@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Events 5</title>
+<style>
+    #bar{background-color: blue;height:20px;width:0%;}
+</style>
+<script>
+var teller=null;w=0;
+function start(){
+    if (teller != null){clearTimeout(teller);w=0;teller=null;}
+	teller=setInterval(balkje, 60);
+}
+function balkje(){
+    w++;
+    if(w>=100){stop();}
+    bar.style.width=""+w+"%"
+}
+function stop(){
+    if (teller != null){clearTimeout(teller);}
+}
+
+window.onload = function () {
+    
+    btnGo.onclick=start;
+    btnStop.onclick=stop;
+
+}
+</script>
+</head>
+<body id="scherm">
+<div id="bar"></div>
+<button id="btnGo">start</button>
+<button id="btnStop">stop</button>
+</body>
+</html>

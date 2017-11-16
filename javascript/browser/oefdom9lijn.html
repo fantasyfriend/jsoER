@@ -1,0 +1,49 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>h1{color:green;}</style>
+    <script>
+        'use strict';
+        var a = new Array(70); a.fill("_");
+        var s = 0, h = 0, v, x,win="";
+
+        function random(d) { return Math.floor(Math.random() * d) + 1 }
+
+        function stand() {
+            var lijn = "";a[69]="🏁";
+            if (h > 69) { a[69] = '🐇'; win='Haas heeft gewonnen 🏁'; clearTimeout(x); }
+            if (s > 69) { a[69] = '🐢'; win='Schilpad heeft gewonnen 🏁'; clearTimeout(x); }
+            if (h > 69 && s > 69) { a[69] = '💢'; win='Schilpad en haas hebben bijde gewonnen 🏁'; clearTimeout(x); }
+            for (var i = 69; i >= 0; i--) { lijn += a[i]; }
+            start.innerHTML = "<h1>"+lijn+"</h1><h1>"+win+"</h1>";        
+}
+
+        function loop() {
+            a[s]="_";a[h]="_";
+            v = random(10);
+            v < 6 ? s += 3 : v < 8 ? s -= 6 : s += 1;
+            if (s < 0) { s = 0; }
+            a[s] = "🐢";
+
+            v = random(10);
+            v < 3 ? h += 0 : v < 5 ? h += 9 : v < 6 ? h -= 12 : v < 9 ? h += 1 : h -= 2;
+            if (h < 0) { h = 0; }
+            a[s] == a[h] ? a[h] = "💢" : a[h] = "🐇";
+            stand();
+        }
+
+        function startJS() {
+            x = setInterval(loop, 400);
+        }
+        window.onload = startJS;
+    </script>
+</head>
+
+<body>
+    <div id="start"></div>
+</body>
+
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Events 5</title>
+<script>
+var tijd=0;
+function stop(){
+	alert('This page will shut down in 5 sec.!');
+    setInterval(end, 600);
+}
+function end(){
+    tijd+=1;btn.innerHTML="nog "+(5-tijd)+" sec"
+    if(tijd==6)close();
+}
+
+window.onload = function () {
+    btn.onclick=stop;
+    
+}
+</script>
+</head>
+<body>
+<button id="btn">close screen</button>
+</body>
+</html>
