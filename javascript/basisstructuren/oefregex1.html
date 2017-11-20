@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>regex</title>
+    
+    <script>
+        'use strict';
+
+        function verwerk(){
+            var invoer=frm.invoer.value;
+            frm.uitvoer.value=invoer.replace(/,/g,", ");;
+        }
+        
+        window.onload = function (){
+           btn.onclick=verwerk; 
+        }
+        
+    </script>
+</head>
+
+<body>
+    <form name="frm">
+        invoer: <input type="text" name="invoer"/>
+        <input type="button" value="+ spatie na komma" id="btn" />
+        uitvoer: <input type="text" name="uitvoer"/>
+    </form>
+</body>
+
+</html>

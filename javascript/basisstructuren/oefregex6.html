@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>regex</title>
+    
+    <script>
+        'use strict';
+
+        function verwerk(){
+            var invoer1=frm.invoer1.value.replace(/ /,"");
+            var invoer2=frm.invoer2.value.replace(/ /,"");
+            if(invoer1.length!=invoer2.length){frm.uitvoer.value="fout";return;}
+            var regexp;
+            for(var i=0;i<invoer2.length;i++){
+                regexp = new RegExp(invoer2.slice(i,i+1));  
+                if( !regexp.test(invoer1) ){frm.uitvoer.value="fout";return;}
+                invoer1=invoer1.replace(regexp,"");
+            }
+            frm.uitvoer.value="goed"
+            
+        }
+        
+        
+        window.onload = function (){
+           btn.onclick=verwerk;
+            
+        }
+        
+    </script>
+</head>
+
+<body>
+    <form name="frm">
+        invoer1: <input type="text" name="invoer1"/>
+        invoer2: <input type="text" name="invoer2"/>
+        <input type="button" value=" controle " id="btn" />
+        uitvoer: <input type="text" name="uitvoer"/>
+    </form>
+</body>
+
+</html>
