@@ -8,28 +8,45 @@
     <style>
         .z{color:black;}
         .r{color:red;}
+        #note{background-color: yellow;width:230px;height:24px;padding:16px;border:2px solid black;}
     </style>
     <script>
         'use strict';
+
+        var tijd=0,teller;
+
+        function end(){
+            tijd+=1;note.innerHTML="nog "+(10-tijd)+" sec"
+            if(tijd==11){
+                note.innerHTML="Uw tijd is om!";
+                clearTimeout(teller);
+                btn.onclick=null;
+            }
+        }
+
         function controle() {
             var woord=0;
+            clearTimeout(teller);
             if(frm.vraag1[0].checked){woord++;v1.innerHTML="<b class='z'> goed</b>"}
             else{v1.innerHTML="<b class='r'> fout</b>"}
             if(frm.vraag2[1].checked){woord++;v2.innerHTML="<b class='z'> goed</b>"}
             else{v2.innerHTML="<b class='r'> fout</b>"}
             if(frm.vraag3[2].checked){woord++;v3.innerHTML="<b class='z'> goed</b>"}
             else{v3.innerHTML="<b class='r'> fout</b>"}
-            woord==0?woord="U heeft geen enkel andwoord goed.": woord==1?woord="U heeft een andwoord goed.":woord="U heeft "+woord+" andwoorden goed.";
-            alert(woord)
+            woord==0?woord="U heeft geen enkel andwoord goed.": woord==1?woord="U heeft 1 andwoord goed.":woord="U heeft "+woord+" andwoorden goed.";
+            note.innerHTML=woord;
+            
         }
 
         window.onload = function () {
             btn.onclick = controle;
+            teller=setInterval(end, 1000);
         }
     </script>
 </head>
 
 <body>
+    <div id="note"></div>
     <form name="frm">
         <h2>Is dit een vraag? <span id="v1"></span></h2>
         <input type="radio" name="vraag1" />ja
