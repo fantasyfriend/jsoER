@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>regex</title>
+    
+    <script>
+        'use strict';
+
+        function uitvoer(){
+            var i;
+            var invoer=frm.invoer.value;
+            intensive.checked?i="":i="i";
+            var regex=new RegExp(frm.regex.value,i);
+            if(regex.test(invoer)){alert("ok");}else{alert("niet goed opgebouwd");}
+        }
+        
+        window.onload = function (){
+           btn.onclick=uitvoer; 
+        }
+        
+    </script>
+</head>
+
+<body>
+    <form name="frm">
+        invoer: <input type="text" name="invoer"/>
+        regex: <input type="text" name="regex"/>
+        intensive: <input type="checkbox" id="intensive"/>
+        <input type="button" value="controle" id="btn" />
+        
+    </form>
+</body>
+
+</html>
