@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #doos{border:2px solid blue;width:240px;height:240px;display:flex;}
+        .kolom{width:60px}
+        .steentje{border:2px solid black;width:56px;height:56px;}
+        .yellow{background-color: yellow;}
+        .green{background-color: green;}
+        .purple{background-color: purple;}
+        .red{background-color: red;}
+        .blue{background-color: blue;}
+
+    </style>
+    <script>
+        var kleur=["yellow","green","purple","red","blue"];
+        var mem,turn=1;
+        function rnd(x){return Math.floor(Math.random()*x)}
+
+        function check(k,i,j){
+            if(turn=1){turn=2;mem=k;}
+            else{turn=1;getElementById("s"+i+""+j+"").;}
+            
+        }
+
+        function vulDoos(x,y){
+            var k,html="";
+            for(i=0;i<x;i++){var steentjes="";
+                for(j=0;j<y;j++){
+                    k=rnd(5);
+                    steentjes+="<div onclick='check("+k+","+i+","+j+")' class='steentje "+kleur[k]+"' id='s"+i+""+j+"'>"+j+"</div>";
+                }
+                html+="<div class='kolom' id='k"+i+"'>"+steentjes+"</div>"
+            }
+            doos.innerHTML=html;
+        }
+
+    window.onload = function(){
+       vulDoos(4,4);             
+    
+    }
+    </script>
+</head>
+<body>
+    <div id="doos">
+    </div>
+</body>
+</html>

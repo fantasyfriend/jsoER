@@ -11,7 +11,7 @@
 
         function verwerk(){
             var invoer=frm.invoer.value;
-            if(invoer.match(/^BE[0-9]{2}[ ][0-9]{4}[ ][0-9]{4}[ ][0-9]{4}$/)){
+            if(invoer.match(/^BE[0-9]{2}[ ][0-9]{4}[ ][0-9]{4}[ ][0-9]{4}$/i)){
                 var control=invoer.replace(/ /g,"");
                 if(control.slice(14,16)==control.slice(4,14)%97){
                     if(control.slice(2,4)==98-((control.slice(4,16)).concat(111400)%97)){
