@@ -10,8 +10,8 @@
         'use strict';
 
         function verwerk(){
-            var invoer1=frm.invoer1.value.replace(/ /,"");
-            var invoer2=frm.invoer2.value.replace(/ /,"");
+            var invoer1=frm.invoer1.value.replace(/ /g,"");
+            var invoer2=frm.invoer2.value.replace(/ /g,"");
             if(invoer1.length!=invoer2.length){frm.uitvoer.value="fout";return;}
             var regexp;
             for(var i=0;i<invoer2.length;i++){
