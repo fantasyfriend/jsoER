@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Test 2 - deel 2 - vraag 3</title>
+
+<script>
+'use strict';
+    function pigLatin(zin) {// **** vraag 3a ****
+        var zinsdeel=zin.split(" ");
+        for (var i=0;i<zinsdeel.length;i++){
+            if(zinsdeel[i].charAt(0)!="p" && zinsdeel[i].charAt(0)!="P"){zinsdeel[i]="p"+zinsdeel[i];}
+        }
+        return zinsdeel.join(" ");
+    }
+
+    function vertaling(){// **** vraag 3b ****
+        txtVertaling.value=pigLatin(txtInvoer.value);
+    }
+        
+    /*function pigLatinDirect() {
+        var zin=txtInvoer.value;
+        var zinsdeel=zin.split(" ");
+        for (var i=0;i<zinsdeel.length;i++){
+            if(zinsdeel[i].charAt(0)!="p" && zinsdeel[i].charAt(0)!="P"){zinsdeel[i]="p"+zinsdeel[i];}
+        }
+        txtVertaling.value=zinsdeel.join(" ");
+    }*/
+                
+    window.onload = function(){
+        //btnVertaal.onclick=pigLatinDirect;
+        btnVertaal.onclick=vertaling;
+    }
+</script>
+
+</head>
+<body>
+    <form name="frm">
+        <label for="txtInvoer">Originele zin: </label><input type="text" id="txtInvoer" name="txtInvoer" placeholder="Zin om te vertalen naar pigLatin"/>
+        <input type="button" value="Vertaal naar pigLatin" id="btnVertaal"/>
+        <label for="txtVertaling">Vertaling: </label><input type="text" id="txtVertaling" name="txtVertaling" readonly />
+    </form>
+</body>
+</html>

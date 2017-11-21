@@ -1,0 +1,43 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>vraag1</title>
+        
+        <script>
+            'use strict';
+            var vraag=["vraag 0","vraag 1","vraag 2","vraag 3","vraag 4"];
+            var antwoord=["antwoord 0","antwoord 1","antwoord 2","antwoord 3","antwoord 4"]
+            var waarde;
+
+            function random(x){
+                waarde= Math.floor(Math.random()*x);
+                return waarde;
+            }
+
+            function zetVraag() {
+                frm.vraag.value=vraag[random(5)];
+            }
+
+            function geefAntwoord() {
+                frm.antwoord.value=antwoord[waarde];
+            }
+                    
+            window.onload = function(){
+                zetVraag();
+                frm.btn1.onclick=zetVraag;
+                frm.btn2.onclick=geefAntwoord;
+            }
+        </script>
+    </head>
+    
+    <body>
+        <form name="frm">
+            <input type="button" value="Bepaal de actieve vraag" id="btn1" /><br>
+            Vraag : <br><input type="text" name="vraag"/><br>
+            <input type="button" value="Bepaal het antwoord op die vraag" id="btn2" /><br>
+            Antwoord : <br><input type="text" name="antwoord">
+        </form>
+    </body>
+    
+    </html>
