@@ -32,17 +32,55 @@ function drawMond(color,x,y,straal){
     context.fillStyle="darkred";
     context.fill();
 }
-function drawMijter(){
+function drawMiter(){
     veelhoek("red",[topx,60,topx+120,180,topx+60,300,topx-60,300,topx-120,180]);
+    drawLijn("gold",topx-120,180,topx+120,180,10);
+    drawLijn("gold",topx,60,topx,300,10);
+}
+function drawImage(naam,x,y,width,height){
+    var img=new Image();
+    img.src=naam;
+    img.onload=function(){
+        context.drawImage(img,x,y,width,height);
+    }
+}
+function drawLijn(color,x1,y1,x2,y2,width){
+    context.strokeStyle=color;
+    context.lineWidth=width;
+    context.beginPath();
+    context.moveTo(x1,y1);
+    context.lineTo(x2,y2);
+    context.stroke();
+}
+function text(color,text,x,y){
+    context.fillStyle=color;
+    context.font="bold 2em sans-serif";
+    context.textAlign="center";
+    context.fillText(text,x,y);
+}
+function rnd(x){return Math.floor(Math.random()*x)};
+
+function snoep(){
+    var x,y,z;
+    for(var i=0;i<12;i++){
+    //drawImage("images/images.png",rnd(580),rnd(580),20+rnd(20),20+rnd(20));
+    x=rnd(560);y=rnd(580);z=rnd(10)+3;
+    veelhoek("rgb("+x/2.5+","+y/2.5+","+z*20+")",[x,y,x+z,y+z,x+z*2,y,x+z*3,y+z,x+4*z,y,x+4*z,y+2*z,x+3*z,y+z,x+2*z,y+2*z,x+z,y+z,x,y+2*z]);
+    }    
 }
 
 function drawFace(){
+    context.clearRect(0,0,600,600);
+    context.fillStyle="beige";
+    context.fillRect(0,0,600,600);
     drawCircle("pink",topx,320,70);
     drawOgen();
     drawBaard();
     drawMond();
-    drawMijter();
-    
+    drawMiter();
+    drawImage("images/speelgoedzak.png",450,450,150,150);
+    text("purple","Dag sinterklaasje !",topx,550);
+    snoep()
 }
 
 window.onload=function(){
@@ -56,7 +94,7 @@ window.onload=function(){
     context.fillStyle="beige";
     context.fillRect(0,0,600,600);
 
-    drawFace();
+    setInterval(drawFace,300);
 
 
 }
