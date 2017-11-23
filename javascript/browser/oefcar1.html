@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>auto</title>
+    
+    <script>
+        'use strict';
+        var BMW=["zero","uno","four","drei"];
+        var FIAT=["124","xx","flut"];
+        var Volkswagen=["classic","flop","125"];
+        var Mercedes=["frrr","14","8"];
+        var merk=[BMW,FIAT,Volkswagen,Mercedes,];
+        
+                
+        function model(m){
+            var html="";
+            for (var i=0;i<merk[m].length;i++){
+                html+="<option value='"+merk[m][i]+"'>"+merk[m][i]+"</option>"
+            }
+            frm.model.innerHTML=html;
+        }
+        function welkModel(){
+            model(document.getElementById("merk").selectedIndex);
+        }
+        function rij(){
+            var kl=document.getElementById("kleur").value;
+            var mrk=document.getElementById("merk").value;
+            var mdl=document.getElementById("model").value;
+            var j=document.getElementById("jaar").value;
+            var km=document.getElementById("afstand").value;
+            var std=document.getElementById("kmstand").value;
+            var cab=document.getElementById("cabrio").checked?"cabrio ":"";
+            alert("Een leuk ritje van "+km+" km met een "+kl+" "+cab+""+mrk+" "+mdl+" uit het jaar "+j+".");
+            document.getElementById("kmstand").value=std*1+km*1;
+        }
+
+        window.onload = function (){
+            model(0);
+            document.getElementById("merk").onchange=welkModel;
+            document.getElementById("btn").onclick = rij;
+        }
+    </script>
+</head>
+
+<body>
+    <form name="frm">
+        <label for="merk">merk: </label>
+        <select name="merk" id="merk">
+            <option value="BMW">BMW</option>
+            <option value="FIAT">FIAT</option>
+            <option value="Volkswagen">Volkswagen</option>
+            <option value="Mercedes">Mercedes</option>
+        </select><br><br>
+        <label for="model">model: </label>
+        <select name="model" id="model"></select><br><br>
+        <label for="kleur">kleur: </label>
+        <select name="kleur" id="kleur">
+            <option value="rode">rood</option>
+            <option value="gele">geel</option>
+            <option value="blauwe">blauw</option>
+            <option value="groene">groen</option>
+            <option value="witte">wit</option>
+            <option value="zwarte">zwart</option>
+        </select><br><br>
+        bouwjaar: <input type="number" name="jaar" id="jaar" required/><br><br>
+        cabrio <input type="checkbox" name="cabrio" id="cabrio"/><br><br>
+        kmstand: <input type="number" name="kmstand" id="kmstand" required/><br><br>
+        <input type="button" value="RIJ" id="btn" />
+        afstand: <input type="number" name="afstand" id="afstand" required/>
+    </form>
+</body>
