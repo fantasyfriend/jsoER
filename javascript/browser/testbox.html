@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #flexbox{width:240px;height:240px;border:2px solid red;display:flex;flex-flow:row wrap;}
+        .blok{width:55px;height:55px;border:2px solid blue;}
+        .groen{width:55px;height:55px;border:2px solid green;}
+        .weg{display:none;}
+    </style>
+    <style id="style2">
+    
+    </style>
+    <script>
+        'use strict';
+        
+        function x(obj){
+            var name= obj.id;
+            alert(name);
+            document.getElementById(name).className="weg";
+        }
+
+        
+        window.onload = function (){
+        var html=""
+        for(var i=0;i<25;i++){
+            html+="<div class='blok' id='p"+i+"' onclick='x(this)'>"+i+"</div>";
+        }
+        flexbox.innerHTML=html;
+        style2.innerHTML=".blok{width:55px;height:55px;border:2px solid palevioletred;}"
+        
+
+
+        }
+        
+    </script>
+</head>
+
+<body>
+    <div id="flexbox"></div>    
+</body>
+
+</html>

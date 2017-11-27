@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>titel</title>
+    <style>
+        *{box-sizing:border-box;}
+        html{background-color:black;}
+        body{min-width:320px;max-width:1200px;}
+        body,header,main,footer{margin:0 auto;padding:4px;}
+        header{}
+        main{}
+        footer{}
+
+        .flex{display:flex;flex-flow:row wrap;justify-content:space-around;}
+        .tl{position:fixed;left:0;top:0;}
+        .tr{position:fixed;right:0;top:0;}
+        .br{position:fixed;right:0;bottom:0;}
+        .tla{position:absolute;left:0;top:0;}
+
+        h1,h2,h3,h4,p{text-align:center;margin:4px;padding:2px;}
+        .small{font-size:0.7em}
+
+        .nc{border:1px solid black;}
+        .rond{border:1px solid black;border-radius:50%;}
+        .lc{border:1px solid black;border-radius:16px;}
+        .sc{border:1px solid black;border-radius:8px;}
+        .bs{box-shadow:black 3px 3px 3px 3px}
+        .p8{padding:8px;}
+        .inl{display:block;}
+
+        .icon{font-family: Arial, Helvetica, sans-serif;font-size: 16px;text-decoration:none;font-weight:bolder;
+        padding:6px 8px;margin:4px 8px;color:white;background-color:dodgerblue;border-radius:6px;box-shadow:black 2px 2px 1px 1px;}
+        .icon:hover{box-shadow:black 1px 1px;}
+        .arrow{font-size: 32px;font-weight:bolder;text-shadow:2px 2px 1px black;border:none;}
+        .arrow:hover{text-shadow:1px 1px black;}
+        .arrow:focus{outline:none;}
+
+        img{width:110px;height:auto;margin:0;margin-bottom:-6px;}
+        .photo,.text{position:relative;margin:12px 4px;padding:0;}
+        .photo:hover{box-shadow:1px 1px 1px 1px;}
+        .photoText{position:absolute;left:10px;bottom:11px;width:90px;}
+        .student{width:132px;margin:2px 2px 2px 8px;}
+
+        #fixmenu{min-height:36px;width:100%;position:fixed;right:0;top:0;z-index:99;}
+        #fixmenu a{margin:0px 8px;padding:2px;text-decoration:none;font-weight:bolder;}
+        #fixmenu a:hover,#up a:hover{text-shadow:1px 1px;}
+        #fixmenu>div, #fixmenu button{margin:8px;}
+        #titel{font-size:1.5em;margin:48px 0 16px 0;}
+
+        #news{padding:24px;}
+        .text{width:700px;}
+
+        #up a{margin:8px;padding:4px 8px;text-decoration:none;font-weight:bolder;}
+
+        @media only screen and (max-width:991px) {.text{width:500px;}}
+        @media only screen and (max-width:767px) {.text{width:300px;}}
+        
+    </style>
+    <style id="style2"></style>
+    <script>
+        'use strict'
+        // ***data***
+        var st1=["Arial, Helvetica, sans-serif",20,"rgba(0,0,0,0.5)","beige","darkcyan","crimson","black"];
+        var st2=["Georgia, serif",18,"rgba(0,0,0,0.5)","powderblue","mediumslateblue","gold","darkslateblue"];
+        var st3=["'Comic Sans MS', cursive, sans-serif",18,"rgba(0,0,0,0.5)","mistyrose","mediumpurple","mediumorchid","black"];
+        var st4=["'Courier New', Courier, monospace",16,"rgba(0,0,0,0.5)","white","darkslateblue","crimson","black"];
+        var st5=["'Arial Black', Gadget, sans-serif",16,"rgba(0,0,0,0.5)","silver","grey","darkblue","lightgrey"];
+        var colors=[st1,st2,st3,st4,st5];var beeld=0;
+        var student=["Belkin","Chloé","Dmitryi","Erwin","Frederik","Irina","Joris","Tom","Wout"];
+        var info=["","","","wetenschappen, natuur, reizen, handel, games en natuurlijk programmeren.","","","","",""];
+        var link=["","","","linkedin.com/in/erwin-van-houten-cv","","","","",""];
+        var menuItem=["","Home","news","Jobbeurs","cursisten","Cursisten","cursus","Cursus","contact","Contact"];
+
+        function color(x){
+            var htmlColor="";
+            htmlColor+="body{font-family:"+colors[x][0]+";font-size:"+colors[x][1]+"px;}";
+            for(var i=2;i<colors[x].length;i++){
+                htmlColor+=".c"+(i-2)+"{color:"+colors[x][i]+"} ";
+                htmlColor+=".bc"+(i-2)+"{background-color:"+colors[x][i]+"} ";
+                htmlColor+=".ts"+(i-2)+"{text-shadow:4px 4px 2px "+colors[x][i]+"} ";
+            }
+            style2.innerHTML=htmlColor;
+        }
+
+        function showCursist(i){
+            var htmlCursist="";
+            var before=i==0?student.length-1:i-1;
+            var next=i==student.length-1?0:i+1;
+            htmlCursist+="<button class='arrow bc1' onclick='showCursist("+before+")'>&lt;</button><figure class='photo bs rond' onclick='showCursisten()'><img class='rond' src='img/"+
+            student[i]+".jpg'><div class='photoText'><p class='bc1 lc'>"+
+            student[i]+"</p></div></figure><button class='arrow bc1' onclick='showCursist("+next+")'>&gt;</button>";
+            htmlCursist+="<div class='text sc bs'><p><b>hobby's :</b></p><p>"+info[i]+"</p><a href='https://www."+link[i]+"' class='icon tla'>in</a></div>";
+            cursisten.innerHTML="<h2>Team cursist: "+student[i]+"</h2><div class='flex'>"+htmlCursist+"</div>";
+        }
+        function showCursisten(){
+            var htmlCursisten="";
+            for(var i=0;i<student.length;i++){
+                htmlCursisten+="<div><figure class='photo bs rond' onclick='showCursist("+i+")'><img class='rond' src='img/"+
+                student[i]+".jpg'><div class='photoText'><p class='bc1 lc'>"+
+                student[i]+"</p></div></figure></div>";
+            }
+            cursisten.innerHTML="<h2>Ons Team</h2><div class='flex'>"+htmlCursisten+"</div>";
+        }
+        function instel(){
+            beeld==colors.length-1?beeld=0:beeld++;
+            showMenu();color(beeld);
+        }
+        function showMenu(){
+            if(body.clientWidth>640){
+                var htmlMenu="";
+                for(var i=0;i<menuItem.length;i+=2){
+                    htmlMenu+="<a href='#"+menuItem[i]+"' class='c1 ts3'>"+menuItem[i+1]+"</a>";
+                }
+            }
+            else{htmlMenu="<button class='tl icon bc2 c1' onclick='showMenuVertical()'>menu</button>";}
+            menu.innerHTML="<div id='fixmenu' class='bc0'><button class='tr icon bc2 c1' onclick='instel()'>style "+(beeld+1)+"</button><div class='tl'>"+htmlMenu+"</div></div>";
+        }
+        function showMenuVertical(){
+            var htmlMenu="";
+            for(var i=0;i<menuItem.length;i+=2){
+                htmlMenu+="<a href='#"+menuItem[i]+"' class='c1 ts3 inl' onclick='showMenu()'>"+menuItem[i+1]+"</a>";
+            }
+            menu.innerHTML="<div id='fixmenu' class=''><button class='tr icon bc2 c1' onclick='instel()'>style "+(beeld+1)+"</button><div class='tl bc0'>"+htmlMenu+"</div></div>";
+        }
+        // ***html up***
+        // ***html news***
+        var htmlNews="<div class='bc1 sc p8'><h3>Uitnodiging Jobbeurs</h3><p>Quis proident dolor minim excepteur veniam ad laboris. Aliquip laboris tempor eiusmod cillum excepteur incididunt eu commodo nisi. Magna pariatur cupidatat officia Lorem elit esse enim esse dolore commodo ipsum velit.</p></div>";
+        // ***html main***
+        var htmlStudy="<h3>JavaScript Front-end Development</h3><p>Quis proident dolor minim excepteur veniam ad laboris. Aliquip laboris tempor eiusmod cillum excepteur incididunt eu commodo nisi. Magna pariatur cupidatat officia Lorem elit esse enim esse dolore commodo ipsum velit.</p>"+
+        "<ul><li>HTML : ..........</li><li>CSS : ........</li><li>JavaScript : .....</li><li>JQuery : ........</li><li>Angulair JS : .......</li><li>MySQL : .......</li></ul>";
+        
+
+    window.onload=function(){
+        showMenu();
+        titel.innerHTML="<h1 id='titel' class='c3'>the JS.TEAM</h1>"
+        welkom.innerHTML="<p id='welkom' class='c2'>Welkom op onze site en graag tot ziens op onze jobbeurs.</p>"
+        news.innerHTML=htmlNews;
+        cursus.innerHTML=htmlStudy;
+        showCursisten();
+        
+        partners.innerHTML="<p class='small'><b>In samenwerking : &beta;eta Cevora VDAB</b></p>";
+        copy.innerHTML="<p class='small'><b>&copy; The JavaScript Front-end Developers Team 2017/2018</b></p>";
+        up.innerHTML="<a  class='sc bc0 c1 br' href='#header'>&uarr;</a>"
+        color(beeld);
+    }
+    </script>
+</head>
+<body id="body">
+    <header id="header" class='bc4 lc'>
+        <div id="titel" class=""></div>
+        <div id="menu" class="bc0"></div>
+    </header>
+    <main id="main" class="">
+        <div id="welkom" class="bc4 c1"></div>
+        <div id="news" class="bc4"></div>
+        <div id="cursisten" class="bc1 lc p8"></div>
+        <div id="cursus" class="bc1 lc p8"></div>
+        <div id="contact" class="bc1 lc"></div>
+    </main>
+    <footer id="footer" class='bc1 lc'>
+        <div id="partners" class=""></div>
+        <div id="copy" class=""></div>
+        <div id="up" class=""></div>
+    </footer>
+</body>
+</html>
