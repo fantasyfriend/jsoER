@@ -2,6 +2,14 @@
 
 var toetsenbord = require('readline-sync');
 
+function Radio(volume) {
+	this.volume = volume;
+}
+
+Radio.prototype.getMuziek = function() {
+	return this.volume<0?"lalala":"LALALA";
+};
+
 var radio = new Radio();
 radio.volume = 1;
 var tekstLuid = radio.getMuziek();

@@ -13,23 +13,39 @@
         .red{border:2px solid black;width:56px;height:56px;background-color: red;}
         .blue{border:2px solid black;width:56px;height:56px;background-color: blue;}
         .grey{border:2px solid black;width:56px;height:56px;background-color: grey;}
-
+        .krimp{animation: krimp 2s;border:2px solid black;}
+        .verdwijn{display:none;}
+        @keyframes krimp {
+            0% {border:2px solid black;width:56px;height:56px;margin:0px;}
+            50% {border:0px solid black;width:0px;height:0px;margin:30px;}
+            100% {border:0px solid black;width:0px;height:0px;margin:0px;}
+            }
     </style>
     <script>
         var kleur=["yellow","green","purple","red","blue","grey"];
         var type,loc,turn=1;
         function rnd(x){return Math.floor(Math.random()*x)}
 
-        function checkAll(x,y){
-            for(i=0;i<x-2;i++){
-                for(j=0;j<y-2;j++){
-                    if(document.getElementById("s"+i+j+"").value==document.getElementById("s"+(i+1)+j+"").value && document.getElementById("s"+(i+1)+j+"").value==document.getElementById("s"+(i+2)+j+"").value){
-                        alert("s"+i+j+"");
+        function checkAll(x,y,l){
+            var idx=[0],idy=[0];
+            for(i=0;i<x-l;i++){
+                for(j=0;j<y;j++){
+                    if(document.getElementById("s"+i+j+"").className==document.getElementById("s"+(i+1)+j+"").className && document.getElementById("s"+(i+1)+j+"").className==document.getElementById("s"+(i+2)+j+"").className){
+                        idx[idx.length-1]!="s"+(i+1)+j+""?idx.push("s"+i+j+"","s"+(i+1)+j+"","s"+(i+2)+j+""):idx.push("s"+(i+2)+j+"");
+                        //alert(idx);
+                    }
+                    if(document.getElementById("s"+j+i+"").className==document.getElementById("s"+j+(i+1)+"").className && document.getElementById("s"+j+(i+1)+"").className==document.getElementById("s"+j+(i+2)+"").className){
+                        idy[idy.length-1]!="s"+j+(i+1)+""?idy.push("s"+j+i+"","s"+j+(i+1)+"","s"+j+(i+2)+""):idy.push("s"+j+(i+2)+"");
+                        //alert(idy);
                     }
                 }
             }
+            idxy=idx.concat(idy).filter((v,i,a)=>a.indexOf(v) === i);alert(idxy);
+            for(i=1;i<idxy.length;i++){document.getElementById(idxy[i]).className="krimp";}
+            setTimeout(verdwijn, 1000);
         }
-
+        function verdwijn(){for(i=1;i<idxy.length;i++){document.getElementById(idxy[i]).className="verdwijn";}}
+        
         function check(e){
             if(turn==1){turn=2;type=e.target.className;loc=e.target.id;}
             else{
@@ -44,12 +60,12 @@
             for(i=0;i<x;i++){var steentjes="";
                 for(j=0;j<y;j++){
                     k=rnd(6);
-                    steentjes+="<div onclick='check(event)' class='"+kleur[k]+"' id='s"+i+""+j+"'>"+j+"</div>";
+                    steentjes+="<div onclick='check(event)' class='"+kleur[k]+"' id='s"+i+""+j+"'></div>";
                 }
                 html+="<div class='kolom' id='k"+i+"'>"+steentjes+"</div>"
             }
             doos.innerHTML=html;
-            checkAll(5,5);
+            checkAll(5,5,2);
         }
 
     window.onload = function(){

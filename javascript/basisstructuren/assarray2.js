@@ -9,7 +9,7 @@ zin = toetsenbord.question("Geef een zin in: ");
 woord=zin.toLowerCase().split(" ");
 woorden=woord.length;   
 for (var i = 0; i < woorden; i++) {
-    woord[i]=woord[i].replace(/[.,?!:;()]/g,"");
+    woord[i]=woord[i].replace(/[.,?!:;()'"]/g,"");
     if (lijst[woord[i]] == null) lijst[woord[i]] = 0;
     karakters+=woord[i].length;
     lijst[woord[i]]++;
