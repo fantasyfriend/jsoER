@@ -13,15 +13,30 @@ Hond.prototype.blaf=function(){
 
 
 
-function ShowHond() {
-    this.win = 0;
-    this.paradeer="";
+function ShowHond(naam,ras,gewicht,win=0) {
+    Hond.apply(this, arguments);
+    this.win = win;
+    
     
 }
 ShowHond.prototype = new Hond();
 ShowHond.prototype.winShow = function() {this.win++;}
-ShowHond.prototype.paradeer = function() {this.win++;}
+ShowHond.prototype.paradeer = function(manier) {this.paraderen=manier;console.log(this.paraderen);}
 
 
+var scotty = new ShowHond("Scotty", "Schotse terrier", 15, 0);
+var beatrice = new ShowHond("Beatrice", "dwergkeeshond", 5, 3);
 
-console.log("Uw wagen verbruikt %d liter per 100 km.", (gemVerbruik/tankbeurten).toFixed(2));
+// showhonden kunnen alles wat gewone honden kunnen:
+console.log(scotty.blaf());
+// showhonden kunnen meer dan gewone honden:
+scotty.paradeer("trappelen");
+beatrice.paradeer("trippelen");
+
+console.log(scotty.naam , " heeft al ", scotty.win, " show(s) gewonnen.");
+console.log(beatrice.naam , " heeft al ", beatrice.win, " show(s) gewonnen.");
+scotty.winShow();
+console.log("Nu heeft ", scotty.naam , " " , scotty.win, " show(s) gewonnen.");
+console.log("Nu heeft ", beatrice.naam , " " , beatrice.win, " show(s) gewonnen.");
+
+console.log(scotty);
