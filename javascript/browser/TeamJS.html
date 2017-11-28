@@ -52,6 +52,9 @@
         #news{padding:24px;}
         .text{width:700px;}
 
+        #map{height:300px;}
+        iframe{height:300px;width:50%;}
+
         #up a{margin:8px;padding:4px 8px;text-decoration:none;font-weight:bolder;}
 
         @media only screen and (max-width:991px) {.text{width:500px;}}
@@ -139,7 +142,7 @@
         news.innerHTML=htmlNews;
         cursus.innerHTML=htmlStudy;
         showCursisten();
-        
+        contact.innerHTML="<div id="map"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2500.1221888483815!2d4.415912715089307!3d51.19840014107059!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c3f721a0fa6c15%3A0xa0da38d24cc6b721!2sBelpairestraat+39%2C+2600+Antwerpen!5e0!3m2!1snl!2sbe!4v1496397432512" frameborder="0" style="border:0" allowfullscreen=""></iframe></div>"
         partners.innerHTML="<p class='small'><b>In samenwerking : &beta;eta Cevora VDAB</b></p>";
         copy.innerHTML="<p class='small'><b>&copy; The JavaScript Front-end Developers Team 2017/2018</b></p>";
         up.innerHTML="<a  class='sc bc0 c1 br' href='#header'>&uarr;</a>"
