@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <script>
+        window.onload=function(){
+            
+        toon();console.log('iets');
+        }
+        function toon(){
+            var body=document.body;
+            var kinderen=body.children;
+            for(var i=0;i<kinderen.length;i++){
+                console.log(kinderen[i].nodeType,kinderen[i].nodeName,kinderen[i].nodeValue);
+                if(kinderen[i].hasAttributes()){console.log('ja');}
+            }
+        }
+    </script>
+ <head><title>Een voorbeeld</title></head>
+ <body>
+ <h1>Een voorbeeld</h1>
+ <p> Dit is een <em>belangrijke</em> tekst</p>
+ </body>
+</html> 

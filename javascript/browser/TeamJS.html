@@ -18,6 +18,8 @@
         .tr{position:fixed;right:0;top:0;}
         .br{position:fixed;right:0;bottom:0;}
         .tla{position:absolute;left:0;top:0;}
+        .wrap{overflow:hidden;}
+        .right{float:right}
 
         h1,h2,h3,h4,p{text-align:center;margin:4px;padding:2px;}
         .small{font-size:0.7em}
@@ -52,8 +54,8 @@
         #news{padding:24px;}
         .text{width:700px;}
 
-        #map{height:300px;}
-        iframe{height:300px;width:50%;}
+        #map{width:280px;margin:12px;}
+        iframe{height:280px;width:280px;}
 
         #up a{margin:8px;padding:4px 8px;text-decoration:none;font-weight:bolder;}
 
@@ -133,7 +135,8 @@
         // ***html main***
         var htmlStudy="<h3>JavaScript Front-end Development</h3><p>Quis proident dolor minim excepteur veniam ad laboris. Aliquip laboris tempor eiusmod cillum excepteur incididunt eu commodo nisi. Magna pariatur cupidatat officia Lorem elit esse enim esse dolore commodo ipsum velit.</p>"+
         "<ul><li>HTML : ..........</li><li>CSS : ........</li><li>JavaScript : .....</li><li>JQuery : ........</li><li>Angulair JS : .......</li><li>MySQL : .......</li></ul>";
-        
+        var adres="adres";
+        var htmlContact="<div class='wrap'><div id='map' class='right lc bs'><iframe class='lc' src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2500.1221888483815!2d4.415912715089307!3d51.19840014107059!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c3f721a0fa6c15%3A0xa0da38d24cc6b721!2sBelpairestraat+39%2C+2600+Antwerpen!5e0!3m2!1snl!2sbe!4v1496397432512' frameborder='0' style='border:0' allowfullscreen=''></iframe>"+adres+"</div></div>"
 
     window.onload=function(){
         showMenu();
@@ -142,7 +145,7 @@
         news.innerHTML=htmlNews;
         cursus.innerHTML=htmlStudy;
         showCursisten();
-        contact.innerHTML="<div id="map"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2500.1221888483815!2d4.415912715089307!3d51.19840014107059!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c3f721a0fa6c15%3A0xa0da38d24cc6b721!2sBelpairestraat+39%2C+2600+Antwerpen!5e0!3m2!1snl!2sbe!4v1496397432512" frameborder="0" style="border:0" allowfullscreen=""></iframe></div>"
+        contact.innerHTML=htmlContact;
         partners.innerHTML="<p class='small'><b>In samenwerking : &beta;eta Cevora VDAB</b></p>";
         copy.innerHTML="<p class='small'><b>&copy; The JavaScript Front-end Developers Team 2017/2018</b></p>";
         up.innerHTML="<a  class='sc bc0 c1 br' href='#header'>&uarr;</a>"
