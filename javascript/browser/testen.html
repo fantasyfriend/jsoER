@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <script>
+        'use strict';
+        var vraag=[];
+        vraag[0]=["hoeveel is 5+2",7,3,5];
+        vraag[1]=["hoeveel is 5-2",3,7,5];
+        vraag[2]=["hoeveel is 5/2",2.5,7.5,5];
+        vraag[3]=["hoeveel is 5*2",10,2,5];
+        vraag[4]=["hoeveel is 5%2",1,0,2.5];
+
+        function opmaak(){
+        var temp=[];var v;var html="";
+        html+=vraag[0][0]+"?<br>";
+        for(var x=0;x<vraag[0].length-1;x++){temp[x]=x+1;}
+        for(var x=0;x<vraag[0].length-1;x++){
+            v=Math.floor(Math.random()*temp.length);
+            html+="<input type='radio' name='keuze' id='k"+temp[v]+"'>"+vraag[0][temp[v]]+"<br>";
+            temp.splice(v,1);alert(v);alert(temp);
+        }
+
+        
+        html+="<button type='button' id='btn'>controle</button>";
+        start.innerHTML=html;
+        }
+        
+        window.onload = function (){
+        
+        
+        opmaak();
+
+
+        }
+        
+    </script>
+</head>
+
+<body>
+    <form name="start">
+    </form>    
+</body>
+
+</html>

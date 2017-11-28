@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>titel</title>
+    <style>
+        *{box-sizing:border-box;}
+        html{background-color:black;}
+        body{font-family: Arial, Helvetica, sans-serif;font-size: 20px;min-width:320px;max-width:1200px;}
+        body,header,main,aside,footer{margin:0 auto;padding:4px;}
+        header{}
+        main{}
+        aside{width:270px;margin:0;}
+        footer{}
+
+        .flexright{display:flex;flex-flow:row wrap;justify-content:flex-end;}
+        .flexleft{display:flex;flex-flow:row wrap;justify-content:flex-start;}
+        .flex{display:flex;flex-flow:row wrap;justify-content:space-around;}
+
+        h1,h2,h3,h4,p{text-align:center;margin:4px;padding:2px;}
+        .small{font-size:0.7em}
+
+        .lc{border-radius:16px;}
+        .sc{border-radius:8px;}
+        .bs{box-shadow:black 4px 4px 4px 4px}
+
+        #news{border:1px solid black;}
+        
+        img{width:96px;height:auto;margin:0;margin-bottom:-6px;border:1px solid black;}
+        .photo{position:relative;margin:2px;padding:0;}
+        .photoText{position:absolute;left:5px;bottom:10px;width:90px;}
+        .student{width:132px;margin:2px 2px 2px 8px;border:1px solid black;}
+
+        
+        .bc1{background-color:darkcyan;}
+        .bc2{background-color:beige;}
+
+        @media only screen and (max-width:991px) {aside{width:100%;}}
+        @media only screen and (max-width:767px) {.student{min-width:160px;}}
+        @media only screen and (max-width:575px) {.student{min-width:260px;}}
+        @media only screen and (max-width:403px) {.student{min-width:180px;}}
+    </style>
+    <style id="style2"></style>
+    <script>
+        'use strict'
+        // ***data***
+        var student=["Belkin","Chloé","Dmitryi","Erwin","Frederik","Irina","Joris","Tom","Wout"];
+        var info=[,,,,,,];
+        var links=[,,,,,,];
+        // ***html up***
+        // ***html news***
+        var htmlNews="<h3>Uitnodiging</h3><p>Quis proident dolor minim excepteur veniam ad laboris. Aliquip laboris tempor eiusmod cillum excepteur incididunt eu commodo nisi. Magna pariatur cupidatat officia Lorem elit esse enim esse dolore commodo ipsum velit.</p>";
+        // ***html main***
+        var htmlStudy="<h3>JavaScript Front-end Development</h3><p>Quis proident dolor minim excepteur veniam ad laboris. Aliquip laboris tempor eiusmod cillum excepteur incididunt eu commodo nisi. Magna pariatur cupidatat officia Lorem elit esse enim esse dolore commodo ipsum velit.</p>"+
+        "<ul><li>HTML : ..........</li><li>CSS : ........</li><li>JavaScript : .....</li><li>JQuery : ........</li><li>Angulair JS : .......</li><li>MySQL : .......</li></ul>";
+        // ***html side***
+        var htmlSide="";
+        for(var i=0;i<student.length;i++){
+            htmlSide+="<div class='flex'><figure class='photo bs sc'><img class='sc' src='img/"+
+            student[i]+".jpg'><div class='photoText'><p class='bc2'>"+student[i]+
+            "</p></div></figure><div class='student  bc2 lc'><div class=''><p>info</p><div><a href=''>link</a></div></div></div></div>";
+        }
+        // ***html down***
+        var htmlDown="<p class='small'><b>&copy; The JavaScript Front-end Developers Team 2017/2018</b></p>"
+
+    window.onload=function(){
+        news.innerHTML=htmlNews;
+        study.innerHTML=htmlStudy;
+        side.innerHTML=htmlSide;
+        down.innerHTML=htmlDown;
+        alert(body.clientWidth);
+        if(body.clientWidth>974)main.style.width=""+(body.clientWidth-280)+"px";
+
+    }
+    </script>
+</head>
+<body id="body">
+    <header class='bc1 lc'>
+        <H1>TITEL</H1>
+        <div id="up"></div>
+    </header>
+    <div id="mid" class="flexright">
+    <main id="main" class="left bc1 lc">
+        <h2>Onze studie</h2>
+        <div id="news" class="bc2"></div>
+        <div id="study"></div>
+    </main>
+    <aside class="right bc1 lc">
+        <h2>Onze groep</h2>
+        <div id="side" class="flex"></div>
+    </aside>
+    </div>
+    <footer class='bc1 lc'>
+        <h3>contact</h3>
+        <div id="down"></div>
+    </footer>
+</body>
+</html>
