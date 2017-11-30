@@ -54,8 +54,11 @@
         #news{padding:24px;}
         .text{width:700px;}
 
+        #form{min-width:300px;height:400px;}    
         #map{width:280px;margin:12px;}
-        iframe{height:280px;width:280px;}
+        iframe{height:278px;width:278px;}
+        #adres{width:280px;}
+
 
         #up a{margin:8px;padding:4px 8px;text-decoration:none;font-weight:bolder;}
 
@@ -135,8 +138,10 @@
         // ***html main***
         var htmlStudy="<h3>JavaScript Front-end Development</h3><p>Quis proident dolor minim excepteur veniam ad laboris. Aliquip laboris tempor eiusmod cillum excepteur incididunt eu commodo nisi. Magna pariatur cupidatat officia Lorem elit esse enim esse dolore commodo ipsum velit.</p>"+
         "<ul><li>HTML : ..........</li><li>CSS : ........</li><li>JavaScript : .....</li><li>JQuery : ........</li><li>Angulair JS : .......</li><li>MySQL : .......</li></ul>";
-        var adres="adres";
-        var htmlContact="<div class='wrap'><div id='map' class='right lc bs'><iframe class='lc' src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2500.1221888483815!2d4.415912715089307!3d51.19840014107059!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c3f721a0fa6c15%3A0xa0da38d24cc6b721!2sBelpairestraat+39%2C+2600+Antwerpen!5e0!3m2!1snl!2sbe!4v1496397432512' frameborder='0' style='border:0' allowfullscreen=''></iframe>"+adres+"</div></div>"
+        var adres="<div id='adres'><p><b>adres:</b></p><p> Belpairestraat 39, Berchem </p><p><b>contact:</b><p><p> contactpersoon@iets.com </p><p> tel.contactpersoon </p></div>";
+        var map="<div class='wrap'><div id='map' class='right lc bs'><iframe class='lc' src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2500.1221888483815!2d4.415912715089307!3d51.19840014107059!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c3f721a0fa6c15%3A0xa0da38d24cc6b721!2sBelpairestraat+39%2C+2600+Antwerpen!5e0!3m2!1snl!2sbe!4v1496397432512' frameborder='0' style='border:0' allowfullscreen=''></iframe>"+adres+"</div></div>"
+        var form="<div id='form'><h2>Formulier</h2></div>";
+        var htmlContact="<div class='flex'>"+form+map+"</div>";
 
     window.onload=function(){
         showMenu();
