@@ -100,7 +100,7 @@
             student[i]+".jpg'><div class='photoText'><p class='bc1 lc'>"+
             student[i]+"</p></div></figure><button class='arrow bc1' onclick='showCursist("+next+")'>&gt;</button>";
             htmlCursist+="<div class='text sc bs'><p><b>hobby's :</b></p><p>"+info[i]+"</p><a href='https://www."+link[i]+"' class='icon tla'>in</a></div>";
-            cursisten.innerHTML="<h2>Team cursist: "+student[i]+"</h2><div class='flex'>"+htmlCursist+"</div>";
+            cursisten.innerHTML="<h2>cursist: "+student[i]+"</h2><div class='flex'>"+htmlCursist+"</div>";
         }
         function showCursisten(){
             var htmlCursisten="";
@@ -138,9 +138,15 @@
         // ***html main***
         var htmlStudy="<h3>JavaScript Front-end Development</h3><p>Quis proident dolor minim excepteur veniam ad laboris. Aliquip laboris tempor eiusmod cillum excepteur incididunt eu commodo nisi. Magna pariatur cupidatat officia Lorem elit esse enim esse dolore commodo ipsum velit.</p>"+
         "<ul><li>HTML : ..........</li><li>CSS : ........</li><li>JavaScript : .....</li><li>JQuery : ........</li><li>Angulair JS : .......</li><li>MySQL : .......</li></ul>";
+        
         var adres="<div id='adres'><p><b>adres:</b></p><p> Belpairestraat 39, Berchem </p><p><b>contact:</b><p><p> contactpersoon@iets.com </p><p> tel.contactpersoon </p></div>";
         var map="<div class='wrap'><div id='map' class='right lc bs'><iframe class='lc' src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2500.1221888483815!2d4.415912715089307!3d51.19840014107059!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c3f721a0fa6c15%3A0xa0da38d24cc6b721!2sBelpairestraat+39%2C+2600+Antwerpen!5e0!3m2!1snl!2sbe!4v1496397432512' frameborder='0' style='border:0' allowfullscreen=''></iframe>"+adres+"</div></div>"
-        var form="<div id='form'><h2>Formulier</h2></div>";
+        var inaam="<p>naam:</p><input type='text' id='naam'>"
+        var imail="<p>e-mail:</p><input type='text' id='mail'>"
+        var ibedrijf="<p>bedrijf:</p><input type='text' id='bedrijf'>"
+        var itel="<p>telefoon:</p><input type='text' id='tel'>"
+
+        var form="<div id='form'><h2>Formulier</h2><form id='frm'>"+inaam+imail+ibedrijf+itel+"</form></div>";
         var htmlContact="<div class='flex'>"+form+map+"</div>";
 
     window.onload=function(){

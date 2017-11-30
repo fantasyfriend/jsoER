@@ -18,9 +18,9 @@ function verwijderParagrafen(){
     var div = document.getElementById("eenDiv");
     if(div){
         var pars = div.getElementsByTagName("p");
-        for(var i=pars.length - 1; i >= 0; i--){
-            div.removeChild(pars[i])
-        }
+        for(var i=pars.length - 1; i >= 0; i--){div.removeChild(pars[i])}
+        
+        //pars.forEach((v,x)=>{div.removeChild(pars[x])});
     }
 }
 

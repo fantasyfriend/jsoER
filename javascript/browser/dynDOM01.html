@@ -4,11 +4,23 @@
 <title>DOM manipulatie: voorbeeld 1</title>
 <script>
 var lijstje = ["brood", "kaas", "boter", "ham"];
+var mp=["melk","boter","kaas","yoghurt"];
 
 window.onload = function(){
     maakHoofding();
     maakLijst();
+    maakCheckbox();
     maakKnop();
+    
+    btn.onclick=voegToe;
+}
+
+function voegToe(){
+        lijstje.push(item.value);
+        li = document.createElement("li");
+        li.innerText = lijstje[lijstje.length-1];
+        document.getElementsByTagName("ul")[0].appendChild(li);
+        item.value="";
 }
 
 function maakHoofding(){
@@ -28,18 +40,61 @@ function maakLijst(){
     }
 }
 
+function maakCheckbox(){
+    var label = document.createElement("label");
+    label.innerText = "melkallergie";
+    document.body.appendChild(label);
+    var check = document.createElement("input");
+    check.id="check";
+    check.type = "checkbox";
+    check.value = "bestellen";
+    document.body.appendChild(check);
+}
+
 function maakKnop(){
     var btn = document.createElement("input");
+    btn.id="bestel";
     btn.type = "button";
     btn.value = "bestellen";
-    btn.onclick = function(){
+    btn.onclick = bestel;
+    document.body.appendChild(btn);
+}
+
+function clearLijst(){
+    var ul = document.getElementsByTagName("ul")[0];
+    if(ul){    
+        var li = ul.getElementsByTagName("li");
+        for(var i=li.length - 1; i >= 0; i--){
+            ul.removeChild(li[i])
+        }
+    }
+}
+
+function bestel(){
+    if(check.checked){
+        clearLijst();
+        mp.forEach((v,j)=>{
+        for(var i = lijstje.length; i--;){if (lijstje[i].toLowerCase() === mp[j]) lijstje.splice(i, 1);}
+        });
+        var ul = document.getElementsByTagName("ul")[0];
+        if(ul){
+        lijstje.forEach((v,i)=>{
+        li = document.createElement("li");
+        li.innerText = lijstje[i];
+        ul.appendChild(li);
+        });
+    }
+    }
+    else{
+        clearLijst();
+        lijstje=[];
         alert("uw bestelling wordt verwerkt");
     }
-    document.body.appendChild(btn);
 }
 </script>
 </head>
 <body>
     <h1>Onderstaande elementen zijn dynamisch toegevoegd</h1>
+    <input type="text" id="item"><button id="btn">Toevoegen</button>
 </body>
 </html>
