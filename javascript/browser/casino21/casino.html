@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casino</title>
+</head>
+<style>
+*{box-sizing:border-box;}
+body{background-color:black;margin:0 auto;}
+.flex{display:flex;flex-flow:row wrap;justify-content:flex-start;}
+#tafel{background-color:olivedrab;border:2px solid darkgreen;border-radius:16px;margin:16px;}
+.kaart{width:80px;height:120px;border:1px solid black;border-radius:8px;box-shadow:black 4px 4px 4px 4px;margin:8px;}
+button{margin-left:16px;}
+#text{border:1px solid red;padding:0 16px;margin:16px;background-color:beige;width:400px;}
+#text p{font-size:1.5em;font-weight:bolder;}
+</style>
+<script>
+let aWaarde=["1","2","3","4","5","6","7","8","9","10","B","V","H"];
+let aKleur=["klaveren","ruiten","harten","schoppen"];
+let handkaarten=[];
+
+function Speelkaart(k,w){
+    this.kleur=k;
+    this.waarde=w;
+}
+Speelkaart.prototype.omschrijving=function(){
+    return this.kleur+" "+this.waarde;
+}
+Speelkaart.prototype.afbeelding=function(){
+    let aKleurPNG=["c","d","h","s"];
+    return (aWaarde.indexOf(this.waarde)+1)+aKleurPNG[aKleur.indexOf(this.kleur)];
+}
+
+function Speelkaartenboek(){
+    this.speelkaarten();
+    this.index=52;
+}
+Speelkaartenboek.prototype.speelkaarten=function(){
+    this.speelkaarten=[];
+    for(let w=0;w<aWaarde.length;w++){
+        for(let k=0;k<aKleur.length;k++){this.speelkaarten[(w*4)+k]=new Speelkaart(aKleur[k],aWaarde[w]);}
+    }
+}
+Speelkaartenboek.prototype.volgendeKaart=function(){
+    this.index--;
+    return this.speelkaarten[this.index];
+}
+Speelkaartenboek.prototype.isLeeg=function(){
+    return this.index>0?false:true;
+}
+Speelkaartenboek.prototype.schud=function(){
+    this.index=52;
+    this.speelkaarten.sort((a,b)=>0.5-Math.random())
+}
+
+let kaartenboek = new Speelkaartenboek();
+
+function Hand(){
+    this.punt=0;
+}
+Hand.prototype.voegKaartToe=function(k){
+    handkaarten.push(k);
+    this.punt+=aWaarde.indexOf(handkaarten[handkaarten.length-1].waarde)+1;
+}
+Hand.prototype.magStoppen=function(){
+    return this.punt>16;
+}
+Hand.prototype.isKapot=function(){
+    return this.punt>21;
+}
+Hand.prototype.punten=function(){
+    return this.punt;
+}
+Hand.prototype.factor=function(){
+    return this.punt==21?2:this.punt==20?1:this.punt==19?1:0;
+}
+
+let hand = new Hand();
+
+
+function geefKaart(){
+    if(kaartenboek.isLeeg()){this.onclick=null;}
+    else{
+        tafel.innerHTML+="<img class='kaart' src='images/"+kaartenboek.volgendeKaart().afbeelding()+".png'>";
+        hand.voegKaartToe(kaartenboek.speelkaarten[kaartenboek.index]);
+        if (hand.isKapot()) {text.innerHTML="<p>Helaas, u bent uw inzet kwijt.</p><p>( "+hand.punt+" punten)</p>";
+        bKaart.onclick=null;}
+        else {if (hand.magStoppen()){text.innerHTML="<p>U krijgt uw inzet "+hand.factor()+" keer terug.</p><p>( "+hand.punt+" punten)</p>";}
+            else{text.innerHTML="<p>Neem nog een kaart.<p><p>( "+hand.punt+" punten)</p>";}}
+    }
+}
+function schudden(){
+    bKaart.onclick=geefKaart;
+    handkaarten=[];hand.punt=0;text.innerHTML="<p>Neem een kaart</p>";
+    tafel.innerHTML="<img class='kaart' src='images/cardback.png'>";
+    kaartenboek.schud();
+}
+
+window.onload=function(){
+document.body.innerHTML="<div id='tafel' class='flex'><img class='kaart' src='images/cardback.png'></div><button id='bKaart'>geef kaart</button><button id='bSchud'>schud</button><div id='text'><p>Neem een kaart</p></div>"
+bKaart.onclick=geefKaart;
+bSchud.onclick=schudden;
+}   
+</script>
+<body></body>
+</html>

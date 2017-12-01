@@ -132,6 +132,9 @@
             }
             menu.innerHTML="<div id='fixmenu' class=''><button class='tr icon bc2 c1' onclick='instel()'>style "+(beeld+1)+"</button><div class='tl bc0'>"+htmlMenu+"</div></div>";
         }
+        function showContact(){
+            
+        }
         // ***html up***
         // ***html news***
         var htmlNews="<div class='bc1 sc p8'><h3>Uitnodiging Jobbeurs</h3><p>Quis proident dolor minim excepteur veniam ad laboris. Aliquip laboris tempor eiusmod cillum excepteur incididunt eu commodo nisi. Magna pariatur cupidatat officia Lorem elit esse enim esse dolore commodo ipsum velit.</p></div>";
@@ -141,12 +144,12 @@
         
         var adres="<div id='adres'><p><b>adres:</b></p><p> Belpairestraat 39, Berchem </p><p><b>contact:</b><p><p> contactpersoon@iets.com </p><p> tel.contactpersoon </p></div>";
         var map="<div class='wrap'><div id='map' class='right lc bs'><iframe class='lc' src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2500.1221888483815!2d4.415912715089307!3d51.19840014107059!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c3f721a0fa6c15%3A0xa0da38d24cc6b721!2sBelpairestraat+39%2C+2600+Antwerpen!5e0!3m2!1snl!2sbe!4v1496397432512' frameborder='0' style='border:0' allowfullscreen=''></iframe>"+adres+"</div></div>"
-        var inaam="<p>naam:</p><input type='text' id='naam'>"
-        var imail="<p>e-mail:</p><input type='text' id='mail'>"
-        var ibedrijf="<p>bedrijf:</p><input type='text' id='bedrijf'>"
-        var itel="<p>telefoon:</p><input type='text' id='tel'>"
-
-        var form="<div id='form'><h2>Formulier</h2><form id='frm'>"+inaam+imail+ibedrijf+itel+"</form></div>";
+        var inaam="<p><input type='text' id='naam' placeholder='naam'></p><br>"
+        var ibedrijf="<input type='text' id='bedrijf' placeholder='bedrijf'><br>"
+        var imail="<input type='text' id='mail' placeholder='e-mail'><br>"
+        var itel="<input type='text' id='tel' placeholder='telefoon' size='32'><br>"
+        var ibericht="<textarea id='bericht' cols='32' rows='4' placeholder='bericht'></textarea>";
+        var form="<div id='form'><h2>Formulier</h2><form id='frm'>"+inaam+ibedrijf+imail+itel+ibericht+"</form></div>";
         var htmlContact="<div class='flex'>"+form+map+"</div>";
 
     window.onload=function(){
