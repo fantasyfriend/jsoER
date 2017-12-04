@@ -40,7 +40,7 @@
         .arrow:hover{text-shadow:none;}
         .arrow:focus{outline:none;}
 
-        img{width:110px;height:auto;margin:0;margin-bottom:-6px;}
+        img{width:100px;height:auto;margin:0;margin-bottom:-6px;}
         .photo,.text{position:relative;margin:12px 4px;padding:0;}
         .photo:hover{box-shadow:1px 1px 1px 1px;}
         .photoText{position:absolute;left:10px;bottom:11px;width:90px;}
@@ -53,9 +53,11 @@
         #titel{font-size:1.5em;margin:48px 0 16px 0;}
 
         #news{padding:24px;}
+        #cursus{margin:24px;}
         .text{width:700px;}
 
-        #form{min-width:300px;height:400px;}    
+        #form{min-width:300px;height:400px;} 
+        input,textarea{padding:4px;}  
         #map{width:280px;margin:12px;}
         iframe{height:278px;width:278px;}
         #adres{width:280px;}
@@ -72,10 +74,10 @@
         'use strict'
         // ***data***
         var st1=["Arial, Helvetica, sans-serif",20,"rgba(0,0,0,0.5)","beige","darkcyan","crimson","black"];
-        var st2=["Georgia, serif",18,"rgba(0,0,0,0.5)","powderblue","mediumslateblue","gold","darkslateblue"];
+        var st2=["Georgia, serif",18,"rgba(0,0,0,0.5)","powderblue","mediumslateblue","gold","black"];
         var st3=["'Comic Sans MS', cursive, sans-serif",18,"rgba(0,0,0,0.5)","mistyrose","mediumpurple","mediumorchid","black"];
-        var st4=["'Courier New', Courier, monospace",16,"rgba(0,0,0,0.5)","white","darkslateblue","crimson","black"];
-        var st5=["'Arial Black', Gadget, sans-serif",16,"rgba(0,0,0,0.5)","silver","grey","darkblue","lightgrey"];
+        var st4=["'Courier New', Courier, monospace",16,"rgba(0,0,0,0.5)","white","slateblue","crimson","black"];
+        var st5=["'Arial Black', Gadget, sans-serif",16,"rgba(0,0,0,0.5)","silver","grey","darkblue","black"];
         var colors=[st1,st2,st3,st4,st5];var beeld=0;
         var student=["Belkin","Chloé","Dmitryi","Erwin","Frederik","Irina","Joris","Tom","Wout"];
         var info=["","","","wetenschappen, natuur, reizen, handel, games en natuurlijk programmeren.","","","","",""];
@@ -144,18 +146,18 @@
         "<ul><li>HTML : ..........</li><li>CSS : ........</li><li>JavaScript : .....</li><li>JQuery : ........</li><li>Angulair JS : .......</li><li>MySQL : .......</li></ul>";
         
         var adres="<div id='adres'><p><b>adres:</b></p><p> Belpairestraat 39, Berchem </p><p><b>contact:</b><p><p> contactpersoon@iets.com </p><p> tel.contactpersoon </p></div>";
-        var map="<div class='wrap'><div id='map' class='right lc bs'><iframe class='lc' src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2500.1221888483815!2d4.415912715089307!3d51.19840014107059!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c3f721a0fa6c15%3A0xa0da38d24cc6b721!2sBelpairestraat+39%2C+2600+Antwerpen!5e0!3m2!1snl!2sbe!4v1496397432512' frameborder='0' style='border:0' allowfullscreen=''></iframe>"+adres+"</div></div>"
+        var map="<div class='wrap'><div id='map' class='right bc1 lc glow'><iframe class='lc' src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2500.1221888483815!2d4.415912715089307!3d51.19840014107059!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c3f721a0fa6c15%3A0xa0da38d24cc6b721!2sBelpairestraat+39%2C+2600+Antwerpen!5e0!3m2!1snl!2sbe!4v1496397432512' frameborder='0' style='border:0' allowfullscreen=''></iframe>"+adres+"</div></div>"
         var inputId=["naam","bedrijf","personen","mail","tel"],inputPlh=["naam","bedrijf","aantal personen","e-mail","telefoon"],html="";
         for(var i=0;i<inputId.length;i++){
-            html+="<p><input type='text' id='"+inputId[i]+"' placeholder='"+inputPlh[i]+":' size='30'></p>"
+            html+="<p><input type='text' class='bc1' id='"+inputId[i]+"' placeholder='"+inputPlh[i]+":' size='30'></p>"
         }
-        var ibericht="<p><textarea id='bericht' cols='32' rows='4' placeholder='bericht:'></textarea></p>";
-        var form="<div id='form'><h2>contact formulier</h2><form id='frm'><br>"+html+ibericht+"<p><button id='zend'>verstuur</button></p></form></div>";
+        var ibericht="<p><textarea class='bc1' id='bericht' cols='32' rows='6' placeholder='bericht:'></textarea></p>";
+        var form="<div id='form'><h2 class='c2'>contact formulier</h2><form id='frm'><br>"+html+ibericht+"<p><button class='icon bc2 c1' id='zend'>verstuur</button></p></form></div>";
         var htmlContact="<div class='flex'>"+form+map+"</div>";
 
     window.onload=function(){
         showMenu();
-        titel.innerHTML="<h1 id='titel' class='c3'>the JS.TEAM</h1>"
+        titel.innerHTML="<h1 id='titel' class='c3'>THE SCRYPTORS</h1>"
         welkom.innerHTML="<p id='welkom' class='c2'>Welkom op onze site en graag tot ziens op onze jobbeurs.</p>"
         news.innerHTML=htmlNews;
         cursus.innerHTML=htmlStudy;
@@ -174,11 +176,11 @@
         <div id="menu" class="bc0"></div>
     </header>
     <main id="main" class="">
-        <div id="welkom" class="bc4 c1"></div>
-        <div id="news" class="bc4"></div>
-        <div id="cursisten" class="bc5 lc p8"></div>
+        <div id="welkom" class="bc5 c1"></div>
+        <div id="news" class="bc5"></div>
+        <div id="cursisten" class="bc5 p8"></div>
         <div id="cursus" class="bc1 lc p8"></div>
-        <div id="contact" class="bc1 lc"></div>
+        <div id="contact" class="bc5"></div>
     </main>
     <footer id="footer" class='bc1 lc'>
         <div id="partners" class=""></div>

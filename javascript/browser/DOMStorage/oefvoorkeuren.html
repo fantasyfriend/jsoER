@@ -30,8 +30,8 @@
     }
     window.onload=function(){
         if(localStorage.kleur!=null){document.body.style.backgroundColor = localStorage.kleur;bc.value=localStorage.kleur;}
-        if(localStorage.font!=null){document.body.style.fontFamily = localStorage.font;}
-        if(localStorage.afbeelding!=null){afb.src = "images/"+localStorage.afbeelding+".png";} 
+        if(localStorage.font!=null){document.body.style.fontFamily = localStorage.font;fs.value=localStorage.font;}
+        if(localStorage.afbeelding!=null){afb.src = "images/"+localStorage.afbeelding+".png";ab.value=localStorage.afbeelding;} 
           
     }
 </script>
@@ -47,7 +47,7 @@
                 <select id="fs" onchange="fStyle()">
                     <option value="serif">serif</option>
                     <option value="sans-serif">sans-serif</option>
-                    <option value="monospace">monospace</option>
+                    <option value="Impact">impact</option>
                 </select><br>
                 <label for="ab">Afbeelding: </label>
                 <select id="ab" onchange="afbeelding()">
