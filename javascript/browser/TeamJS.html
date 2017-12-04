@@ -29,14 +29,15 @@
         .lc{border:1px solid black;border-radius:16px;}
         .sc{border:1px solid black;border-radius:8px;}
         .bs{box-shadow:black 3px 3px 3px 3px}
+        .glow{box-shadow:white 1px 1px 2px 2px}
         .p8{padding:8px;}
         .inl{display:block;}
 
         .icon{font-family: Arial, Helvetica, sans-serif;font-size: 16px;text-decoration:none;font-weight:bolder;
         padding:6px 8px;margin:4px 8px;color:white;background-color:dodgerblue;border-radius:6px;box-shadow:black 2px 2px 1px 1px;}
         .icon:hover{box-shadow:black 1px 1px;}
-        .arrow{font-size: 32px;font-weight:bolder;text-shadow:2px 2px 1px black;border:none;}
-        .arrow:hover{text-shadow:1px 1px black;}
+        .arrow{font-size: 32px;font-weight:bolder;text-shadow:2px 2px 1px white;border:none;}
+        .arrow:hover{text-shadow:none;}
         .arrow:focus{outline:none;}
 
         img{width:110px;height:auto;margin:0;margin-bottom:-6px;}
@@ -96,20 +97,20 @@
             var htmlCursist="";
             var before=i==0?student.length-1:i-1;
             var next=i==student.length-1?0:i+1;
-            htmlCursist+="<button class='arrow bc1' onclick='showCursist("+before+")'>&lt;</button><figure class='photo bs rond' onclick='showCursisten()'><img class='rond' src='img/"+
+            htmlCursist+="<button class='arrow bc4 c3' onclick='showCursist("+before+")'>&lt;</button><figure class='photo glow rond' onclick='showCursisten()'><img class='rond' src='img/"+
             student[i]+".jpg'><div class='photoText'><p class='bc1 lc'>"+
-            student[i]+"</p></div></figure><button class='arrow bc1' onclick='showCursist("+next+")'>&gt;</button>";
-            htmlCursist+="<div class='text sc bs'><p><b>hobby's :</b></p><p>"+info[i]+"</p><a href='https://www."+link[i]+"' class='icon tla'>in</a></div>";
+            student[i]+"</p></div></figure><button class='arrow bc4 c3' onclick='showCursist("+next+")'>&gt;</button>";
+            htmlCursist+="<div class='text bc1 sc bs'><p><b>hobby's :</b></p><p>"+info[i]+"</p><a href='https://www."+link[i]+"' class='icon tla'>in</a></div>";
             cursisten.innerHTML="<h2>cursist: "+student[i]+"</h2><div class='flex'>"+htmlCursist+"</div>";
         }
         function showCursisten(){
             var htmlCursisten="";
             for(var i=0;i<student.length;i++){
-                htmlCursisten+="<div><figure class='photo bs rond' onclick='showCursist("+i+")'><img class='rond' src='img/"+
+                htmlCursisten+="<div><figure class='photo glow rond' onclick='showCursist("+i+")'><img class='rond' src='img/"+
                 student[i]+".jpg'><div class='photoText'><p class='bc1 lc'>"+
                 student[i]+"</p></div></figure></div>";
             }
-            cursisten.innerHTML="<h2>Ons Team</h2><div class='flex'>"+htmlCursisten+"</div>";
+            cursisten.innerHTML="<h2 class='c2'>Ons Team</h2><div class='flex'>"+htmlCursisten+"</div>";
         }
         function instel(){
             beeld==colors.length-1?beeld=0:beeld++;
@@ -144,12 +145,12 @@
         
         var adres="<div id='adres'><p><b>adres:</b></p><p> Belpairestraat 39, Berchem </p><p><b>contact:</b><p><p> contactpersoon@iets.com </p><p> tel.contactpersoon </p></div>";
         var map="<div class='wrap'><div id='map' class='right lc bs'><iframe class='lc' src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2500.1221888483815!2d4.415912715089307!3d51.19840014107059!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c3f721a0fa6c15%3A0xa0da38d24cc6b721!2sBelpairestraat+39%2C+2600+Antwerpen!5e0!3m2!1snl!2sbe!4v1496397432512' frameborder='0' style='border:0' allowfullscreen=''></iframe>"+adres+"</div></div>"
-        var inaam="<p><input type='text' id='naam' placeholder='naam'></p><br>"
-        var ibedrijf="<input type='text' id='bedrijf' placeholder='bedrijf'><br>"
-        var imail="<input type='text' id='mail' placeholder='e-mail'><br>"
-        var itel="<input type='text' id='tel' placeholder='telefoon' size='32'><br>"
-        var ibericht="<textarea id='bericht' cols='32' rows='4' placeholder='bericht'></textarea>";
-        var form="<div id='form'><h2>Formulier</h2><form id='frm'>"+inaam+ibedrijf+imail+itel+ibericht+"</form></div>";
+        var inputId=["naam","bedrijf","personen","mail","tel"],inputPlh=["naam","bedrijf","aantal personen","e-mail","telefoon"],html="";
+        for(var i=0;i<inputId.length;i++){
+            html+="<p><input type='text' id='"+inputId[i]+"' placeholder='"+inputPlh[i]+":' size='30'></p>"
+        }
+        var ibericht="<p><textarea id='bericht' cols='32' rows='4' placeholder='bericht:'></textarea></p>";
+        var form="<div id='form'><h2>contact formulier</h2><form id='frm'><br>"+html+ibericht+"<p><button id='zend'>verstuur</button></p></form></div>";
         var htmlContact="<div class='flex'>"+form+map+"</div>";
 
     window.onload=function(){
@@ -175,7 +176,7 @@
     <main id="main" class="">
         <div id="welkom" class="bc4 c1"></div>
         <div id="news" class="bc4"></div>
-        <div id="cursisten" class="bc1 lc p8"></div>
+        <div id="cursisten" class="bc5 lc p8"></div>
         <div id="cursus" class="bc1 lc p8"></div>
         <div id="contact" class="bc1 lc"></div>
     </main>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Web Storage - test</title>
+</head>
+<body>
+<h1>JSON object in web storage</h1>
+<form>
+<label for="naam">Naam:</label><input type="text" id="naam" placeholder="Tik hier uw naam"><br/>
+<label for="voornaam">Voornaam:</label><input type="text" id="voornaam" placeholder="Tik hier uw voornaam"><br/>
+<input type="button" value="Bewaar" onclick="bewaarPersoonInLocalStorage(this.form.naam.value, this.form.voornaam.value)">
+</form>
+<input type="button" value="Toon" onclick="toonPersoonUitLocalStorage()">
+<div id="resultaat"></div>
+</body>
+<script>
+function bewaarPersoonInLocalStorage(naam, voornaam){
+    var data;
+    if(localStorage.persoon){data=JSON.parse(localStorage.getItem('persoon'));}
+    else data=[]
+    data.push({"naam": naam, "voornaam": voornaam});
+	localStorage.setItem('persoon', JSON.stringify(data));
+}
+
+function toonPersoonUitLocalStorage(){
+    var html="";
+	var persoon = JSON.parse(localStorage.getItem('persoon'));
+	if (persoon != null){
+        for(var i=0;i<persoon.length;i++){
+		html+="<li>"+persoon[i].voornaam + " "+ persoon[i].naam+"</li>";
+    }
+    resultaat.innerHTML="<lu>"+html+"</lu>";
+    }
+	else{
+		alert("Er is nog geen persoon bewaard.");
+	}
+}
+</script>
+</html>
