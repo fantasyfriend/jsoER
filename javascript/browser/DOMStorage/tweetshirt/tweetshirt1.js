@@ -3,9 +3,13 @@
 window.onload = function() {
 	var button = document.getElementById("previewButton");
 	button.onclick = previewHandler;
+	document.getElementById("shape").onchange=giveItemColor;
 
 	// Easter Egg ;-)
 	makeImage();
+}
+function giveItemColor(){
+	itemColor.style.visibility="visible";
 }
 
 function previewHandler() {
@@ -36,8 +40,7 @@ function previewHandler() {
 // This is where we'll set the background color
 function fillBackgroundColor(canvas, context) {
 	var selectObj = document.getElementById("backgroundColor");
-	var index = selectObj.selectedIndex;
-	var bgColor = selectObj[index].value;
+	var bgColor = selectObj.value;
 
 	context.fillStyle = bgColor;
 	context.fillRect(0, 0, canvas.width, canvas.height);
@@ -53,7 +56,7 @@ function drawSquare(canvas, context) {
 	// Use this fillStyle instead if you want to try
 	// "twitter blue"
 	//context.fillStyle = "rgb(0, 173, 239)";
-	context.fillStyle = "lightblue";
+	context.fillStyle = itemColor.value;
 	context.fillRect(x, y, w, w);
 }
 
@@ -69,15 +72,15 @@ function drawCircle(canvas, context) {
 	// Use this fillStyle instead if you want to try
 	// "twitter blue"
 	//context.fillStyle = "rgb(0, 173, 239)";
-	context.fillStyle = "lightblue";
+	context.fillStyle = itemColor.value;
 	context.fill();
 }
 
 // draws all the text, including the tweet
 function drawText(canvas, context) {
 	var selectObj = document.getElementById("foregroundColor");
-	var index = selectObj.selectedIndex;
-	var fgColor = selectObj[index].value;
+	
+	var fgColor = selectObj.value;
 
 	context.fillStyle = fgColor;
 	context.font = "bold 1em sans-serif";
@@ -87,9 +90,10 @@ function drawText(canvas, context) {
 
 	// draw the tweet!
 	selectObj = document.getElementById("tweets");
-	var tweet = selectObj[index].value;
-	context.font = "italic 1.2em serif";
-	context.fillText(tweet, 30, 100);
+	var tweet = selectObj.value;
+	context.font = "italic "+fontSize.value+"em serif";
+	context.textAlign = "center";
+	context.fillText(tweet, canvas.clientWidth / 2 , 100);
 
 	// If you want to try splitIntoLines to 
 	// handle longer tweets, uncomment this code

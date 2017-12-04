@@ -7,6 +7,7 @@
 		canvas {
 			border: 1px solid black;
 		}
+		#itemColor{visibility:hidden;}
 	</style>
 	<script src="tweetshirt1.js"></script>
 </head>
@@ -20,10 +21,7 @@
 	<form>
 	<p>
 		<label for="backgroundColor">Select background color:</label>
-		<select id="backgroundColor">
-			<option value="white" selected="selected">White</option>
-			<option value="black">Black</option>
-		</select>
+		<input type="color" id="backgroundColor">
 	</p>
 	<p>
 		<label for="shape">Circles or squares?</label>
@@ -32,13 +30,13 @@
 			<option value="circles">Circles</option>
 			<option value="squares">Squares</option>
 		</select>
+		<input type="color" id="itemColor">
 	</p>
 	<p>
 		<label for="foregroundColor">Select text color:</label>
-		<select id="foregroundColor">
-			<option value="black" selected="selected">Black</option>
-			<option value="white">White</option>
-		</select>
+		<input type="color" id="foregroundColor">
+		<label for="fontSize">Fontsize:</label>
+		<input type="number" id="fontSize" min="0.1" step="0.1">
 	</p>
 	<p>
 		<label for="tweets">Pick a tweet:</label>
@@ -47,6 +45,8 @@
 	</p>
 	<p>
 		<input type="button" id="previewButton" value="Preview">
+		<input type="button" id="saveButton" value="Save">
+		<input type="button" id="reloadButton" value="Reload">
 	</p>
 </form>
 
