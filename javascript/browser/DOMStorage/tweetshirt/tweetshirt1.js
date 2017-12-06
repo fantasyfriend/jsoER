@@ -110,6 +110,7 @@ function drawText(canvas, context) {
 
 	// draw the tweet!
 	selectObj = document.getElementById("tweets");
+<<<<<<< HEAD
 	var tweet = tw = selectObj.value;
 	context.save();
 	context.translate(canvas.clientWidth / 2 ,canvas.clientHeight / 2);
@@ -120,6 +121,12 @@ function drawText(canvas, context) {
 	context.textAlign = "center";
 	context.fillText(tweet, 0,0);
 	context.restore();
+=======
+	index = selectObj.selectedIndex;
+	var tweet = selectObj[index].value;
+	context.font = "italic 1.2em serif";
+	context.fillText(tweet, 30, 100);
+>>>>>>> 4ddd553e5da5526d435099329bd6e37f7a36c503
 
 	// If you want to try splitIntoLines to 
 	// handle longer tweets, uncomment this code

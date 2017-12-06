@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Sticky notes using CSS3 and Google Fonts (Step 0)</title>
+<link  href="http://fonts.googleapis.com/css?family=Reenie+Beanie:regular" rel="stylesheet" type="text/css"> 
+<style>
+    body{background-color:gray;}
+    ul{list-style-type: none;}
+    .note{background-color:cornsilk;width:160px;height:200px;padding:4px;margin:16px;border:1px solid black;box-shadow:4px 4px 4px 4px black;}
+    .note:nth-child(3n+0){transform:rotate(15deg);}
+    .note:nth-child(3n+1){transform:rotate(-5deg);}
+    .note:nth-child(3n+2){transform:rotate(-15deg);}
+    .note:hover{transform:scale(1.25,1.25)}
+    .pak:hover{cursor:pointer;}
+    .note2{box-shadow:8px 8px 4px 4px black;z-index:99;position:absolute;}
+    #board{display:flex;flex-flow:row wrap;}
+    .close{float:right;}
+    h2,p{display:block;margin:4px;}
+    #p2, .p2{font-family:"Reenie Beanie"}
+    textarea{border-color:cornsilk;background-color:cornsilk;width:120px;resize:none;}
+</style>
+<script>
+var nr=true,go=true,nota1=[],nota2=[],posX,posY,li;
+function maakNote1(){
+    if(nr){
+    var html="";
+    for(var i=0;i<nota1.length;i++){
+        html+="<li class='note' id='n"+i+"'><img onclick='verwijder("+i+")' class='close' src='images/close.png'><h2 class='p1 pak' onclick='pak("+i+")'>"+nota1[i]+"</h2><p class='p2'>"+nota2[i]+"</p></li>";
+    }
+    localStorage.nota1=JSON.stringify(nota1);
+    localStorage.nota2=JSON.stringify(nota2);
+    html+="<li class='note' id='newNote'><img class='close' src='images/close.png'><textarea id='p1'placeholder='Untitled'></textarea><br><textarea id='p2'placeholder='Your content here' rows='8'></textarea></li>";
+    board.innerHTML=html;nr=false;
+    }
+    else{
+        if(p1.value!=""){
+            nota1.push(p1.value);
+            nota2.push(p2.value);
+            nr=true;
+            maakNote1();
+        }
+    }
+}
+function verwijder(x){
+    nota1.splice(x,1);
+    nota2.splice(x,1);
+    nr=true;
+    maakNote1();
+}
+function start(){
+    nota1=JSON.parse(localStorage.nota1);
+    nota2=JSON.parse(localStorage.nota2);
+    nr=true;maakNote1();
+}
+function pak(i){
+    if(go){
+    li=document.getElementById("n"+i);
+    var x=li.getBoundingClientRect().left + window.scrollX;
+    var y=li.getBoundingClientRect().top + window.scrollY;
+    posX=window.event.clientX-x;
+    posY=window.event.clientY-y;
+    li.classList.add("note2");
+    li.style.left=x+"px";li.style.top=y+"px";
+    nota1.push(nota1[i]);nota1.splice(i,1);
+    nota2.push(nota2.splice(i,1)[0]);//kortere manier
+    go=false;
+    }
+    else{
+    li.classList.remove("note2");
+    /*for(var i=0;i<nota1.length-1;i++){
+        var el=document.getElementById("n"+i);
+        var x=el.getBoundingClientRect().left + window.scrollX;
+        var y=el.getBoundingClientRect().top + window.scrollY;
+        if(wX>x && wX<x+160 && wY>y && wY<y+200){el.style.backgroundColor="red";}
+    }*/
+    go=true;
+    nr=true;maakNote1();
+    }
+}
+function move(){
+    if(!go){
+    var wX = window.event.clientX;
+    var wY = window.event.clientY;
+    li.style.left=(wX-posX+4)+"px";li.style.top=(wY-posY+8)+"px";
+    }
+}
+window.onload=function(){
+    btn.onclick=maakNote1;
+    if(localStorage.nota1)start();
+    window.onmousemove=move;
+}
+</script>
+</head>
+<body>
+    <img id='btn' src="images/newnote.png" alt="">
+    <ul id='board'></ul>
+</body>
+</html>
