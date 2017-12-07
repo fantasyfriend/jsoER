@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>XML DOM-tree</title>
+<script src="xmlUtil.js"></script>
+<script>
+'use strict';
+
+function oef1(){
+    const FILENAME = "XML-bestanden/ploeg.xml";
+    var doc = loadXMLDoc(FILENAME);
+    alert("aantal spelers: " + doc.documentElement.children.length);
+}
+function oef2(){
+    const FILENAME = "XML-bestanden/oef2.xml";
+    var doc = loadXMLDoc(FILENAME);
+    alert("aantal werknemers: " + doc.documentElement.getElementsByTagName('werknemer').length);
+}
+function oef3(){
+    const FILENAME = "XML-bestanden/oef2.xml";
+    var doc = loadXMLDoc(FILENAME);
+    var werknemers=doc.documentElement.getElementsByTagName('werknemer');
+    var loon=0;
+    for(var i=0;i<werknemers.length;i++){loon+=werknemers[i].getAttribute('loon')*1}
+    alert("loon: " + loon + " BEF");
+}
+function oef4(){
+    const FILENAME = "XML-bestanden/oef4.xml";
+    var doc = loadXMLDoc(FILENAME);
+    var werknemers=doc.documentElement.getElementsByTagName('werknemer');
+    var loon=0;
+    for(var i=0;i<werknemers.length;i++){
+        if(werknemers[i].getAttribute('valuta')=="EUR" || werknemers[i].getAttribute('valuta')==null){loon+=werknemers[i].getAttribute('loon')*1;}
+        else{loon+=werknemers[i].getAttribute('loon')/40.3399}
+    }
+    alert("loon: " + loon + " EUR");
+}
+function geefLoon(afdeling,filenaam){
+    const FILENAME = filenaam;
+    var doc = loadXMLDoc(FILENAME);
+    var afd=doc.getElementById(afdeling);
+    var werknemers=afd.getElementsByTagName('arbeider');
+    var loon=0;
+    for(var i=0;i<werknemers.length;i++){
+        loon+=werknemers[i].getAttribute('loon')*1
+    }
+    return loon;
+}
+function oef5(){
+    alert("loon: " + geefLoon("magazijn","XML-bestanden/oef5.xml") + " BEF");
+}
+function geefGemiddeldLoon(afdeling,filenaam){
+    const FILENAME = filenaam;
+    var doc = loadXMLDoc(FILENAME);
+    var afd=doc.getElementById(afdeling);
+    var werknemers=afd.getElementsByTagName('arbeider');
+    var aantal=werknemers.length;
+    var loon=0;
+    for(var i=0;i<aantal;i++){
+        loon+=werknemers[i].getAttribute('loon')*1
+    }
+    return loon/aantal;
+}
+function oef6(){
+    alert("gemiddeld loon: " + geefGemiddeldLoon("magazijn","XML-bestanden/oef5.xml") + " BEF");
+}
+function geefGemiddeldLoon1(afdeling,filenaam){
+    var loon=0,aantal=0;
+    const FILENAME = filenaam;
+    var doc = loadXMLDoc(FILENAME);
+    var loonA=doc.querySelectorAll('afdeling[id='+afdeling+']>arbeider>loon');
+    for(var j=0;j<loonA.length;j++){
+        loon+=loonA[j].firstChild.nodeValue*1;
+        aantal++;
+    }
+    return loon/aantal;
+}
+function geefGemiddeldLoon2(afdeling,filenaam){
+    var loon=0,aantal=0;
+    const FILENAME = filenaam;
+    var doc = loadXMLDoc(FILENAME);
+    var afd=doc.documentElement.getElementsByTagName('afdeling');
+    for(var i=0;i<afd.length;i++){
+        if(afd[i].getAttribute('id')==afdeling){
+        var werknemers=afd[i].getElementsByTagName('arbeider');
+        for(var j=0;j<werknemers.length;j++){
+        var loonA=werknemers[j].getElementsByTagName('loon');
+        loon+=loonA[0].firstChild.nodeValue*1;
+        aantal++;
+        }}
+    }
+    return loon/aantal;
+}
+function oef7(){
+    alert("gemiddeld loon: " + geefGemiddeldLoon1("magazijn","XML-bestanden/oef7.xml") + " BEF");
+}
+
+function oef8(){
+    //doc.innerHTML="<html><head><title>De titel</title></head><body>De link: <a>De VDAB</a></body></html>"
+    var doc=document.implementation.createDocument("","",null);
+    var html=doc.createElement('html');
+    var head=doc.createElement('head');
+    var body=doc.createElement('body');
+    var tekstNode = doc.createTextNode('De link: ');
+    body.appendChild(tekstNode);
+    var a=doc.createElement('a');
+    var tekstNode = doc.createTextNode('De VDAB');
+    a.setAttribute("href", "http://www.vdab");
+    a.appendChild(tekstNode);
+    body.appendChild(a);
+    var title=doc.createElement('title');
+    var tekstNode = doc.createTextNode('De titel');
+    title.appendChild(tekstNode);
+    head.appendChild(title);
+    html.appendChild(head);
+    html.appendChild(body);
+    doc.appendChild(html);
+
+    alert(doc.documentElement.outerHTML);
+}
+function oef9(){
+    var doc=document.implementation.createDocument("","",null);
+    var html=doc.createElement('html');
+    var head=doc.createElement('head');
+    var body=doc.createElement('body');
+    var tekstNode = doc.createTextNode('De link: ');
+    body.appendChild(tekstNode);
+    var a=doc.createElement('a');
+    var tekstNode = doc.createTextNode('De VDAB');
+    a.setAttribute("href", "http://www.vdab");
+    a.appendChild(tekstNode);
+    body.appendChild(a);
+    var title=doc.createElement('title');
+    var tekstNode = doc.createTextNode('De titel');
+    title.appendChild(tekstNode);
+    head.appendChild(title);
+    html.appendChild(head);
+    html.appendChild(body);
+    doc.appendChild(html);
+
+    var p=doc.createElement('p');
+    var tekstNode = doc.createTextNode('De eerste paragraaf');
+    p.appendChild(tekstNode);
+    doc.querySelector('body').appendChild(p);
+
+    alert(doc.documentElement.outerHTML);
+}
+function oef10(){
+    const FILENAME = "XML-bestanden/itemspuur.xml";
+    var doc = loadXMLDoc(FILENAME);
+    var prijs=doc.documentElement.getElementsByTagName('prijs');
+    for(var i=0;i<prijs.length;i++){
+       prijs[i].firstChild.nodeValue=""+(prijs[i].textContent*1.05).toFixed(2)+"";
+    }
+    alert(doc.documentElement.outerHTML);
+}
+function oef11(){
+    var links="";
+    const FILENAME = "XML-bestanden/oef11.html";
+    var xml = (loadXMLText(FILENAME));
+    
+    var parser = new DOMParser();
+    var doc = parser.parseFromString(xml, "application/xhtml+xml");
+
+    var link=doc.documentElement.getElementsByTagName('a');
+    for(var i=0;i<link.length;i++){
+        links+=link[i].getAttribute("href")+"\n";
+    }
+
+    alert(links);
+}
+
+window.onload=function(){
+    btn1.onclick=oef1;
+    btn2.onclick=oef2;
+    btn3.onclick=oef3;
+    btn4.onclick=oef4;
+    btn5.onclick=oef5;
+    btn6.onclick=oef6;
+    btn7.onclick=oef7;
+    btn8.onclick=oef8;
+    btn9.onclick=oef9;
+    btn10.onclick=oef10;
+    btn11.onclick=oef11;
+}
+
+</script>
+</head>
+<body>
+    <button id='btn1'>oef 1</button>
+    <button id='btn2'>oef 2</button>
+    <button id='btn3'>oef 3</button>
+    <button id='btn4'>oef 4</button>
+    <button id='btn5'>oef 5</button>
+    <button id='btn6'>oef 6</button>
+    <button id='btn7'>oef 7</button>
+    <button id='btn8'>oef 8</button>
+    <button id='btn9'>oef 9</button>
+    <button id='btn10'>oef 10</button>
+    <button id='btn11'>oef 11</button>
+</body>
+</html>
