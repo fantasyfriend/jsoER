@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #welkom{width:100%;height:100px;background:darkblue;position:relative;}
+        #t{margin:0;color:yellow;position:absolute;left:100px;top:30px;}
+    </style>
+    <script>
+        text="Welkom op deze site."
+        var x=300,si;
+        
+        function move(){
+            welkom.innerHTML="<h1 id='t'>"+text+"</h1>";
+            t.style.left=x+"px";
+            t.style.fontSize=x+"px";
+            x--;
+        }
+        function stop(){
+            clearTimeout(si);
+        }
+    window.onload=function(){
+        var xstart=0;
+        var xend=welkom.offsetWidth;
+        btn.onclick=stop;
+        si=setInterval(move,10);
+        alert(xend);
+
+    }
+    </script>
+</head>
+<body>
+    <div id='welkom'></div>
+    <button id='btn'>move</button>
+    
+</body>
+</html>
