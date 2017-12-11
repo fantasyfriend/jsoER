@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>XML DOM-tree</title>
+<script src="xmlUtil.js"></script>
+<script>
+'use strict';
+var naam=[],symbool=[],gok=0;
+
+function maakArrays(){
+    const FILENAME = "XML-bestanden/allelements.xml";
+    var doc = loadXMLDoc(FILENAME);
+    var atoom=doc.documentElement.getElementsByTagName('ATOM');
+    for(var i=0;i<atoom.length;i++){
+        naam.push(atoom[i].getElementsByTagName('NAME')[0].textContent);
+        symbool.push(atoom[i].getElementsByTagName('SYMBOL')[0].textContent);
+    }
+}
+function game(){
+    var keuze=Math.floor(Math.random()*naam.length);
+    start.innerHTML+="<h3>wat is de afkorting van het element "+naam[keuze]+" :";
+}
+function check(){
+
+}
+
+window.onload=function(){
+    maakArrays();
+    game();
+    btn1.onclick=check;
+    
+}
+
+</script>
+</head>
+<body>
+    <div id='start'></div>
+    <button id='btn1'>check</button>
+    
+    
+</body>
+</html>
