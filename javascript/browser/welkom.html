@@ -6,28 +6,42 @@
     <title>Document</title>
     <style>
         #welkom{width:100%;height:100px;background:darkblue;position:relative;}
-        #t{margin:0;color:yellow;position:absolute;left:100px;top:30px;}
+        .tl{margin:0;color:yellow;position:absolute;left:-100px;bottom:10px;}
     </style>
     <script>
-        text="Welkom op deze site."
-        var x=300,si;
+        var l=[],x,si,xend,x;
+               
         
         function move(){
-            welkom.innerHTML="<h1 id='t'>"+text+"</h1>";
-            t.style.left=x+"px";
-            t.style.fontSize=x+"px";
+            var tx,ts;
+            for(var i=0;i<l.length;i++){
+                tx=(i*12)+x;ts=((xend/2)-(Math.abs((xend/2)-tx)))/8;
+                if(tx>0 && tx<xend){
+                    document.getElementById("tp"+i).style.left=tx+"px";
+                    document.getElementById("tp"+i).style.fontSize=ts+"px";
+
+                    }
+                else{document.getElementById("tp"+i).style.left="-100px";}
+            }
+            if((l.length*12)+x<0)x=xend-1;
+
             x--;
         }
         function stop(){
             clearTimeout(si);
         }
     window.onload=function(){
-        var xstart=0;
-        var xend=welkom.offsetWidth;
+        xend=welkom.offsetWidth;
+        x=xend-1;
+        var text="Welkom op deze site....."
+        l=text.split('');
+        for(var i=0;i<l.length;i++){
+            welkom.innerHTML+="<p class='tl' id='tp"+i+"'>"+l[i]+"</p>";    
+            }
+        
         btn.onclick=stop;
-        si=setInterval(move,10);
-        alert(xend);
-
+        si=setInterval(move,3);
+       
     }
     </script>
 </head>
