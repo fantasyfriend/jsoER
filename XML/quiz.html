@@ -63,20 +63,20 @@ function klokje(){
 function save(){
     var waarden=[];
     var dag=d.getDay();var maand=d.getMonth();var jaar=d.getFullYear();
-    waarden.push(dag+"/"+maand+"/"+jaar);
-    waarden.push(inp.value);
     waarden.push(score);
     waarden.push(t);
+    waarden.push(dag+"/"+maand+"/"+jaar);
+    waarden.push(inp.value);
     quiz[quiz.length]=waarden;
     localStorage.quiz=JSON.stringify(quiz);
     hoogste();
 }
 function hoogste(){
-    
+    quiz.sort();
     var html="";
     html+="<tr><td>naam</td><td>datum</td><td>score</td><td>tijd</td></tr>";
     for(var i=0;i<quiz.length;i++){
-        html+="<tr><td>"+quiz[i][1]+"</td><td>"+quiz[i][0]+"</td><td>"+quiz[i][2]+"</td><td>"+quiz[i][3]+"</td></tr>";
+        html+="<tr><td>"+quiz[i][3]+"</td><td>"+quiz[i][2]+"</td><td>"+quiz[i][0]+"</td><td>"+quiz[i][1]+"</td></tr>";
     }
     op.innerHTML="<table>"+html+"</table>";
     gok=0;score=0;

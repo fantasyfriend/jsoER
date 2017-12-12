@@ -10,10 +10,9 @@ var names = [
 
 function findHints(q) {
     var hint = "";
-
     // TODO: return string with all names starting with q.  Separate different names by a comma.
-    for(var i=0;i<names.length;i++){
-        if(names[i].startsWith(""+q+"")){hint+=(hint==""?"":",")+names[i];}
+    for(var i;i<names.length;i++){
+        if(names[i].startsWith(q)){hint+=names[i]+","}
     }
     if (hint == ""){
         return "No suggestion found.";

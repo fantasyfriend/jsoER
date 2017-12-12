@@ -10,8 +10,8 @@ function init() {
 }
 
 function getLuck() {
-	//var url = "luckyornot.txt";  // ok (opvragen via webserver (surfen), werkt niet als je file opent in browser)
-	 var url = "http://wickedlysmart.com/ifeelluckytoday";  // probleem: cross domain call
+	var url = "luckyornot.txt";  // ok (opvragen via webserver (surfen), werkt niet als je file opent in browser)
+	 //var url = "http://wickedlysmart.com/ifeelluckytoday";  // probleem: cross domain call
 	 // mogelijke oplossingen vereisen allen server-side zaken (=> out-of-scope):
 	 // 1) JSONP (in te stellen op server) van webservice  (zie gumball voorbeeld) OF
 	 // 2) server van webservice configureren zd Access-Control-Allow-Origin in header zit OF

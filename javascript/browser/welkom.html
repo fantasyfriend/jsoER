@@ -6,7 +6,8 @@
     <title>Document</title>
     <style>
         #welkom{width:100%;height:100px;background:darkblue;position:relative;}
-        .tl{margin:0;color:yellow;position:absolute;left:-100px;bottom:10px;}
+        .tl{margin:0;color:yellow;position:absolute;left:-100px;bottom:10px;font-size:40px;
+        border:1px solid black;background-color:crimson;width:40px;border-radius:4px; }
     </style>
     <script>
         var l=[],x,si,xend,x;
@@ -15,10 +16,10 @@
         function move(){
             var tx,ts;
             for(var i=0;i<l.length;i++){
-                tx=(i*12)+x;ts=((xend/2)-(Math.abs((xend/2)-tx)))/8;
+                tx=(i*40)+x;//ts=((xend/2)-(Math.abs((xend/2)-tx)))/8;
                 if(tx>0 && tx<xend){
                     document.getElementById("tp"+i).style.left=tx+"px";
-                    document.getElementById("tp"+i).style.fontSize=ts+"px";
+                    document.getElementById("tp"+i).style.transform="rotateX("+tx+"deg)";
 
                     }
                 else{document.getElementById("tp"+i).style.left="-100px";}
