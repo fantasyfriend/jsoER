@@ -2,11 +2,24 @@
 <html>
 <head>
 <title>XML DOM-tree</title>
+<style>
+    #tijdscore{border:1px solid black;color:crimson;padding:0 6px;}
+    #op{border:2px solid black;color:crimson;padding:8px;float:right;}
+    table{border-spacing:0;}
+    td{border:1px solid grey;}
+</style>
 <script src="xmlUtil.js"></script>
 <script>
 'use strict';
-var naam=[],symbool=[],gok=0;
+var naam=[],symbool=[],gok=0,keuze,score=0,begin=true,d,tijd,t=0,quiz=[];
 
+function go(){
+    if(inp.placeholder=="Uw antwoord"){
+    begin=false;
+    d=new Date;
+    tijd=d.getTime();
+    }
+}
 function maakArrays(){
     const FILENAME = "XML-bestanden/allelements.xml";
     var doc = loadXMLDoc(FILENAME);
@@ -17,25 +30,82 @@ function maakArrays(){
     }
 }
 function game(){
-    var keuze=Math.floor(Math.random()*naam.length);
-    start.innerHTML+="<h3>wat is de afkorting van het element "+naam[keuze]+" :";
+    keuze=Math.floor(Math.random()*naam.length);
+    gok++;
+    start.innerHTML="<p>vraag "+gok+": wat is de afkorting van het element "+naam[keuze]+" ?</p>";
 }
 function check(){
-
+    if(inp.placeholder=="Uw naam"){
+        save();
+        inp.placeholder="Uw antwoord";
+        tijdscore.innerHTML="Have Fun!";
+    }
+    if(inp.value==symbool[keuze]){
+        score++;
+        punten.innerHTML="<p>score: "+score+"</p>";
+    }
+    inp.value="";
+    if(gok==10){
+        begin=true;
+        start.innerHTML="";
+        tijdscore.innerHTML=" score: "+score+" in "+t+" seconden";
+        punten.innerHTML="";
+        inp.placeholder="Uw naam";
+    }
+    else{game();}
+}
+function klokje(){
+    if(!begin){
+    t=Math.floor((Date.now()-tijd)/1000);
+    tijdscore.innerHTML=" "+t+" seconden";
+    }
+}
+function save(){
+    var waarden=[];
+    var dag=d.getDay();var maand=d.getMonth();var jaar=d.getFullYear();
+    waarden.push(dag+"/"+maand+"/"+jaar);
+    waarden.push(inp.value);
+    waarden.push(score);
+    waarden.push(t);
+    quiz[quiz.length]=waarden;
+    localStorage.quiz=JSON.stringify(quiz);
+    hoogste();
+}
+function hoogste(){
+    
+    var html="";
+    html+="<tr><td>naam</td><td>datum</td><td>score</td><td>tijd</td></tr>";
+    for(var i=0;i<quiz.length;i++){
+        html+="<tr><td>"+quiz[i][1]+"</td><td>"+quiz[i][0]+"</td><td>"+quiz[i][2]+"</td><td>"+quiz[i][3]+"</td></tr>";
+    }
+    op.innerHTML="<table>"+html+"</table>";
+    gok=0;score=0;
 }
 
 window.onload=function(){
+    if(localStorage.quiz){quiz=(JSON.parse(localStorage.quiz));hoogste();}
+    else{;alert('leeg');}
     maakArrays();
     game();
-    btn1.onclick=check;
-    
+    setInterval(klokje,1000);
+    inp.onkeydown=function(e){
+        if(begin){go();}
+        if(e.key==='Enter'){check();}
+    }
+       
 }
 
 </script>
 </head>
 <body>
+    <div id='op'>hoogste score:</div>
+    <h1>The Quiz.... <b id='tijdscore'>Have Fun!</b></h1>
     <div id='start'></div>
-    <button id='btn1'>check</button>
+    <input id='inp' placeholder='Uw antwoord' autofocus>
+    <br>
+    <div id='punten'></div>
+    
+
     
     
 </body>
