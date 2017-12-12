@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>blackjack</title>
+<style>
+    .flex{display:flex;flex-flow:row wrap;justify-content:space-around;}
+    body{background-color:black;margin:0 auto;width:90%;height:100vh;}
+    #veld{border:1px solid black;border-radius:10px;margin:16px;width:100%;height:100vh;background-color:mediumseagreen;}
+    #kaartveld{height:200px;}
+    button{margin:8px;}
+
+</style>
+<script>
+    'use strict';
+    let waarde=["A","2","3","4","5","6","7","8","9","10","B","V","H"];
+    let type=["&spades;","&clubs;","&hearts;","&diams;"];
+    let set=[],hand=[];
+    function maakSet() {for(let i=0;i<52;i++){set[i]=i;}}
+    function keuze(x) {return Math.floor(Math.random()*x);}
+    function bouwVeld(){
+        document.body.innerHTML="<div id='veld'><div id='kaartveld' class='flex'></div><button id='take'>neem kaart</button><button id='stop'>stop</button></div>";
+    } 
+
+    function neemKaart(){
+        let kaart=keuze(set.length);
+        set.splice(kaart,1);hand.push(kaart);
+        legKaart();
+    }  
+
+    function legKaart(){
+        let leg="";
+        for(let i=0;i<hand.length;i++){leg+="<div class='kaartup'><p class='t'></p><p class='w'></p></div>";}
+    } 
+
+window.onload = function (){
+    maakSet();
+    bouwVeld();   
+        
+     take.onclick=neemKaart;  
+}
+</script>
+</head>
+<body></body>
+</html>
