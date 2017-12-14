@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AJAX: XML ophalen</title>
+    <script>
+        
+        function dataOphalen() {
+            var url = "ploeg.xml";  
+            fetch(url).then(function (response) {
+            return response.text();
+            }).then(function (responsText) {
+                
+                var parser = new DOMParser()
+                var xmlDoc = parser.parseFromString(responsText, "text/xml");
+                var spelers = xmlDoc.getElementsByTagName("speler");
+                var result = "<h1>Overzicht spelers</h1><ul>";
+                for (var i = 0; i < spelers.length; i++) {
+                    var speler = spelers[i];
+                    var id = speler.attributes["id"].nodeValue;
+                    var naamNodes = speler.getElementsByTagName("naam");
+                    var naam = naamNodes[0].firstChild.nodeValue;
+                    result += "<li>(" + id + ")&nbsp;" + naam + "</li>";
+                }
+                document.getElementById("result").innerHTML = result+"</ul>";
+            });
+        }
+    </script>
+</head>
+<body>
+    <input type="button" value="Haal XML op" onclick="dataOphalen()" />
+    <div id="result">
+    </div>
+</body>
+</html>

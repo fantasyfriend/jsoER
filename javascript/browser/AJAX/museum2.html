@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AJAX: XML ophalen</title>
+    <style>
+        h1{color:black;}
+        .center{margin:8px auto;display:flex;justify-content:center;}
+        input{margin:8px 16px;}
+
+        .map{width:45%;max-width:400px;height:300px;border:1px solid black;margin:10px;}
+       
+        table{border-spacing:0px;border:1px solid grey;box-shadow:black 3px 3px 3px 3px;}
+        td{border:1px solid grey;padding:4px;}
+        tr:nth-child(odd) {background-color:lightgrey;}
+        tr:first-child{text-align:center;font-weight:900;background-color:lightgrey;}
+
+        a{color:white;background-color:grey;box-shadow:black 2px 2px 2px 2px; margin:8px;padding:4px 8px;font-size:20px;font-weight:900;border-radius:2px;}
+        a:hover{color:black;background-color:white;box-shadow:black 1px 1px 1px 1px;text-decoration:none;cursor:pointer;}
+        
+    </style>
+    <script>
+        var m=[];
+        function Museum(stad,museum,adres,breedte,lengte){
+            this.stad=stad;
+            this.museum=museum;
+            this.adres=adres;
+            this.breedte=breedte;
+            this.lengte=lengte;
+        }
+        function order(naam){
+            alert(m[1][naam]);
+        }
+        
+        function dataOphalen() {
+            //var stad=[],museum=[],adres=[],breedte=[],lengte=[];
+            m=[];
+            var url = "http://opendata.brussel.be/api/records/1.0/search/?dataset=musea-in-brussel";  
+            fetch(url).then(function (response) {
+            return response.json();
+            }).then(function (responsText) {
+                var data = responsText;
+                var result = "<table><tr><td>stad<a onclick='order(0)' id='p1'>&darr;</a></td><td>museum<a onclick='order(1)' id='p1'>&darr;</a></td><td>adres<a onclick='order(2)' id='p1'>&darr;</a></td></tr>";
+                var record;
+                for (var i = 0; i < data.records.length; i++) {
+                    m[i]=new Museum()
+                    record = data.records[i];
+                    m[i].stad="Brussel";
+                    m[i].museum = record.fields.naam_van_het_museum;
+                    m[i].adres = record.fields.adres;
+                    m[i].breedte = record.fields.latitude_breedtegraad;
+                    m[i].lengte = record.fields.longitude_lengtegraad;
+                    result += "<tr><td>"+m[i].stad+"</td><td>"+m[i].museum+"</td><td>"+m[i].adres+"</td></tr>";
+                }
+                return result;
+            }).then(function (result) {
+
+            var url = "http://datasets.antwerpen.be/v4/gis/museumoverzicht.xml";  
+            fetch(url).then(function (response) {
+            return response.text();
+            }).then(function (responsText) {
+                var parser=new DOMParser();
+                var data = parser.parseFromString(responsText,"text/xml");
+                var records = data.getElementsByTagName("record");
+                var ii=m.length,record,naamNodes,stad,museum,straat,huisnummer,adres,breedte,lengte;
+                for (var i = 0; i < records.length; i++) {
+                    m[i+ii]=new Museum()
+                    record = records[i];
+                    m[i+ii].stad="Antwerpen"
+                    naamNodes = record.getElementsByTagName("naam");
+                    m[i+ii].museum = naamNodes[0].textContent;
+                    naamNodes = record.getElementsByTagName("straat");
+                    straat = naamNodes[0].textContent;
+                    naamNodes = record.getElementsByTagName("huisnummer");
+                    huisnummer = naamNodes[0].textContent;
+                    m[i+ii].adres=straat+" "+huisnummer;
+                    naamNodes = record.getElementsByTagName("point_lat");
+                    m[i+ii].breedte = naamNodes[0].textContent;
+                    naamNodes = record.getElementsByTagName("point_lng");
+                    m[i+ii].lengte = naamNodes[0].textContent;
+                    result += "<tr><td>"+m[i+ii].stad+"</td><td>"+m[i+ii].museum+"</td><td>"+m[i+ii].adres+"</td></tr>";
+                }
+                document.getElementById("result2").innerHTML = result+"</table>";
+            });
+
+            });
+        }
+        
+        //<iframe class='lc' src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2500.1221888483815!2d4.415912715089307!3d51.19840014107059!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c3f721a0fa6c15%3A0xa0da38d24cc6b721!2sBelpairestraat+39%2C+2600+Antwerpen!5e0!3m2!1snl!2sbe!4v1496397432512' frameborder='0' style='border:0' allowfullscreen=''></iframe>    
+    window.onload=function(){
+        
+        dataOphalen();
+    }
+    </script>
+</head>
+<body>
+    <h1>Musea in Antwerpen en Brussel (met map)</h1>
+    <div class="center">
+    <input type="button" value="Refresh" id="ref"/>
+    <input type="button" value="Vorig" id="vor"/>
+    <input type="button" value="Volgend" id="vol"/>
+    </div>
+    <div class="center">
+    <div class="map"></div>
+    <div class="map"></div>
+    </div>
+    <div id="result"></div>
+    <div id="result2"></div>
+    
+</body>
+</html>

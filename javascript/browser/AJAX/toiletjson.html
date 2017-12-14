@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AJAX: XML ophalen</title>
+    <style>
+            table{border-spacing:0px;border:4px solid grey;}
+            td{border:1px solid grey;padding:4px;}
+            tr:first-child{text-align:center;font-weight:900;background-color:lightgrey;}
+            tr:nth-child(2n) {background-color: #a7da6d;}
+    </style>
+    <script>
+        var jsonHtml = false;
+        function loadXMLHttpRequest() {
+            try {  // Firefox/Opera/Safari/IE7+
+                jsonHtml = new XMLHttpRequest();
+            }
+            catch (e) {
+                try { // IE5
+                    jsonHtml = new ActiveXObject("Msxml2.XMLHTTP");
+                }
+                catch (e) {
+                    try { // IE6
+                        jsonHtml = new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                    catch (e) {
+                        alert("Deze browser ondersteunt geen AJAX");
+                    }
+                }
+            }
+        }
+
+        function dataOphalen() {
+            if (jsonHtml) {
+                jsonHtml.open("GET", "http://datasets.antwerpen.be/v4/gis/openbaartoilet.json");
+                jsonHtml.onprogress = function () {result.innerHTML="Even wachten, ben nog bezig!";}
+                jsonHtml.onload = function () {
+                    if (jsonHtml.status == 200) {
+                        var jsonfile = JSON.parse(jsonHtml.responseText);
+
+
+                        var records = jsonfile.data;
+                        var result = "<table><tr><td>omschrijving</td><td>adres</td><td>plaats</td></tr>";
+                        for (var i = 0; i < records.length; i++) {
+                            var record = records[i];
+                            var omschrijving = record.omschrijving;
+                            var straat = record.straat;
+                            straat=straat=="/"||straat==null?"":straat;
+                            var huisnummer = record.huisnummer;
+                            huisnummer=huisnummer=="/"||huisnummer==null?"":huisnummer;
+                            var postcode = record.postcode;
+                            var district = record.district;
+                            result += "<tr><td>"+omschrijving+"</td><td>"+straat+" "+huisnummer+"</td><td>"+postcode+" "+district+"</td></tr>";
+                        }
+                        document.getElementById("result").innerHTML = result+"</table>";
+
+
+                    }
+                }
+                jsonHtml.send();
+            }
+        }
+    </script>
+</head>
+<body onload="loadXMLHttpRequest()">
+    <h1>Openbare Toiletten Antwerpen</h1>
+    <input type="button" value="Haal XML op" onclick="dataOphalen()" />
+    <div id="result"></div>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AJAX: XML ophalen</title>
+    <style>
+        h1{color:crimson;text-decoration:underline;}
+        #zoekbox{border:2px solid grey;padding:12px;position:relative;display:inline-block;margin:16px 0;}
+        #zoekbox p{background-color:white;position:absolute;top:-27px;}
+        input{margin:0 8px;}
+        table{border-spacing:0px;border:1px solid grey;box-shadow:black 3px 3px 3px 3px;}
+        td{border:1px solid grey;padding:4px;}
+        tr:nth-child(odd) {background-color:lightgrey;}
+        tr:first-child{text-align:center;font-weight:900;background-color:lightgrey;}
+        a{color:white;background-color:grey;box-shadow:black 2px 2px 2px 2px; margin:8px;padding:4px;font-size:20px;font-weight:900;border-radius:2px;}
+        a:hover,.actief{color:black;background-color:white;box-shadow:black 1px 1px 1px 1px;text-decoration:none;cursor:pointer;}
+        .actief{color:crimson;}
+    </style>
+    <script>
+    var zoeken="",rijen="",start=0;    
+        function dataOphalen() {
+            zoeken=zoek.value!=""?"&q="+zoek.value+"":"";
+            rijen=rij.value!=""?"&rows="+rij.value+"":"";
+            var url = "http://opendata.brussel.be/api/records/1.0/search/?dataset=ereburgers1"+zoeken+rijen+"&start="+start;  
+            fetch(url).then(function (response) {
+            return response.json();
+            }).then(function (responsText) {
+                var data = responsText;
+                var result = "<table><tr><td>naam</td><td>functie</td><td>datum</td></tr>";
+                for (var i = 0; i < data.records.length; i++) {
+                    var record = data.records[i];
+                    var naam = record.fields.nom;
+                    var functie = record.fields.functie;
+                    var datum = new Date(record.fields.date).toLocaleDateString();
+                    result += "<tr><td>"+naam+"</td><td>"+functie+"</td><td>"+datum+"</td></tr>";
+                }
+                var hits=data.nhits;var links="";
+                links+="<p onclick='actie()'>"+hits+"</p>";
+                var hits=Math.ceil(data.nhits/rij.value);var links="";
+                for (var i = 0; i < hits; i++) {
+                var actif=(start/rij.value)==i?"actief":"";
+                links+="<a id='a"+i+"' class='"+actif+"' onclick='actie("+i+")'>"+(i+1)+"</a>";
+                }
+                document.getElementById("result").innerHTML = result+"</table><br>"+links;
+            });
+        }
+        function actie(page){
+            start=rij.value*page;
+            document.getElementById("result").innerHTML ="";
+            dataOphalen();
+        }
+        
+    window.onload=function(){
+        rij.value=10;
+        btn.onclick=dataOphalen;
+    }
+    </script>
+</head>
+<body>
+    <h1>Ereburgers van Brussel</h1>
+    <div id="zoekbox">
+    <p>Zoekcriteria</p>
+    Zoekterm: 
+    <input type="text" id="zoek"/>
+    Max. aantal rijen per pagina:  
+    <input type="number" id="rij"/>
+    <input type="button" value="Zoek" id="btn"/>
+    </div>
+    <div id="result">
+    </div>
+</body>
+</html>

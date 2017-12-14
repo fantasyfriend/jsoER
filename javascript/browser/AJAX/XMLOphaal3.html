@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AJAX: XML ophalen</title>
+    <style>
+        table{border-spacing:0px;}
+        td{border:1px solid grey;}
+        tr:first-child{text-align:center;}
+    </style>
+    <script>
+        var xmlHttp = false;
+        function loadXMLHttpRequest() {
+            try {  // Firefox/Opera/Safari/IE7+
+                xmlHttp = new XMLHttpRequest();
+            }
+            catch (e) {
+                try { // IE5
+                    xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
+                }
+                catch (e) {
+                    try { // IE6
+                        xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                    catch (e) {
+                        alert("Deze browser ondersteunt geen AJAX");
+                    }
+                }
+            }
+        }
+
+        function dataOphalen() {
+            if (xmlHttp) {
+                xmlHttp.open("GET", "ploeg.xml");
+                xmlHttp.onreadystatechange = function () {
+                    if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+                        var xmlDoc = xmlHttp.responseXML;
+                        var spelers = xmlDoc.getElementsByTagName("speler");
+                        var result = "<h1>Overzicht spelers</h1><table><tr><td>id</td><td>naam</td></tr>";
+                        for (var i = 0; i < spelers.length; i++) {
+                            var speler = spelers[i];
+                            var id = speler.attributes["id"].nodeValue;
+                            var naamNodes = speler.getElementsByTagName("naam");
+                            var naam = naamNodes[0].firstChild.nodeValue;
+                            result += "<tr><td>(" + id + ")&nbsp;</td><td>" + naam + "</td></tr>";
+                        }
+                        document.getElementById("result").innerHTML = result+"</table>";
+                    }
+                }
+                xmlHttp.send();
+            }
+        }
+    </script>
+</head>
+<body onload="loadXMLHttpRequest()">
+    <input type="button" value="Haal XML op" onclick="dataOphalen()" />
+    <div id="result">
+    </div>
+</body>
+</html>
