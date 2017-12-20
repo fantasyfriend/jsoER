@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <style>
+
+    </style>
+    <script>
+    let producten=[];
+            
+    function Product(naam, prijs){
+        this.naam = naam;
+        this.prijs = prijs;
+    }
+
+    function init (){
+        $('#boven').html('<tr><td>Artikel</td><td>prijs</td><td></td></tr><tr><td><input type="text" id="artikel" placeholder="Artikel"></td><td><input type="number" id="prijs" placeholder="prijs" step="0.01"></td><td><button id="toevoeg">Toevoegen</button></td></tr>');
+        $('#onder').html('<tr><td>totaal: </td><td id="totaal"></td><td></td></tr>');
+        $('#toevoeg').click(toevoeg);
+    }
+
+    function toevoeg(){
+        let naam = $('#artikel').val();
+        let prijs = parseInt($('#prijs').val());
+        let p = new Product(naam, prijs);
+        producten.push(p);
+        $('#artikel').val('');
+        $('#prijs').val('');
+        $b=$('<tr>').html('<td>'+naam+'</td><td>'+prijs+'</td><td><button class="verwijder">Verwijder</button></td>');
+        $('button',$b).click(verwijder);
+        $('#midden').append($b);
+        
+        totaal();
+    }
+
+    function verwijder(e){
+        alert(e.target.nodeName);
+        alert($(this).closest('tr').index());
+
+    }
+
+    function totaal(){
+        let totaal=0;
+        for(let i=0;i<producten.length;i++){totaal+=producten[i].prijs;}
+        $('#totaal').text(totaal);
+    }
+
+    $(function(){
+
+        init();
+
+            
+    });
+    </script>
+</head>
+<body>
+    <table>
+        <thead id="boven"></thead>
+        <tfoot id="onder"></tfoot>
+        <tbody id="midden"></tbody>
+    </table>
+    
+</body>
+</html>
