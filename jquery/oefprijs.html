@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Google</title>
+</head>
+<style>
+    *{box-sizing:border-box;}
+    form,#lijstje{display:inline-block;background-color:beige;border-radius:10px;box-shadow:black 4px 4px 4px 4px;padding:10px;}
+    label{display:inline-block;width:75px;text-align:right;}
+    input,select{display:inline-block;width:120px;margin:4px;}
+    #leeg1,#leeg2{color:crimson;text-shadow:1px 1px 1px black;font-size:1.3em;}
+    table{border:2px solid crimson;border-spacing:0;}
+    td{border:1px solid black;}
+</style>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script>
+    var n=[];p=[];
+
+    function verwijder(){
+        //n.splice(x-1,1);p.splice(x-1,1);
+        //$('#lijstbody tr:nth-child('+(x)+')').remove();alert(p);
+        .remove();
+        $('#lijstfoot').html("<tr><<td>totaal: </td><td>"+p.reduce((pv,cv)=>pv+cv,0)+"</td></tr>");
+    }
+    
+    $(function(){
+        
+
+        $('#btn').click(function(){
+            if($('#naam').val()==''){
+                $('#leeg1').text(' U heeft nog niets ingevoerd!');
+            }
+            else{
+                if($('#prijs').val()==''){
+                    $('#leeg2').text(' U heeft nog niets ingevoerd!');
+                }
+                else{
+                    n.push($('#naam').val());
+                    p.push($('#prijs').val()*1);
+                    $('#lijstbody').append("<tr><td>"+$('#naam').val()+"</td><td>"+$('#prijs').val()+" Euro</td><td><button onclick='verwijder()'>verwijder</button></td></tr>");
+                    $('#lijstfoot').html("<tr><<td>totaal: </td><td>"+p.reduce((pv,cv)=>pv+cv,0)+"</td></tr>");
+                }
+            }
+            
+        });
+    });
+</script>
+<body>
+    <form id="frm">
+        <label for="naam">naam: </label>
+        <input type="text" name="naam" id="naam"><span id="leeg1"></span><br>
+        <label for="prijs">prijs: </label>
+        <input type="number" name="prijs" id="prijs" step="0.01"><span id="leeg2"></span><br>
+        <label for=""></label>
+        <input type="button" id="btn" value="toevoegen">
+    </form><br>
+    <table id=lijstje>
+        <thead><tr>
+            <td>voorwerp</td><td>prijs</td>
+        </tr></thead>
+        <tfoot id="lijstfoot"></tfoot>
+        <tbody id="lijstbody"></tbody>
+    </table>
+
+    
+</body>
+</html>
+
