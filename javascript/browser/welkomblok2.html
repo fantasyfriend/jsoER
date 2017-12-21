@@ -29,14 +29,15 @@
         }
         #counter {padding: 4px;}
         #counter>div {display: inline-block;padding: 4px 8px;margin:4px;width: 80px;}
-        #counter>div>h1 {font-size:32px;padding:16px;box-shadow:4px 2px black;text-align: center;background: linear-gradient(rgba(0, 0, 0, 0.3), steelblue, rgba(0, 0, 0, 0.3));}
+        #counter>div>h1 {font-size:32px;padding:16px;box-shadow:4px 2px black;text-align: center;background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(100,100,200,0.8), rgba(0, 0, 0, 0.3));}
         #counter>div>h5 {text-align: center;}
+        
     </style>
     <script>
         function maakCounter(d, t) {
             var tijd = Date.parse(d + "T" + t)
             counter.innerHTML = "<div id='dag'></div><div id='uur'></div><div id='min'></div><div id='sec'></div>";
-            blok = 4;
+            var blok = 4;
             setInterval(zetCounter, 1000);
             function zetCounter() {
                 var t = tijd - Date.now();
@@ -48,17 +49,17 @@
                 if (blok >2) {
                     var u = (Math.floor(t / 3600000)) % 24;
                     if (u < 1 && blok==3) { uur.style.display = "none"; blok=2; }
-                    uur.innerHTML = "<h1>" + (u == 0 ? '&nbsp' : u) + "</h1><h5>" + (u == 0 ? '&nbsp' :u == 1 ? 'UUR' : 'UREN') + "</h5>";
+                    uur.innerHTML = "<h1>" + u + "</h1><h5>" + (u == 1 ? 'UUR' : 'UREN') + "</h5>";
                 }
                 if (blok >1) {
                     var m = (Math.floor(t / 60000)) % 60;
                     if (m < 1 && blok==2) { min.style.display = "none"; blok=1; }
-                    min.innerHTML = "<h1>" + (m == 0 ? '&nbsp' : m) + "</h1><h5>" + (m == 0 ? '&nbsp' :m == 1 ? 'MINUUT' : 'MINUTEN') + "</h5>";
+                    min.innerHTML = "<h1>" + m + "</h1><h5>" + (m == 1 ? 'MINUUT' : 'MINUTEN') + "</h5>";
                 }
                 if (blok >0) {
                     var s = (Math.floor(t / 1000)) % 60;
                     if (s < 1 && blok==1) { sec.style.display = "none"; blok=0;eindCounter(); }
-                    sec.innerHTML = "<h1>" + (s == 0 ? '&nbsp' : s) + "</h1><h5>" + (s == 0 ? '&nbsp' :s == 1 ? 'SECONDE' : 'SECONDEN') + "</h5>";
+                    sec.innerHTML = "<h1>"+ s +"</h1><h5>" + (s == 1 ? 'SECONDE' : 'SECONDEN') + "</h5>";
                 }
             }
             function eindCounter(){
@@ -67,7 +68,7 @@
         }
         window.onload = function () {
 
-            maakCounter("2017-12-19", "20:00:00");
+            maakCounter("2018-01-25", "12:30:00");
         }
     </script>
 </head>

@@ -6,6 +6,32 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Google</title>
 </head>
+<style>
+    *{box-sizing:border-box;}
+    form{display:inline-block;background-color:bisque;border-radius:10px;box-shadow:black 4px 4px 4px 4px;padding:10px;}
+    label{display:inline-block;width:75px;text-align:right;}
+    input,select{display:inline-block;width:120px;margin:4px;}
+    #leeg,#web{color:crimson;text-shadow:1px 1px 1px black;font-size:1.3em;}
+</style>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script>
+    $(function(){
+
+        $('#btn').click(function(e){
+            if($('#q').val()==''){
+                e.preventDefault();
+                $('#leeg').text(' U heeft nog geen text ingevoerd!');
+            }
+            else{$('#leeg').text('');}
+            if($('#lr').val()=='lang_fr' && $('#cr').val()=='countryNL'){
+                e.preventDefault();
+                $('#web').text(' U kunt geen Franse site bezoeken in Nederland!')
+            }
+            else{$('#web').text('');}
+        });
+
+    });
+</script>
 <body>
     <ol>
         <li>Maak een form waarmee je in Google kunt zoeken</li>
@@ -17,5 +43,24 @@
         <li>Je kunt in Google zoeken naar websites in een bepaald land via name=cr. Mogelijke landen zijn 'countryBE', 'countryNL', 'countryFR'.... Voeg een select-element toe waarmee je kunt kiezen tussen België, Nederland, Frankrijk en alle landen </li>
         <li>Zorg ervoor dat er een foutmelding verschijnt wanneer iemand probeert te zoeken naar Franstalige websites in Nederland.</li>
     </ol>
+    <form id="frm" action="http://google.com/search">
+        <label for="zoek">Zoekterm </label>
+        <input type="text" name="q" id="q"><span id="leeg"></span><br>
+        <label for="lr">Taal: </label>
+        <select name="lr" id="lr"><span></span>
+        <option value="">Alle talen</option>
+        <option value="lang_nl">Nederlands</option>
+        <option value="lang_fr">Frans</option>
+        </select><br>
+        <label for="cr">Land: </label>
+        <select name="cr" id="cr"><span></span>
+        <option value="">Alle Landen</option>
+        <option value="countryBE">Belgie</option>
+        <option value="countryNL">Nederland</option>
+        <option value="countryFR">Frankrijk</option>
+        </select><span id="web"></span><br>
+        <label for=""></label>
+        <input type="submit" id="btn">
+    </form>
 </body>
 </html>

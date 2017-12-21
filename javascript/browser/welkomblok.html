@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: midnightblue;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        #titel,
+        #welkom,
+        #counter {
+            display: flex;
+            justify-content: center;
+            color: white;
+        }
+
+        #titel>h1 {
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 8px 24px;
+            text-shadow: 4px 4px 4px grey;
+        }
+
+        #welkom>div {
+            position: relative;
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 8px 8px;
+        }
+
+        #welkom p {
+            text-align: center;
+            margin: 16px;
+        }
+
+        #counter {
+            padding: 4px;
+        }
+
+        #counter>div {
+            display: inline-block;
+            padding: 4px 8px;
+            margin: 4px;
+            width: 80px;
+        }
+
+        #counter>div>h1 {
+            font-size: 32px;
+            padding: 16px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        #counter>div>h5 {
+            text-align: center;
+        }
+
+        @media (min-width: 600px) {
+            #counter {
+                margin: 32px 4px;
+            }
+            #counter>div {
+                width: 134px;
+            }
+            #counter>div>h1 {
+                display: inline;
+                padding: 12px;
+            }
+            #counter>div>h5 {
+                display: inline;
+                text-align: left;
+                margin: 0 8px;
+                font-size: 0.8em;
+            }
+        }
+    </style>
+    <script>
+        function maakCounter(d, t) {
+            var tijd = Date.parse(d + "T" + t)
+            counter.innerHTML = "<div id='dag'></div><div id='uur'></div><div id='min'></div><div id='sec'></div>";
+            var blok = 4;
+            setInterval(zetCounter, 1000);
+            function zetCounter() {
+                var t = tijd - Date.now();
+                if (blok > 3) {
+                    var d = Math.floor(t / (3600000 * 24));
+                    if (d < 1) { dag.style.display = "none"; blok = 3; }
+                    dag.innerHTML = "<h1>" + d + "</h1><h5>" + (d == 0 ? '&nbsp' : d == 1 ? 'DAG' : 'DAGEN') + "</h5>";
+                }
+                if (blok > 2) {
+                    var u = (Math.floor(t / 3600000)) % 24;
+                    if (u < 1 && blok == 3) { uur.style.display = "none"; blok = 2; }
+                    uur.innerHTML = "<h1>" + u + "</h1><h5>" + (u == 1 ? 'UUR' : 'UREN') + "</h5>";
+                }
+                if (blok > 1) {
+                    var m = (Math.floor(t / 60000)) % 60;
+                    if (m < 1 && blok == 2) { min.style.display = "none"; blok = 1; }
+                    min.innerHTML = "<h1>" + m + "</h1><h5>" + (m == 1 ? 'MINUUT' : 'MINUTEN') + "</h5>";
+                }
+                if (blok > 0) {
+                    var s = (Math.floor(t / 1000)) % 60;
+                    if (s < 1 && blok == 1) { sec.style.display = "none"; blok = 0; eindCounter(); }
+                    sec.innerHTML = "<h1>" + s + "</h1><h5>" + (s == 1 ? 'SECONDE' : 'SECONDEN') + "</h5>";
+                }
+            }
+            function eindCounter() {
+                beurs.innerHTML = "<p>Mocht u op onze jobbeurs van donderdag 25 januari geweest zijn dan hopen we dat u ervan genoten heeft.</p><p>U kunt nog altijd een kijkje nemen naar onze CV onder het topic Cursisten.</p><p>Neem gerust contact.</p>"
+            }
+        }
+        window.onload = function () {
+
+            maakCounter("2018-01-25", "12:30:00");
+        }
+    </script>
+</head>
+
+<body>
+    <div id="Welkomblok">
+        <div id="titel">
+            <h1>THE SCRIPTORS</h1>
+        </div>
+        <div id="welkom">
+            <div>
+                <div id="beurs">
+                    <p>Via deze site kan u zich inschrijven voor onze jobbeurs.</p>
+                    <p>U kunt alvast een kijkje nemen naar onze CV onder het topic Cursisten.</p>
+                    <p>Hopelijk tot dan!</p>
+                </div>
+            </div>
+        </div>
+        <div id="counter"></div>
+    </div>
+</body>
+
+</html>
