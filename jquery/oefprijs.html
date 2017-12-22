@@ -19,10 +19,10 @@
 <script>
     var n=[];p=[];
 
-    function verwijder(){
-        //n.splice(x-1,1);p.splice(x-1,1);
-        //$('#lijstbody tr:nth-child('+(x)+')').remove();alert(p);
-        .remove();
+    function verwijder(e){
+        var x=$(this).closest('tr').index();
+        n.splice(x,1);p.splice(x,1);
+        $(this).closest('tr').remove();alert(p);
         $('#lijstfoot').html("<tr><<td>totaal: </td><td>"+p.reduce((pv,cv)=>pv+cv,0)+"</td></tr>");
     }
     
@@ -40,7 +40,9 @@
                 else{
                     n.push($('#naam').val());
                     p.push($('#prijs').val()*1);
-                    $('#lijstbody').append("<tr><td>"+$('#naam').val()+"</td><td>"+$('#prijs').val()+" Euro</td><td><button onclick='verwijder()'>verwijder</button></td></tr>");
+                    $b=$('<tr>').html("<td>"+$('#naam').val()+"</td><td>"+$('#prijs').val()+" Euro</td><td><button>verwijder</button></td>");
+                    $('button',$b).click(verwijder);
+                    $('#lijstbody').append($b);
                     $('#lijstfoot').html("<tr><<td>totaal: </td><td>"+p.reduce((pv,cv)=>pv+cv,0)+"</td></tr>");
                 }
             }
