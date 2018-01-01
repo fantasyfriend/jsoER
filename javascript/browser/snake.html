@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{background-color:black;position:relative;}
+        #doos{height:400px;width:800px;border:2px solid crimson;}
+        #blokje{height:40px;background:linear-gradient(grey 0%, black 10%,grey 50%,black 90%, grey 100%);}
+        #kogel{position:absolute;bottom:32px;border-radius:50%;width:20px;height:20px;}
+        #gun{position:absolute;bottom:2px;;height:40px;width:20px;background:linear-gradient(to right,black,grey,white,grey,black);}
+        .bal{margin-top:9px;border-radius:50%;width:20px;height:20px;display:inline-block;}
+        .k0{background-color:white;visibility:hidden; }
+        .k1{background:radial-gradient(lightcoral,crimson);}
+        .k2{background:radial-gradient(lightblue ,blue);}
+        .k3{background:radial-gradient(lightgreen ,green);}
+        .k4{background:radial-gradient(lavender ,purple);}
+    </style>
+    <script>
+        function kleur(n){return Math.floor(Math.random()*n);}
+        
+
+        window.onload=function(){
+            var html="",x=0;
+            for(var i=0;i<40;i++){
+                html+="<div id='b"+i+"' class='bal k0'></div>"
+            }
+            blokje.innerHTML=html;
+
+            document.addEventListener('keydown',function(e){
+                e.preventDefault();
+                if(e.key=='ArrowLeft'){x-=4;if(x<2){x=2};}
+                if(e.key=='ArrowRight'){x+=4;if(x>778){x=778};}
+                gun.style.left=x+'px';
+                kogel.style.left=x+'px';
+                if(e.keyCode==32){alert('ok');}
+            })
+
+            kogel.className="k"+kleur(5);
+
+            setInterval(verander,400);
+
+            function verander(){
+                for(var i=0;i<39;i++){
+                    var g=document.getElementById('b'+(i+1));
+                    var s=document.getElementById('b'+i);
+                    s.className = g.className;
+                }
+                b39.className="bal k"+kleur(5);
+            }
+            
+        }
+    </script>
+</head>
+<body>
+    <div id='doos'>
+    <div id='blokje'></div>
+    <div id='kogel'></div>
+    <div id='gun'></div>
+    </div>
+</body>
+</html>

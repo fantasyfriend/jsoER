@@ -16,16 +16,18 @@
     canvas2 = document.getElementById("canvas2");
     c2 = canvas2.getContext("2d");
 
-    c1.rect(20,20,150,100);
-    c1.stroke();
-    c1.clearRect(40,40,100,200);
-    c2.fillStyle="red";
-    c2.fillRect(20,20,150,100);
-    c2.clearRect(0,0,60,40);
-    alert(canvas2.clientWidth);
-    
-    
+      
+    function grafiek(d,x,y){
+        var l=d.length;
+        for(var i=1;i<l;i+=2){alert(d[i]);
+            c1.fillStyle='rgb(0,0,'+i*30+')';
+            c1.fillRect((((x-40)/l))*(i-1)+20,y-20-(d[i]*100),((x-40)/l)*2,d[i]*100);
+        }
+    }
 
+    
+    var data=['kip',5,'vis',4,'water',1,'brood',2];
+    grafiek(data,600,600);
 
     }   
     </script>

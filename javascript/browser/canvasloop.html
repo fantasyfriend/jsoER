@@ -1,0 +1,109 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<style>
+body {
+    margin: 0;
+    padding: 0;
+}
+canvas{border:1px solid black;}
+</style>
+<title>Canvas image</title>
+</head>
+<body>
+<canvas id="myCanvas" width="450" height="320"></canvas>
+<canvas id="canvas2" width="450" height="320"></canvas>
+<canvas id="imageblok"  width="1200" height="800"></canvas>
+<img id='eli' src="images/Eli.png" alt="">
+<script>
+  var canvas = document.getElementById('myCanvas');
+  var context = canvas.getContext('2d');
+  var c = document.getElementById('canvas2');
+  var ctx = c.getContext('2d');
+  var cc = document.getElementById('imageblok');
+  var cctx = cc.getContext('2d');
+  var posX=canvas2.getBoundingClientRect().left;
+  var posY=canvas2.getBoundingClientRect().top;
+  var px,py,lopen;
+  var image = new Image();
+
+  image.onload = function() {
+    var x = 0;var a=0;var b=0;
+    var s=1;t=1;
+    var width =image.width;
+    var height=image.height;
+    var min = 0-width;
+    var step = 4;
+    cctx.drawImage(image, 0, 0);
+    
+    var loop = function() {
+      context.drawImage(image, a*-1, b*-1);
+    };
+    setInterval(loop, 20);
+
+    var img=document.getElementById('imageblok');
+    var eli=document.getElementById('eli');
+
+    var loop2=function(){
+    ctx.drawImage(img,a,b,450,320,0,0,450,320);
+    ctx.drawImage(eli,32*s,48*t,32,48,210,130,32,48);
+    }
+    setInterval(loop2, 20);
+    
+    
+    /*document.addEventListener('keydown',function(e){
+        e.preventDefault();
+        s++;if(s>6){s=0};
+        switch(e.key){
+            case 'ArrowLeft':t=2;a-=step;if(a<0){a=0};break;
+            case 'ArrowUp':t=4;b-=step;if(b<0){b=0};break;
+            case 'ArrowRight':t=2;a+=step;if(a>width-450){a=width-450};break;
+            case 'ArrowDown':t=0;b+=step;if(b>height-320){b=height-320};break;
+        }
+    })*/
+    
+    canvas2.addEventListener('mousedown',function (e){lopen=setInterval(moving,40,e)});
+    canvas2.addEventListener('mouseup',function (){clearInterval(lopen);});
+            
+    function moving(e){
+        
+        s++;if(s>6){s=0};
+        px=226-(e.clientX-posX);
+        py=154-(e.clientY-posY);
+        if(px>0){
+            if(py>0){
+                if(px/2>py){t=2;a-=4;if(a<0){a=0};}
+                else if(py/2>px){t=4;b-=4;if(b<0){b=0};}
+                else{t=3;a-=3;if(a<0){a=0};b-=3;if(b<0){b=0};}
+            }
+            else{
+                if(px/2>py*-1){t=2;a-=4;if(a<0){a=0};}
+                else if((py*-1)/2>px){t=0;b+=4;if(b>height-320){b=height-320};}
+                else{t=1;a-=3;if(a<0){a=0};b+=3;if(b>height-320){b=height-320};}
+            }
+        }
+        else{
+            if(py>0){
+                if((px*-1)/2>py){t=2;a+=4;if(a>width-450){a=width-450};}
+                else if(py/2>px*-1){t=4;b-=4;if(b<0){b=0};}
+                else{t=3;a+=3;if(a>width-450){a=width-450};b-=3;if(b<0){b=0};}
+            }
+            else{
+                if((px*-1)/2>py*-1){t=2;a+=4;if(a>width-450){a=width-450};}
+                else if((py*-1)/2>px*-1){t=0;b+=4;if(b>height-320){b=height-320};}
+                else{t=1;a+=3;if(a>width-450){a=width-450};b+=3;if(b>height-320){b=height-320};}
+            }
+        }
+        /*switch(e.key){
+            case 'ArrowLeft':t=2;a-=step;if(a<0){a=0};break;
+            case 'ArrowUp':t=4;b-=step;if(b<0){b=0};break;
+            case 'ArrowRight':t=2;a+=step;if(a>width-450){a=width-450};break;
+            case 'ArrowDown':t=0;b+=step;if(b>height-320){b=height-320};break;
+        }*/
+    }
+  };
+
+  image.src = 'images/village.png';
+</script>
+</body>
+</html>

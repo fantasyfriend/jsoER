@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<style>
+body {
+    margin: 0;
+    padding: 0;
+}
+canvas{border:1px solid black;}
+#imageblok{position:relative;}
+#img2{position:absolute;top:0px;left:1920px;}
+</style>
+<title>Canvas image</title>
+</head>
+<body>
+<canvas id="myCanvas" width="450" height="329"></canvas>
+<canvas id="canvas2" width="450" height="329"></canvas>
+<canvas id="imageblok"  width="4000" height="1000"></canvas>
+<script>
+  var canvas = document.getElementById('myCanvas');
+  var context = canvas.getContext('2d');
+  var c = document.getElementById('canvas2');
+  var ctx = c.getContext('2d');
+  var cc = document.getElementById('imageblok');
+  var cctx = cc.getContext('2d');
+  var image = new Image();
+
+  image.onload = function() {
+    var x = 0;var a=0;
+    var width =image.width;
+    var min = 0-width;
+    var step = 1;
+    cctx.drawImage(image, 0, 0);
+    cctx.drawImage(image, width, 0);
+
+    var loop = function() {
+      context.drawImage(image, x, 0);
+      context.drawImage(image, x + width, 0);
+      x -= step;
+      if (x < min) {
+        x = 0;
+      }
+    };
+    setInterval(loop, 1);
+
+    var img=document.getElementById('imageblok');
+
+    var loop2=function(){
+    ctx.drawImage(img,a,0,450,329,0,0,450,329);
+    a += step;
+    if(a>width){a=0;}
+    }
+    setInterval(loop2, 1);
+  };
+
+  image.src = 'images/151171.jpg';
+</script>
+</body>
+</html>
