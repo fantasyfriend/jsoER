@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JQuery Ajax client</title>
+    <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script>
+        function verwijder(id){
+                $.ajax('http://localhost:8080/namen?id='+id,{
+                    method: 'DELETE',
+                }).done(function(){
+                    console.log('item is gedelete');opbouw();
+                }).fail(function(obj, error, msg){
+                    console.log(msg);
+                })
+        }
+        function opbouw(){
+                $.ajax('http://localhost:8080/namen',{
+                    method: 'GET',
+                    dataType: 'json',
+                }).done(function(data){
+                    var html="";
+                    for(var i=0;i<data.length;i++){
+                        html+="<tr><td>"+data[i].id+"</td><td>"+data[i].voornaam+"</td><td>"+data[i].achternaam+"</td><td><button onclick='verwijder("+data[i].id+")'>verwijder</button></td></tr>"
+                    }
+                    tabel.innerHTML=html;
+                }).fail(function(obj, error, msg){
+                    console.dir(msg);
+                })
+        }
+        
+        $(function(){
+
+            $('#btnget').click(opbouw);
+                        
+            $('#btngetid').click(function(){
+                $.ajax('http://localhost:8080/namen',{
+                    method: 'GET',
+                    dataType: 'json',
+                    data:{id: idnr.value}
+                }).done(function(data){
+                    tabel.innerHTML="<tr><td>"+data.id+"</td><td>"+data.voornaam+"</td><td>"+data.achternaam+"</td></tr>"
+                }).fail(function(obj, error, msg){
+                    tabel.innerHTML="<tr><td colspan='3'><h2>Dit Id nummer is "+msg+"!</h2></td></tr>"
+                })
+            });
+           
+            $('#btnpost').click(function(){
+                $.ajax('http://localhost:8080/namen',{
+                    method:'POST',
+                    data:JSON.stringify({id: idx.value, voornaam: vn.value, achternaam: an.value})
+                }).done(function(){
+                    console.log('item is toegevoegd');opbouw();
+                }).fail(function(obj, error, msg){
+                    console.log(msg);
+                })
+            });
+        });
+
+
+    </script>
+</head>
+<body>
+    <button id='btnget'>Get</button>
+    <input type='number' id='idnr' placeholder=" geef Id nummer">
+    <button id="btngetid">Get data via Id</button>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Voornaam</th>
+                <th>Achternaam</th>
+                <th>Actie</th>
+            </tr>
+            <tr>
+                <th><input type='number' id='idx' placeholder="Id nummer" ></th>
+                <th><input type='text' id='vn' placeholder="voornaam" ></th>
+                <th><input type='text' id='an' placeholder="achternaam" ></th>
+                <th><button id="btnpost">Create zangeres</button></th>
+            </tr>
+
+        </thead>
+        <tbody id='tabel'>
+
+        </tbody>
+    </table>
+</body>
+</html>
