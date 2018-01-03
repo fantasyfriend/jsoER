@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boink</title>
+    <style>
+        body{background-color: black}
+        h1{color:darkcyan;text-shadow:3px 3px 5px yellow;text-align:center;}
+        #doos{margin:0 auto;position:relative;width:800px;height:600px;border:4px solid crimson;background-color:darkcyan;}
+        #pad{position:absolute;bottom:20px;left:360px;width:80px;height:12px;
+        background: linear-gradient(darkgreen,lawngreen,darkgreen);box-shadow:black 4px 4px 4px 4px;border-radius:4px; }
+        #bal{position:absolute;bottom:30px;left:390px;width:20px;height:20px;border-radius:50%;
+        background: radial-gradient(white,crimson,black);}
+    </style>
+    <script>
+        var balstatus=false;
+        var xp=0,xp2=0,hoek,snelheid=0,xb=0,yb=30,xs=0,ys=0;
+
+        setInterval(function(){hoek=xp-xp2;xp2=xp},100);
+        setInterval(beweegBal,10);
+
+        function beweegPad(e){
+            xp=(e.clientX-doos.getBoundingClientRect().left)-40;
+            if(xp<0)xp=0;if(xp>720)xp=720;
+            pad.style.left=xp+"px";
+            if(!balstatus){bal.style.left=(xp+30)+"px";}
+        }
+        function schietBal(){
+            if(!balstatus){
+                balstatus=true;
+                xb=xp;snelheid=1;alert(hoek);
+                ys=hoek>200?0.3:hoek>100?0.4:hoek>50?0.5:hoek>25?0.6:hoek>10?0.7:hoek>3?0.8:hoek>1?0.9:1;
+                xs=hoek>200?0.7:hoek>100?0.6:hoek>50?0.5:hoek>25?0.4:hoek>10?0.3:hoek>3?0.2:hoek>1?0.1:0;
+            }
+        }
+        function beweegBal(){
+            if(balstatus){
+                xb+=xs;yb+=ys;
+                bal.style.left=xb+"px";bal.style.bottom=yb+"px";
+            }
+        }
+
+    window.onload=function(){
+
+        doos.addEventListener('mousemove',beweegPad);
+        doos.addEventListener('click',schietBal);
+
+    }
+    </script>
+</head>
+<body>
+<h1>BOINK</h1>
+<div id="doos">
+    <div id="stenen"></div>
+    <div id="pad"></div>
+    <div id="bal"></div>
+</div>
+    
+</body>
+</html>
