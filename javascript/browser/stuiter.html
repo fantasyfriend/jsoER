@@ -12,12 +12,13 @@
         background: linear-gradient(darkgreen,lawngreen,darkgreen);box-shadow:black 4px 4px 4px 4px;border-radius:4px; }
         #bal{position:absolute;bottom:30px;left:390px;width:20px;height:20px;border-radius:50%;
         background: radial-gradient(white,crimson,black);}
+        #check1{color:beige;}
     </style>
     <script>
         var balstatus=false;
-        var xp=0,xp2=0,hoek,snelheid=0,xb=0,yb=30,xs=0,ys=0;
+        var xp=0,xp2=0,hoek,s=0,xb=0,yb=30,xs=0,ys=0,h,r,rr,zk=1,bk=1;//h=hoek,r=richting,zk=zijkant,bk=onder+bovenkant
 
-        setInterval(function(){hoek=xp-xp2;xp2=xp},100);
+        setInterval(function(){hoek=xp-xp2;xp2=xp;check1.innerHTML="<p>"+hoek+"</p>";},100);
         setInterval(beweegBal,10);
 
         function beweegPad(e){
@@ -28,17 +29,30 @@
         }
         function schietBal(){
             if(!balstatus){
-                balstatus=true;
-                xb=xp;snelheid=1;alert(hoek);
-                ys=hoek>200?0.3:hoek>100?0.4:hoek>50?0.5:hoek>25?0.6:hoek>10?0.7:hoek>3?0.8:hoek>1?0.9:1;
-                xs=hoek>200?0.7:hoek>100?0.6:hoek>50?0.5:hoek>25?0.4:hoek>10?0.3:hoek>3?0.2:hoek>1?0.1:0;
+                balstatus=true;bk=1;zk=1;
+                xb=xp;s=3;alert(hoek);
+                h=Math.abs(hoek);
+                hoekje();
             }
         }
         function beweegBal(){
             if(balstatus){
-                xb+=xs;yb+=ys;
+                if(xb<0 || xb>780){zk=zk==1?-1:1;};
+                if(yb>580){bk=bk==1?-1:1;};
+                if((yb<30 && yb>25) && (xb>xp-10 && xb<xp+70)){
+                    rr=xb<0?-1:1;
+                    h=Math.abs((h*rr)+hoek);alert(h);
+                    bk=bk==1?-1:1;
+                    };
+                if(yb<0){alert('shit happens');balstatus=false;yb=30;}
+                xb+=(xs*s*zk);yb+=(ys*s*bk);
                 bal.style.left=xb+"px";bal.style.bottom=yb+"px";
             }
+        }
+        function hoekje(){
+            r=hoek<0?-1:1;
+            ys=(h>200?0.4:h>100?0.5:h>50?0.6:h>25?0.7:h>10?0.8:h>3?0.8:h>1?0.9:1);
+            xs=(h>200?0.8:h>100?0.7:h>50?0.6:h>25?0.5:h>10?0.4:h>3?0.3:h>1?0.2:0)*r;
         }
 
     window.onload=function(){
@@ -56,6 +70,8 @@
     <div id="pad"></div>
     <div id="bal"></div>
 </div>
+<div id='check1'></div>
+<div id='check2'></div>
     
 </body>
 </html>
