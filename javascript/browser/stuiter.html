@@ -5,13 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Boink</title>
     <style>
-        body{background-color: black}
+        body{background-color: black;}
         h1{color:darkcyan;text-shadow:3px 3px 5px yellow;text-align:center;}
-        #doos{margin:0 auto;position:relative;width:800px;height:600px;border:4px solid crimson;background-color:darkcyan;}
-        #pad{position:absolute;bottom:20px;left:360px;width:80px;height:12px;
+        #doos{margin:0 auto;position:relative;width:512px;height:540px;border:4px solid crimson;background-color:darkcyan;}
+        #pad{position:absolute;bottom:20px;left:224px;width:64px;height:12px;
         background: linear-gradient(darkgreen,lawngreen,darkgreen);box-shadow:black 4px 4px 4px 4px;border-radius:4px; }
-        #bal{position:absolute;bottom:30px;left:390px;width:20px;height:20px;border-radius:50%;
+        #bal{position:absolute;bottom:30px;left:246px;width:20px;height:20px;border-radius:50%;
         background: radial-gradient(white,crimson,black);}
+        #blokveld{position:absolute;top:0px;left:0px;}
+        .blok{width:32px;height:16px;border-radius:4px;margin:0;display:inline-block;}
+        .ak0{background-color: black;}
+        .ak1{background: linear-gradient(purple,lightpink,rgb(41, 4, 41));}
+        .ak2{background: linear-gradient(crimson,lightcoral,crimson);}
+        .ak3{background: linear-gradient(darkblue,lightblue,darkblue);}
         #check1{color:beige;}
     </style>
     <script>
@@ -21,11 +27,20 @@
         setInterval(function(){hoek=xp-xp2;xp2=xp;check1.innerHTML="<p>"+hoek+"</p>";},100);
         setInterval(beweegBal,10);
 
+        function testopbouwblokjes(){
+            let html="";
+            for(let y=0;y<16;y++){
+                for(let x=0;x<16;x++){
+                    html+="<div style='' id='blok"+((y*16)+x)+"' class='blok ak1'></div>";
+                }
+            }
+            blokveld.innerHTML=html;
+        }
         function beweegPad(e){
-            xp=(e.clientX-doos.getBoundingClientRect().left)-40;
-            if(xp<0)xp=0;if(xp>720)xp=720;
+            xp=(e.clientX-doos.getBoundingClientRect().left)-32;
+            if(xp<0)xp=0;if(xp>448)xp=448;
             pad.style.left=xp+"px";
-            if(!balstatus){bal.style.left=(xp+30)+"px";}
+            if(!balstatus){bal.style.left=(xp+24)+"px";}
         }
         function schietBal(){
             if(!balstatus){
@@ -37,8 +52,8 @@
         }
         function beweegBal(){
             if(balstatus){
-                if(xb<0 || xb>780){zk=zk==1?-1:1;};
-                if(yb>580){bk=bk==1?-1:1;};
+                if(xb<0 || xb>492){zk=zk==1?-1:1;};
+                if(yb>520){bk=bk==1?-1:1;};
                 if((yb<30 && yb>25) && (xb>xp-10 && xb<xp+70)){
                     rr=xb<0?-1:1;
                     h=Math.abs((h*rr)+hoek);alert(h);
@@ -57,6 +72,7 @@
 
     window.onload=function(){
 
+        testopbouwblokjes();
         doos.addEventListener('mousemove',beweegPad);
         doos.addEventListener('click',schietBal);
 
@@ -66,7 +82,7 @@
 <body>
 <h1>BOINK</h1>
 <div id="doos">
-    <div id="stenen"></div>
+    <div id="blokveld"></div>
     <div id="pad"></div>
     <div id="bal"></div>
 </div>
