@@ -25,7 +25,7 @@ http.createServer( function (request, response) {
          response.writeHead(200, {'Content-Type': 'text/html'});	
          
          // Write the content of the file to response body
-         if(pathname=="/stest.html"){response.write(data.toString());}
+         if(pathname=="/stest.html"){response.write(data.toString());}// beter voor de fs....
          else{response.write('hallo');}		
       }
       // Send the response body 

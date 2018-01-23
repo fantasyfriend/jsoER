@@ -1,9 +1,3 @@
-/*
- * vooraf:  npm install mysql 
- */
-
-/* UPDATE */
-
 function updateRecord(row, callback) {
 	var mysql = require('mysql');
 	var connection = mysql.createConnection({
@@ -15,8 +9,7 @@ function updateRecord(row, callback) {
 	});
 
 	connection.connect();
-	connection.query('UPDATE leveranciers SET adres = ?, woonplaats = ? WHERE lev_code = ?',
-		row, function (err, result) {
+	connection.query('delete from ?? WHERE ?? = ?', identifiers,function (err, result) {
 			if (err) {
 				callback(err, result);
 
@@ -27,8 +20,9 @@ function updateRecord(row, callback) {
 		});
 }
 
-var row = ['Grote Vliegenzwam', 'Smurfenstad', '997']; 
-updateRecord(row, function (err, result) {
+var code='997';
+var identifiers = ['leveranciers', 'lev_code', code]; 
+updateRecord(identifiers, function (err, result) {
 	if (err) {
 		console.log('Error while performing query.');
 		console.log(err);

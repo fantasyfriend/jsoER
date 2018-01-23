@@ -1,10 +1,10 @@
 'use strict'
 var events = require('events');
 // Create an eventEmitter object
-var em = new events.EventEmitter();
 
 function Rekening(x=0){
     this.saldo=x
+    this.em = new events.EventEmitter();
 };
 Rekening.prototype.stortGeld=function(b){
     this.saldo+=b;

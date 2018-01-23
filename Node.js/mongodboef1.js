@@ -1,17 +1,12 @@
-/**  voor MongoDb 3+ */
-/*
- * vooraf:  npm install mongodb
- */
-
 'use strict';
 
-var mongoClient = require('mongodb').MongoClient;
 
-// zie ook  http://mongodb.github.io/node-mongodb-native/3.0/quick-start/quick-start/
+var mongoClient = require('mongodb').MongoClient;
 
 // Connection URL
 var url = 'mongodb://localhost:27017';
 
+function toon(keuken){
 // Use connect method to connect to the server
 mongoClient.connect(url, function (err, client) {
     var db = client.db('test');
@@ -19,7 +14,7 @@ mongoClient.connect(url, function (err, client) {
     // Get the restaurants collection
     var collection = db.collection('restaurant');
     // Find all documents
-    collection.find().toArray(function (err, docs) {
+    collection.find({'cuisine':keuken}).toArray(function (err, docs) {
         console.log("Restaurant document(s) found:");
         docs.forEach(function (element) {
             console.log('%s (%s), %s', element.name, element.cuisine, element.address ? element.address.street : "");
@@ -27,3 +22,5 @@ mongoClient.connect(url, function (err, client) {
         client.close();
     });
 });
+};
+toon('Pizza');
