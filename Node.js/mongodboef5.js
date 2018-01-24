@@ -6,7 +6,7 @@ var mongoClient = require('mongodb').MongoClient;
 // Connection URL
 var url = 'mongodb://localhost:27017';
 
-function voegtoe(naam){
+function voegtoe(invoer){
 // Use connect method to connect to the server
 mongoClient.connect(url, function (err, client) {
     var db = client.db('test');
@@ -14,7 +14,7 @@ mongoClient.connect(url, function (err, client) {
     // Get the restaurants collection
     var collection = db.collection('restaurant');
         
-    collection.insertOne({'name':naam}, function (error, response) {
+    collection.insertOne(invoer, function (error, response) {
         
         console.log(response.insertedCount+" document(s) toegevoegd");
         
@@ -23,4 +23,4 @@ mongoClient.connect(url, function (err, client) {
 });
 };
 
-voegtoe('Dodo');
+voegtoe({'name':'Dropie','cuisine':'Insects'});

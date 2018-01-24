@@ -13,12 +13,10 @@ mongoClient.connect(url, function (err, client) {
     console.log("Connected successfully to server");
     // Get the restaurants collection
     var collection = db.collection('restaurant');
-    collection.updateMany({'borough':buurt},{$set:{'borough':'unknown'}});
-    collection.find({'borough':'unknown'}).toArray(function (err, docs) {
-        console.log(docs.length+" document(s) updated");
-        docs.forEach(function (element) {
-            console.log('%s (%s), %s', element.name, element.cuisine, element.borough);
-        });
+    collection.updateMany({'borough':buurt},{$set:{'borough':'unknown'}}, function (error, response) {
+        
+        console.log(response.result.nModified+" document(s) aangepast");
+        
         client.close();
     });
 });
