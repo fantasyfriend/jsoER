@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <style>
+      table{border-spacing:0; }
+      thead{background-color: lightgrey;}
+      td{border:1px solid black;}
+      .rood{background-color: lightcoral;}
+    </style>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<body>
+
+<div id="invoer"></div>
+
+<button type="button" onclick="loadDoc()">Totale lijst</button>
+<button type="button" onclick="loadDoc2()">Keukens</button>
+
+<br><br>
+
+<table>
+  <thead id='hoofd'></thead>
+  <tbody id='tabel'></tbody>
+</table>
+
+<script>
+
+function loadDoc() {
+hoofd.innerHTML="<tr><td colspan='4' class='rood'>Even geduld ben bezig aan het inladen van de gegevens!</td></tr>";
+$.getJSON("//127.0.0.1:8888/totaal",function(data){
+  var html="";
+  for(var i=0;i<data.length;i++){
+    html+="<tr><td>"+data[i].name+"</td><td>"+data[i].address.street+" "+data[i].address.building+"</td><td>"+data[i].borough+"</td><td>"+data[i].cuisine+"</td></tr>"
+  }
+  hoofd.innerHTML="<tr><td>naam</td><td>adres</td><td>buurt</td><td>keuken</td></tr>";
+  tabel.innerHTML=html;
+})
+}
+
+function loadDoc2() {
+hoofd.innerHTML="<tr><td colspan='3' class='rood'>Even geduld ben bezig aan het inladen van de gegevens!</td></tr>";
+$.getJSON("//127.0.0.1:8888/restaurants/keukens",function(data){
+  var html="";
+  for(var i=0;i<data.length;i++){
+    var gegeven=""+data[i];
+    html+="<tr><td>"+data[i]+"</td><td><button onclick='loadDoc3(\""+gegeven+"\")'>zoek</button></td></tr>"
+  }
+  hoofd.innerHTML="<tr><td colspan='2'><b>Kies je keuken</b></td></tr><tr><td>keuken</td><td></td></tr>";
+  tabel.innerHTML=html;
+})
+}
+
+function loadDoc3(x) {
+hoofd.innerHTML="<tr><td colspan='2' class='rood'>Even geduld ben bezig aan het inladen van de gegevens!</td></tr>";
+$.getJSON("//127.0.0.1:8888/restaurants/keuken?q="+x+"",function(data){
+  var html="";
+  for(var i=0;i<data.length;i++){
+    html+="<tr><td>"+data[i].name+"</td><td>"+data[i].address.street+" "+data[i].address.building+"</td><td>"+data[i].borough+"</td></tr>"
+  }
+  hoofd.innerHTML="<tr><td colspan='3'><b>Overzicht van de "+x+" keuken</b></td></tr><tr><td>naam</td><td>adres</td><td>buurt</td></tr>";
+  tabel.innerHTML=html;
+})
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<div id="invoer"></div>
+
+<button type="button" onclick="loadDoc()">get list</button>
+<button type="button" onclick="loadDoc2()">get volw.onderwijs</button>
+
+<script>
+
+function loadDoc() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (xhttp.readyState == 4 && xhttp.status == 200) {
+        var json=JSON.parse(xhttp.responseText);
+        var html="";
+        for(var i=0;i<json.length;i++){html+="<li>"+json[i].PLANTENNAAM+"</li>"}
+      document.getElementById("invoer").innerHTML = '<ul>'+html+'</ul>';
+    }
+  };
+  xhttp.open("GET", "//127.0.0.1:1337/", true);
+  xhttp.send();
+}
+
+function loadDoc2() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (xhttp.readyState == 4 && xhttp.status == 200) {
+        var json=JSON.parse(xhttp.responseText);
+        var html="";
+        for(var i=0;i<json.data.length;i++){html+="<li>"+json.data[i].naam+"</li>"}
+      document.getElementById("invoer").innerHTML = '<ul>'+html+'</ul>';
+    }
+  };
+  xhttp.open("GET", "//datasets.antwerpen.be/v4/gis/volwassenonderwijs.json", true);
+  xhttp.send();
+}
+</script>
+
+</body>
+</html>
