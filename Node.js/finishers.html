@@ -40,7 +40,7 @@
     <form id='blad'><table><tr><td>first name:</td><td><input type='text' name='fn'></td></tr>
     <tr><td>last name:</td><td><input type='text' name='ln'></td></tr>
     <tr><td>gender:</td><td><input type='radio' name='gender' id="mn" value='man'>man<br><input type='radio' name='gender' id="f" value='female'>woman</td></tr>
-    <tr><td>tijd:</td><td><input type='number' name='h' placeholder='hour' min="0" max="24">:<input type='number' name='m' placeholder='minutes' min="0" max="60"></td></tr>
+    <tr><td>time:</td><td><input type='number' name='h' placeholder='hour' min="0" max="24">:<input type='number' name='m' placeholder='minutes' min="0" max="60"></td></tr>
     <tr><td><input type='button' onclick='send()' value='send'></td><td><input type='button' onclick='wis()' value='clear'></td></tr></table></form>
 </div>
 </div>
@@ -126,7 +126,7 @@ function send(){
     var h=blad.elements["h"].value;
     var m=blad.elements["m"].value;
     var g=blad.elements["gender"].value;
-    $.post("//127.0.0.1:8888/input?fn="+fn+"&ln="+ln+"&g="+g+"&h="+h+"&m="+m+"",'json')
+    $.post("//127.0.0.1:8888/input?fn="+fn+"&ln="+ln+"&g="+g+"&h="+h+"&m="+m+"",function(data){alert(data);},'json')
 }
 
 function wis(){

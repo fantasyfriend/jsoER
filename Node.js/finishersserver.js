@@ -60,11 +60,11 @@ app.post('/input', function(req, res){
         var h=req.query.h*1;
         var m=req.query.m*1;
         var db = client.db('test');
-        console.log("Connected successfully to server en schrijf weg: %s, %s, %s, %d, %d",fn,ln,g,h,m);
+        console.log("Connected successfully to server en schreef weg: %s, %s, %s, %d, %d",fn,ln,g,h,m);
         var collection = db.collection('finishers');
         collection.insertOne({'first_name':fn,'last_name':ln,'gender':g,'finish':{'hour':h,'minutes':m}},function(){
             client.close();
-            res.send('De gegevens zijn weggeschreven');
+            res.end('{"message" : "Added Successfully", "status" : 200}');
     });
 });
 });
