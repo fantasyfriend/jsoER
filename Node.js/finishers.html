@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+    <style>
+		body{width:490px;margin:0 auto;background-color:green;}
+        h1{font-size:40px;text-align:center;color:yellow;text-shadow:black 4px -4px 15px;}
+        h3{font-size:20px;text-align:center;color:yellow;text-shadow:black 4px -4px 15px;}
+        #menu{position:relative;top:3px;}
+		#blok{margin:50px auto;}
+		ul{margin:0;padding:0;}
+        li{display:inline-block;border:2px solid black;border-top-left-radius:10px;border-top-right-radius:10px;
+        margin:0 5px;padding:5px;background-color:beige;box-shadow:black 0 -5px 10px inset;}
+        .active{box-shadow:none;border-bottom: 2px solid beige;color:crimson;font-weight: 900;}
+        .active,li:hover{box-shadow:black 0 -5px 10px;}
+        #invoer{border:3px solid black;background-color: beige;border-radius: 5px;width:470px;min-height:200px;box-shadow:black 0px -7px 17px;}
+        .rood{color:crimson;font-weight: 900;}
+        table{border-spacing:0;margin:16px auto;background-color: springgreen; }
+        thead{background-color: lightgrey;}
+        td{border:1px solid black;padding:4px 12px;}
+        table tr:nth-child(even){background-color: lightgreen;}
+        input[type=number]{width: 80px;} 
+        #blad{visibility:hidden;}
+    </style>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<body>
+<h1>Finishers</h1>
+<div id="blok">
+<nav id="menu">
+    <ul>
+        <li id="man">Male finishers</li>            
+        <li id="female">Female finishers</li>
+        <li id="all">All finishers</li>
+        <li id="news">New finisher</li>
+    </ul>
+</nav>
+<div id="invoer">
+    <table>
+    <thead id='hoofd'></thead>
+    <tbody id='tabel'></tbody>
+    </table>
+    <form id='blad'><table><tr><td>first name:</td><td><input type='text' name='fn'></td></tr>
+    <tr><td>last name:</td><td><input type='text' name='ln'></td></tr>
+    <tr><td>gender:</td><td><input type='radio' name='gender' id="mn" value='man'>man<br><input type='radio' name='gender' id="f" value='female'>woman</td></tr>
+    <tr><td>tijd:</td><td><input type='number' name='h' placeholder='hour' min="0" max="24">:<input type='number' name='m' placeholder='minutes' min="0" max="60"></td></tr>
+    <tr><td><input type='button' onclick='send()' value='send'></td><td><input type='button' onclick='wis()' value='clear'></td></tr></table></form>
+</div>
+</div>
+<h3>De gegevens worden elke 10 seconden ververst!</h3>
+
+
+<script>
+var activetab;
+hoofd.innerHTML="<tr><td colspan='2' class='rood'><h2>Welkom</h2></td></tr>";
+
+man.onclick=goman;
+female.onclick=gofemale;
+all.onclick=goall;
+news.onclick=gonew;
+
+
+function goman(){
+    $(activetab).removeClass('active');
+    $('#man').addClass('active');activetab='#man';
+    blad.style.visibility='hidden';
+    hoofd.innerHTML="<tr><td colspan='2' class='rood'>Bezig aan het inladen van de gegevens!</td></tr>";
+    tabel.innerHTML="";
+    $.getJSON("//127.0.0.1:8888/man",function(data){
+        var html="";
+        for(var i=0;i<data.length;i++){
+            var min=data[i].finish.minutes;if(parseInt(min,10)<10)min='0'+min;
+          html+="<tr><td>"+data[i].first_name+" "+data[i].last_name+"</td><td>"+data[i].finish.hour+":"+min+"</td></tr>"
+        }
+        hoofd.innerHTML="<tr><td>naam</td><td>tijd</td></tr>";
+        tabel.innerHTML=html;
+    })
+}
+
+function gofemale(){
+    $(activetab).removeClass('active');
+    $('#female').addClass('active');activetab='#female';
+    blad.style.visibility='hidden';
+    hoofd.innerHTML="<tr><td colspan='2' class='rood'>Bezig aan het inladen van de gegevens!</td></tr>";
+    tabel.innerHTML="";
+    $.getJSON("//127.0.0.1:8888/woman",function(data){
+        var html="";
+        for(var i=0;i<data.length;i++){
+            var min=data[i].finish.minutes;if(parseInt(min,10)<10)min='0'+min;
+          html+="<tr><td>"+data[i].first_name+" "+data[i].last_name+"</td><td>"+data[i].finish.hour+":"+min+"</td></tr>"
+        }
+        hoofd.innerHTML="<tr><td>naam</td><td>tijd</td></tr>";
+        tabel.innerHTML=html;
+    })
+}
+
+function goall(){
+    $(activetab).removeClass('active');
+    $('#all').addClass('active');activetab='#all';
+    blad.style.visibility='hidden';
+    hoofd.innerHTML="<tr><td colspan='2' class='rood'>Bezig aan het inladen van de gegevens!</td></tr>";
+    tabel.innerHTML="";
+    $.getJSON("//127.0.0.1:8888/all",function(data){
+        var html="";
+        for(var i=0;i<data.length;i++){
+            var min=data[i].finish.minutes;if(parseInt(min,10)<10)min='0'+min;
+          html+="<tr><td>"+data[i].first_name+" "+data[i].last_name+"</td><td>"+data[i].finish.hour+":"+min+"</td></tr>"
+        }
+        hoofd.innerHTML="<tr><td>naam</td><td>tijd</td></tr>";
+        tabel.innerHTML=html;
+    })
+}
+
+function gonew(){
+    $(activetab).removeClass('active');
+    $('#news').addClass('active');activetab='#news';
+    hoofd.innerHTML="<tr><td colspan='2' class='rood'>Put here your values</td></tr>";
+    tabel.innerHTML="";
+    blad.style.visibility='visible';
+    blad.elements["fn"].focus();
+}    
+
+function send(){
+    blad.style.visibility='hidden';
+    hoofd.innerHTML="<tr><td colspan='2' class='rood'>Gegevens verstuurd!</td></tr>";
+    tabel.innerHTML="";
+    var fn=blad.elements["fn"].value;
+    var ln=blad.elements["ln"].value;
+    var h=blad.elements["h"].value;
+    var m=blad.elements["m"].value;
+    var g=blad.elements["gender"].value;
+    $.post("//127.0.0.1:8888/input?fn="+fn+"&ln="+ln+"&g="+g+"&h="+h+"&m="+m+"",'json')
+}
+
+function wis(){
+blad.elements["fn"].value="";
+blad.elements["ln"].value="";
+mn.checked=false;f.checked=false;
+blad.elements["h"].value="";
+blad.elements["m"].value="";
+blad.elements["fn"].focus();
+}
+
+
+</script>
+
+</body>
+</html>
