@@ -1,0 +1,14 @@
+<h1>Hoger Lager</h1>
+<form #frmGok="ngForm">
+  <p>Uw gok (1-100):
+    <input type="number" name="getal" #invoer="ngModel" [(ngModel)]="getal" min="1" max="100" required >
+    <span style="color:red" *ngIf="invoer.dirty  && invoer.invalid">
+      <span *ngIf="invoer.errors.required">Een getal moet ingevuld worden.</span>
+    </span>
+  </p>
+  
+  <input type="submit" [disabled]="gok.geraden || !frmGok.form.valid" (click)="check()"/>
+  <button (click)="nieuw()">opnieuw</button>
+</form>
+<p><span *ngIf="gok.beurten<1">Doe een gok</span>{{ resultaat }}</p>
+<p>Aantal beurten: {{ gok.beurten }}</p>
