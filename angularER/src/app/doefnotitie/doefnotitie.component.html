@@ -1,0 +1,13 @@
+<h2>Oefening: notitie</h2>
+<form>
+    
+<textarea #tekst rows="5" cols="20" [(ngModel)]="invoer" (focus)="tekst.setSelectionRange(0,0)"></textarea>
+<br><br>
+<div>
+  <button id="btn1" (click)="bewaar()" [disabled]="invoer.length==0?true:false">Bewaar</button>
+  <button id="btn2" (click)="wis()" [disabled]="invoer.length==0?true:false">Wis</button>
+</div>
+<br><br>
+<span>aantal beschikbare karakters: {{ totaal() }}</span>
+  
+</form>

@@ -7,9 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VbForComponent implements OnInit {
   piraten = ["Jan", "Piet", "Joris", "Korneel"];
-  constructor() { }
+  naam: string;
+  constructor() {this.naam=''; }
 
   ngOnInit() {
   }
-
+  toevoegen(){
+    this.piraten.push(this.naam);this.naam='';
+  }
 }

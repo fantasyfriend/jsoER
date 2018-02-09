@@ -31,7 +31,7 @@ class BankrekeningMetAutomProp {
 let rekeninga: BankrekeningMetAutomProp = new BankrekeningMetAutomProp("0001", "Joske", 500);
 console.log("rekening van Joske na creatie:")
 console.log(rekeninga.toString());  
-// rekeninga.saldo = 1000;  // compileerfout (saldo is private)
+rekeninga.saldo = 1000;  // compileerfout (saldo is private)
 rekeninga.houder = "Joske Vermeulen";
 console.log("rekening na wijziging van props:")
 console.log(rekeninga);

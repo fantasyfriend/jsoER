@@ -19,9 +19,6 @@ console.log(greeter01("Joske"));   // Hello, Joske
 console.log(greeter01());    // compileerfout; maar js-file wordt wel gegenereerd (en kan uitgevoerd worden): Hello, undefined
 console.log(greeter01("Joske", "Vermeulen")) ;   // compileerfout; maar js-file wordt wel gegenereerd (en kan uitgevoerd worden): Hello, Joske
 console.log(greeter01(100)); 
-
-
-/* TypeScript met type annotatie */
 function greeter02(name: string){
      return "Hello, " + name;
 }
