@@ -1,0 +1,9 @@
+<h1>{{ gekozenHero.naam }} details</h1>
+<p>id: {{ gekozenHero.id}}</p>
+<label>naam:
+<input #s type="string" name="gekozenHero.naam" required [(ngModel)]="gekozenHero.naam" (focus)="s.select();" #txtIn="ngModel" autofocus>
+</label>
+<input type="checkbox" name="gekozenHero.beschikbaar" required [(ngModel)]="gekozenHero.beschikbaar">beschikbaar
+  <span style="color:red" *ngIf="txtIn.dirty  && txtIn.invalid">
+    <span *ngIf="txtIn.errors.required">Vul een naam in aub</span>
+  </span>
