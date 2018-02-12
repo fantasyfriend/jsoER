@@ -9,6 +9,13 @@ import { OefNotitieComponent } from './oefeningen/oefnotitie/oefnotitie.componen
 import { VbForuitbrComponent } from './voorbeelden/vbfor/vbforuitbr.component';
 import { OefBroodjesComponent } from './oefeningen/oefbroodjes/oefbroodjes.component';
 import { OefhooglaagComponent } from './oefhooglaag/oefhooglaag.component';
+import { HttpClientModule } from '@angular/common/http';
+import { VbHttpComponent } from './voorbeelden/vbhttp/vbhttp.component';
+import { VbServiceComponent03 } from './voorbeelden/vbservice/vbservice03.component';
+import { VbScholenService03 } from './voorbeelden/vbservice/vbservice03';
+import { CurrencyComponent } from './currency/currency.component';
+import { GeldService } from './currency/currency';
+
 // TODO: alle componenten die in deze module gedefinieerd zijn importeren
 
 @NgModule({
@@ -20,15 +27,19 @@ import { OefhooglaagComponent } from './oefhooglaag/oefhooglaag.component';
     VbForuitbrComponent,
     OefBroodjesComponent,
     OefhooglaagComponent,
+    VbHttpComponent,
+    VbServiceComponent03,
+    CurrencyComponent
     // TODO: alle componenten die in deze module gedefinieerd zijn hier importeren
   ],
   imports: [
     BrowserModule,
     FormsModule,  //  nodig om 2 way binding te kunnen doen
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [GeldService],
   // TODO: in bootstrap array (enkel) alle componenten opsommen
   // die horen bij user defined tags die in index.html gebruikt worden
-  bootstrap: [OefhooglaagComponent]
+  bootstrap: [CurrencyComponent]
 })
 export class AppModule { }
