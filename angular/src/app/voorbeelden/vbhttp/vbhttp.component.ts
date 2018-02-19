@@ -12,8 +12,8 @@ export class VbHttpComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
-  //this.http.get('https://www.w3schools.com/angular/customers.php').subscribe(
-  this.http.get('https://jsonplaceholder.typicode.com/users').subscribe(
+  this.http.get('https://www.w3schools.com/angular/customers.php').subscribe(
+  
       data => {
         this.customers = data["records"];
       },

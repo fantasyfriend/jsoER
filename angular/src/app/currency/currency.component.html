@@ -10,7 +10,7 @@
     <option value="EUR" selected>EUR</option>
     <option *ngFor="let cur of geld" [ngValue]="cur">{{cur}}</option>
   </select>
-  <input type="submit" value="Converteer" [disabled]="!frmCur.form.valid" (click)="verwerk();nr.focus();" />
+  <input type="submit" value="Converteer" [disabled]="!frmCur.form.valid " (click)="verwerk();nr.focus();" />
   <select [(ngModel)]="curUit" name="curUit">
     <option value="EUR">EUR</option>
     <option *ngFor="let cur of geld" [ngValue]="cur">{{cur}}</option>
