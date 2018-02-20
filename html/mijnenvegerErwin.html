@@ -7,21 +7,21 @@
     <style>
     :root{--x:16;--y:16;--b:10;}
     #speelveld{border:2px solid red;position:relative;background-color: lightgrey;}
-    .blokje{width:26px;height:26px;background-color:beige;border:1px solid green;box-shadow:black 2px 2px 1px 1px; 
-    position:absolute;margin:1px;}
+    .blokje{width:20px;height:26px;background-color:beige;border:1px solid green;box-shadow:black 2px 2px 1px 1px; 
+    position:absolute;margin:1px;font-size:24px;font-weight: 900;padding-left:6px;}
     .blokje:hover{background-color: khaki;box-shadow:black 1px 1px 0px 1px;}
-    .leeg{width:30px;height:30px;background-color:lightgrey;border:1px solid grey;box-shadow: none;
-    position:absolute;margin: 0 ;}
-    .r0{background-color:lightgrey;}
-    .r1{background-color:green;}
-    .r2{background-color:red;}
+    .leeg{width:22px;height:30px;background-color:lightgrey;border:1px solid grey;box-shadow: none;
+    position:absolute;margin:0;font-size:24px;font-weight: 900;padding-left:8px;}
+    .r0{color:lightgrey;}
+    .r1{color:green;}
+    .r2{color:red;}
     </style>
     <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script>
 
         
-        var x=16;//aantal kolommen
-        var y=16;//aantal rijen
+        var x=10;//aantal kolommen
+        var y=10;//aantal rijen
         var b=10;//aantal bommen
         var bom=new Array(0);//plaats van bom
         var p=new Array(x*y);//array posities
@@ -41,20 +41,28 @@
 
         function klikLinks(event,xy){
             $('#'+xy).removeClass().addClass('leeg');
+            if($.inArray(xy, bom) !== -1){$('#'+xy).text("x");}
+            else{var a=0;
+            for(var j=-1*y;j<2*y;j+=y){
+                for(var i=-1;i<2;i++){var z=xy+j+i;
+                if($.inArray(z, bom) !== -1){a++}} 
+            }
+            $('#'+xy).text(""+a);
+            }
         }
 
         function klikRechts(event,xy){
             event.preventDefault();
             if($('#'+xy).hasClass('blokje')){
-            $('#'+xy).removeClass('r'+p[xy]).addClass('r'+(p[xy]>2?p[xy]=0:p[xy]+=1));
+            $('#'+xy).removeClass('r'+p[xy]).addClass('r'+(p[xy]>2?p[xy]=0:p[xy]+=1)).text(p[xy]==1?"v":p[xy]==2?"?":"");
             }
         }
 
         function bommen(b){
             while(bom.length<b){
                 var x=Math.floor(Math.random()*p.length);
-                if($.inArray(x, bom)){bom.push(x)};
-            }
+                if($.inArray(x, bom) == -1){bom.push(x)};
+            };alert(bom);
         }
 
                 
@@ -69,7 +77,6 @@
 </head>
 <body>
     <div id="field"></div>
-    <button id="btn" onmousedown="actie(event)">test</button>
     
 </body>
 </html>

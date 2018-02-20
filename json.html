@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Showcase</title>
+    <link href="css/stylesheet.css" rel="stylesheet">
+    <script src="jquery/jquery-3.1.1.js"></script>
+    <script>
+            
+    $(document).ready(function(){
+    
+  $.getJSON( "php/jsonTest2.php", {id:"3"}, function( data ) {
+  var items = [];
+  $.each( data, function( key, val ) {
+    items.push( "<li id='" + key + "'>" + val + "</li>" );
+  });
+ 
+  $( "<ul/>", {
+    "class": "my-new-list",
+    html: items.join( "" )
+  }).appendTo( "body" );
+});
+
+    });
+            
+    </script>
+</head>
+<body>
+    
+    
+    
+    <div class="start"></div>
+</body>
+</html>

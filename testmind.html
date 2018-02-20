@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Showcase</title>
+<style>
+body {background-color:beige;color:grey;font:Arial, Helvetica, sans-serif; width:100%;margin:0;padding:0;font-size:16px;}
+
+header {height:230px;}
+#logo {width:120px;height:60px;}
+.logo {background:radial-gradient(lightskyblue 30%, beige 70%);padding:15px 30px;display:inline-block;position:absolute;left:10px;top:10px;}
+#t1 {position:absolute;left:0px;top:-24px;font-size:32px;text-shadow:8px 8px 4px grey;color:crimson;}
+#t2 {position:absolute;left:80px;top:20px;font-size:24px;text-shadow:6px 6px 3px grey;color:crimson;}
+
+.blok {margin:0.2em;border:1px solid black;border-radius: 0.5em;background-color:beige;box-shadow:grey 5px 5px;padding:0.2em;display:inline-block;}
+.groen {background:radial-gradient(green 20%, beige 80%);color:beige;text-align:center;}
+.letter {border:1px solid black;border-radius:0.3em;background-color:beige;box-shadow:grey 5px 5px;width:35px;height:35px;text-shadow:3px 3px 3px grey;text-align: center;font-size:1.5em;display:inline-block;}
+.letterx {border:1px solid black;border-radius:0.8em;background-color:beige;box-shadow:grey 5px 5px;width:35px;height:35px;text-shadow:3px 3px 3px grey;text-align: center;font-size:1.5em;display:inline-block;}
+.lettertje {border:1px solid black;border-radius:0.3em;background-color:beige;box-shadow:grey 5px 5px;width:35px;height:35px;text-shadow:3px 3px 3px grey;text-align: center;font-size:1.5em;display:inline-block;position:absolute;}
+.note {border:1px solid black;transform: rotate(20deg);background-color:beige;box-shadow:grey 5px 5px;padding:0.5em;display:inline-block;}
+.pnote {padding:1em;font-family: "Comic Sans MS", cursive, sans-serif;display:inline-block;}
+.outnote {border:1px solid black;background-color:beige;box-shadow:black 1px 1px 2px;padding:0;display:inline-block;}
+.blad {border:1px solid black;background-color:beige;box-shadow:grey 5px 5px;padding:1em;display:inline-block;}
+.anote {border:1px solid black;transform: rotate(-10deg);background-color:beige;box-shadow:grey 5px 5px;padding:1em;display:inline-block;}
+.blok2 {border:1px solid black;background-color:beige;box-shadow:grey 5px 5px;padding:0 1em;display:inline-block;text-align:center;}
+    
+.flap1 {box-sizing: border-box;width:40%;border-top:1px solid black;border-right:1px solid black;border-left:1px solid black;border-top-left-radius:0.5em;border-top-right-radius:0.5em;background-color:beige;box-shadow:grey 5px 0;display:inline-block;text-align:center;}
+.flap2 {box-sizing: border-box;border-top:1px solid black;border-right:1px solid black;border-left:1px solid black;border-top-left-radius:0.5em;border-top-right-radius:0.5em;background-color:beige;box-shadow:black 0 -1px inset;display:inline-block;text-align:center;}
+.vel {box-sizing: border-box;width:80%;border-bottom:1px solid black;border-left:1px solid black;border-right:1px solid black;background-color:beige;box-shadow:grey 5px 2px;padding:0 1em;z-index:-2; }
+.green {background:radial-gradient(lightgreen,beige);color:green;}
+.geel {background:radial-gradient(farthest-corner at 50% 20%,gold,beige);color:black;}
+.dgeel {background-color:gold;height:25px;padding:8px 15px 0;}
+.red {background:radial-gradient(lightpink,beige);color:crimson;}
+.blue {background:radial-gradient(skyblue,beige);color:blue;}
+
+.game {position:fixed;left:-10px;top:100px;}
+.game img {widh:30px;}
+.mmind {position:fixed;left:-400px;top:230px;}
+.uitkomst {position:fixed;left:240px;top:240px;}
+.gatn {border:1px solid black;margin:4px;border-radius:5px;background-color:beige;box-shadow:grey 5px 5px inset;width:10px;height:10px;display:block;}
+.gat {border:1px solid black;margin:0.3em;border-radius:0.4em;background-color:beige;box-shadow:grey 5px 5px inset;width:0.8em;height:0.8em;display:inline-block;}
+.gatg {border:1px solid black;margin:0.3em;border-radius:0.7em;background-color:beige;box-shadow:grey 5px 5px inset;width:1.4em;height:1.4em;display:inline-block;}
+.bolg {border:1px solid black;border-radius:0.7em;box-shadow:grey 5px 5px;width:1.4em;height:1.4em;display:inline-block;}
+.bol {border:1px solid black;border-radius:0.4em;box-shadow:grey 5px 5px;width:0.8em;height:0.8em;display:inline-block;}
+.kl10 {background:radial-gradient(farthest-corner at 0.1em 0.1em, white, grey, black);}
+.kl11 {background:radial-gradient(farthest-corner at 0.1em 0.1em, white, white, grey);}
+.kl0 {background:radial-gradient(farthest-corner at 0.4em 0.4em, skyblue, blue, black);}
+.kl1 {background:radial-gradient(farthest-corner at 0.4em 0.4em, lightgreen, green, black);}
+.kl2 {background:radial-gradient(farthest-corner at 0.4em 0.4em, lightpink, crimson, black);}
+.kl3 {background:radial-gradient(farthest-corner at 0.4em 0.4em, yellow, orange, black);}
+.kl4 {background:radial-gradient(farthest-corner at 0.4em 0.4em, plum, purple, black);}
+.kl5 {background:radial-gradient(farthest-corner at 0.4em 0.4em, aquamarine, darkcyan, black);}
+.kl6 {background:radial-gradient(farthest-corner at 0.4em 0.4em, white, grey, black);}
+.kl7 {background:radial-gradient(farthest-corner at 0.4em 0.4em, white, white, grey);}
+.board {border:1px solid black;border-radius: 0.5em;background-color:beige;box-shadow:grey 5px 5px;padding:0.2em;width:20.6em;}
+
+.sshow {border:1px solid black;box-shadow:black 3px 3px 3px;}
+.sshow img {position:absolute;left:200px;top:15px;width:500px;height:200px;border:1px solid black;box-shadow:black 3px 3px 3px}
+.small img {border:2px solid black;box-shadow:black 3px 3px 3px;width:100px;}
+.right {float:right;}
+.left {float:left;}
+
+.gallery {position:absolute;top:15px;left:710px;width:100px;border:1px solid black;margin:4px;padding:0;box-shadow:black 3px 3px 3px;}
+.gallery img {width:100px;height:60px;}
+.in {transform:rotate(20deg);opacity:0.5;}
+.out {transform:rotate(-20deg);opacity:0.5;}
+
+.mpage {position:absolute;z-index:-1;width:70%;margin-left:10px;}
+
+.con {perspective: 500px;}
+.con:hover .flip {transform-origin: left;transform: rotateY(-80deg);transition: transform 500ms ease;}
+.onder {position:absolute;top:60px;left:35px;z-index:-1;}
+
+/*clearfix hack*/
+.cf:before, .cf:after {content: " "; display: table;}
+.cf:after {clear:both;}
+/* IE6/7 */
+.cf {*zoom: 1;}
+</style>
+    <script src="jquery/jquery-3.1.1.js"></script>
+    <script>
+    var uitk=[];
+    var uik=[];
+    var gok=[];
+    var v=0;
+    var w=0;
+    var lev=3;
+    var sc=0;
+    var gew='?';
+    var f=[];
+        
+    $(document).ready(function(){
+    var store=localStorage.score;    
+    if (!store){localStorage.score=0;}
+    
+    $('.note').prepend('<div class="gatn"></div>');
+    $('.pnote').wrap('<div class="outnote geel"></div>');
+    $('.outnote').prepend('<div class="dgeel"><div class="bol kl10"></div><div class="bol right kl10"></div></div>');
+    
+    $('.game').append('<img src="images/coffee-icon-png.png" alt="coffee" title="Take a break" width="40px" id="gogame" class="right"><p><b>Take a break!</b></p><p><b>with a Master Mind game</b></p>');
+    
+    var game=410;
+    $('.game').click(function(){
+    $('.mmind').animate({left: '+='+game+'px'}, 800);
+    game=game*(-1);
+    });
+    
+    $('#cv').click(function(){
+    $(this).parent().hide();
+    $.get("php/jsonTest1.php", {id:"2"}, function(data) {
+        var z='<div class="outnote geel"><div class="dgeel"><div class="bol kl10"></div>\n\
+        <div class="bol right kl10"></div></div><div class="pnote"><div class="note geel right small">\n\
+        <img src="images/Erwin.jpg" alt="Erwin" title="Erwin van Houten" id="cv"></div>'+data+'</div></div>';
+        $('.cv').html(z).hide().css('z-index', '5');
+        $('.cv').slideDown(2000);
+    });});
+    
+    $('.cv').click(function(){
+    $('.cv').hide();
+    $('#cv').parent().slideDown(1000);
+    });
+    
+    mind(lev, sc);
+    
+    f[0]='<img src="images/manga.jpg" alt="manga"';
+    f[1]='<img src="images/lord.jpg" alt="lord"';
+    f[2]='<img src="images/ff1.jpg" alt="ff1"';
+    f[3]='<img src="images/ff2.jpg" alt="ff2"';
+    f[4]='<img src="images/land.jpg" alt="land"';
+    
+    var sa=2;
+    setInterval(function(){
+        var sb=sa-1; if (sb<0){sb+=5;}
+        var sc=sa-2; if (sc<0){sc+=5;}
+        $('#f'+sa).slideDown(2000);
+        $('#f'+sa).css('z-index', '-1');
+        $('#f'+sb).css('z-index', '-2');
+        $('#f'+sc).css('z-index', '-3');
+        $('#f'+sc).slideUp(2000);
+        sa++; if (sa>4){sa=0;}}, 6000);
+        
+    $('.gallery').html(f[0]+' class="in">');
+    $('.gallery').append(f[1]+' class="open">');
+    $('.gallery').append(f[2]+' class="out">');
+    
+    var pl0=0;var pl1=1;var pl2=2;
+    $('.gallery').click(function(e){ypos=e.pageY-$(this).offset().top;
+    if (ypos>125) {
+    pl0++;if (pl0>4) {pl0-=5;};pl1++;if (pl1>4) {pl1-=5;};pl2++;if (pl2>4) {pl2-=5;};
+    $('.gallery').html(f[pl0]+' class="in">');
+    $('.gallery').append(f[pl1]+' class="open">');
+    $('.gallery').append(f[pl2]+' class="out">');}
+    else if (ypos<64) {
+    pl0--;if (pl0<0) {pl0+=5;};pl1--;if (pl1<0) {pl1+=5;};pl2--;if (pl2<0) {pl2+=5;};
+    $('.gallery').html(f[pl0]+' class="in">');
+    $('.gallery').append(f[pl1]+' class="open">');
+    $('.gallery').append(f[pl2]+' class="out">');}
+    else {$('.mpage').html('<div>'+f[pl1]+' width="100%"></div>');}
+});
+    
+    });// ** einde doc.ready **
+    
+    function mind(lev, sc){
+    intro="<div class='gat'></div><h2>Master Mind game</h2><p><sup>(raad de kleurcode)</sup></p>\n\
+    <p>kies uw kleuren:<b class='blue right'>Top Score: "+localStorage.score+"</b></p>";
+    for (var i=0;i<lev;i++){intro+="<div class='bolg kl"+i+"'></div>";}
+    intro+="<p><b>level: "+lev+" - score: "+sc+" punten</b></p>";
+    $('.mmind').html(intro);
+    
+    var uk="<p>het was: </p>";
+    for (var i=0;i<5;i++){
+    var k=Math.floor(Math.random()*lev);
+    uitk[i]=k;
+    uk+="<div class='bolg kl"+k+"'></div>";}
+            
+    var bord="";
+    var gatg="";
+    var gat="";
+    for (var i=0;i<5;i++){
+    gatg+= "<div class='gatg g"+i+"'></div>"; 
+    gat+= "<div class='gat k"+i+"'></div>";}
+    for (var i=0;i<10;i++){
+    bord+= "<div class='blok lg"+i+"'>"+gatg+"</div><div class='blok lk"+i+"'>"+gat+"</div>";}
+    $('.mmind').append("<div class='board'>"+bord+"</div>");
+
+    $('.bolg').click(function() {
+        var pos=".lg"+w+" .g"+v+"";
+        kleur= $(this).attr('class');
+        $(pos).addClass(kleur);
+        gok[v]=kleur.slice(-1);
+        v++;
+        if (v==5) {var p=0;for (var i=0;i<5;i++){uik[i]=uitk[i];};
+            for (var x=0;x<5;x++){if (gok[x]==uik[x]){gok[x]=8;uik[x]=9;var pos=".lk"+w+" .k"+p+"";
+                $(pos).addClass('bol kl10');p++;}}
+            if (p==5){gew='<p><b>goed gedaan!</b></p>';
+                $('.uitkomst').html(uk).prepend(gew).slideDown(2500).delay(7500).slideUp(2500);
+                sc+=(10-w)*lev*2;if (sc>localStorage.score) {localStorage.score=sc;}
+                lev++;v=0;w=0;mind(lev, sc);} 
+            else {for (var y=0;y<5;y++){for (var x=0;x<5;x++){if (gok[y]==uik[x]){gok[y]=8;uik[x]=9;var pos=".lk"+w+" .k"+p+"";
+                $(pos).addClass('bol kl11');p++;}}}
+            v=0;w++; if (w==10){gew='<p><b>helaas verloren!</b></p>';
+                $('.uitkomst').html(uk).prepend(gew).slideDown(2500).delay(7500).slideUp(2500);
+                w=0;sc=0;lev=3;mind(lev, sc);}}}
+    });}
+    </script>
+</head>
+
+<header>
+<div class="logo">
+    <img src="images/planet-icon.png" alt="aarde" title="Fantasy Friends" id="logo">
+    <p id="t1"><b>Fantasy</b></p><p id="t2"><b>Friends</b></p>
+</div>
+    
+<div class="note game"></div>
+<div class="blad mmind"></div>
+<div class="uitkomst"></div>
+
+<div class="sshow">
+    <img src="images/manga.jpg" alt="manga" id="f0">
+    <img src="images/lord.jpg" alt="lord" id="f1">
+    <img src="images/ff1.jpg" alt="ff1" id="f2">
+    <img src="images/ff2.jpg" alt="ff2" id="f3">
+    <img src="images/land.jpg" alt="land" id="f4">
+</div>
+
+<div class="gallery"></div>
+</header>
+
+<div class="pnote small con">
+    <img src="images/kambar.jpg" alt="kambar" title="Het zwaard van Kambar" class="flip">
+    <button class="onder blue">lees nu !</button>
+</div>
+
+<div class="note right blue small">
+    <img src="images/Erwin.jpg" alt="Erwin" title="Erwin van Houten" id="cv">
+</div>
+<div class="cv right"></div>
+
+<div class="blad mpage cf">
+    <p>Midden page</p>
+    <p>nog invullen!</p>
+</div>   
+        
+    
+</body>
+</html>

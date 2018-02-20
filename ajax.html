@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Showcase</title>
+    <style>
+        html {margin:0;padding:0;}
+        body {background-color:beige;color:black;font:Arial, Helvetica, sans-serif; width:100%;margin:0;padding:0;font-size:16px;} 
+    </style>
+    <script src="jquery/jquery-3.1.1.js"></script>
+    <script>
+            
+    $(document).ready(function(){
+    var input="SELECT id, firstname, lastname FROM MyGuests";
+    //$.get("src/Mappen/Data/testDBcreateDB.php", {naam:"CREATE DATABASE testioso"}, function( data ) {
+    $.get("src/Mappen/Data/testDBupdateDB1.php", {update:input}, function( data ) {    
+   
+    $('.start').html(data);
+    });
+
+    });
+            
+    </script>
+</head>
+<body>
+    <div class="start"></div>
+</body>
+</html>

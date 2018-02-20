@@ -1,0 +1,38 @@
+<!DOCTYPE HTML> 
+<!-- src/Mappen/Presentation/datum_keuze.twig --> 
+<html> 
+<head> 
+    <meta charset=utf-8> <title>datum keuze</title>
+    <style>
+    body  {background-color:beige;color:grey;font:Arial, Helvetica, sans-serif; width:100%;margin:0;padding:0;font-size:16px;}
+    header {border-width:4px 0px;border-style:solid;border-color:green beige crimson;height:20px;margin:30px;}
+    h1 {font-size:50px;font-style:italic;text-shadow:5px 5px 4px grey;color:black;}
+    h2 {position:absolute;left:20px;top:-35px;font-size:45px;font-style:italic;}
+    h3 {position:absolute;left:98px;top:8px;font-size:30px;font-style:italic;}
+    .green {background:radial-gradient(lightgreen,beige);color:green;}
+    .red {background:radial-gradient(lightpink,beige);color:crimson;}
+    .blue {float:right;background:radial-gradient(skyblue,beige);color:blue;text-decoration:none;font-size:30px;font-style:italic;}
+    </style>
+</head> 
+<body>
+
+    <header> 
+        <h2 class="green">Fan </h2><h3 class="red">Film </h3>    
+    </header>
+     
+    <h1>Kies uw datum</h1>
+    
+    <section>
+    <table>
+        {% for d in date %}
+            <tr><td><a class="blue" href="film.php?datum={{ d }}">{{ d }}</a>
+        {% endfor %}
+    </table>
+        <p class="red">{{ melding }}</p>
+    </section>
+            
+    <footer>
+    </footer>
+    
+</body> 
+</html>

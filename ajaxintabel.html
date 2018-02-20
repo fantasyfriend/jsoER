@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Showcase</title>
+    <style>
+        html {margin:0;padding:0;}
+        body {background-color:beige;color:black;font:Arial, Helvetica, sans-serif; width:100%;margin:0;padding:0;font-size:16px;} 
+        table {border:1px solid red;}
+        td {background-color: plum;color:black;}
+    </style>
+    <script src="jquery/jquery-3.1.1.js"></script>
+    <script>
+    
+    $(document).ready(function(){
+     
+    var database="test";
+    var tabel="myguests";
+    var input="SHOW FIELDS FROM "+tabel;
+    
+    $.get("ajaxtestDB.php", {update:input,db:database}, function( data ) {    
+   
+    $('.start').html(data);
+    });        
+    
+    $('button').click(function(){var i=$('.tabel:checked').map(function() {
+    return this.value;}).get();
+    var kolommen=String(i);
+    var input="SELECT "+kolommen+" FROM "+tabel;
+    
+    $.get("src/Mappen/Data/testDBoutputDB.php", {update:input,db:database,kl:kolommen}, function( data ) {    
+   
+    $('.start2').html(data);
+    });
+    });
+
+    });
+            
+    </script>
+</head>
+<body>
+    <div class="start"></div>
+    <button>ok</button>
+    <div class="start2"></div>
+</body>
+</html>

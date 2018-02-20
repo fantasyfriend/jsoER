@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Erwin van Houten</title>
+<style>
+html {margin:0;padding:0;}
+body {background-color:black;color:black;font:Arial, Helvetica, sans-serif; width:100%;margin:0;padding:0;font-size:16px;min-width:960px;min-height:800px;}
+/*body {cursor: url('images/'),auto;}*/
+.inline {display:inline-block}
+.line {display:block}
+
+header {height:230px;}
+#logo {width:120px;height:60px;}
+.logo {background:radial-gradient(lightskyblue 30%, rgba(0,0,0,0) 70%);padding:15px 30px;display:inline-block;position:absolute;left:0px;top:0px;z-index:3;}
+#t1 {position:absolute;left:5px;top:-24px;font-size:32px;text-shadow:8px 8px 4px black;color:beige;}
+#t2 {position:absolute;left:80px;top:20px;font-size:24px;text-shadow:6px 6px 3px black;color:beige;}
+
+.balk {border:1px solid black;color:beige;text-align:center;background:radial-gradient(blue,skyblue,black,black);}
+.keuzen {position:relative;top:30px;}
+.onder {position:relative;top:560px;}
+
+.pageR {padding:7px;position:fixed;left:480px;top:-120px;border:1px solid grey;box-shadow:grey 2px 2px 2px;background:linear-gradient(to right, goldenrod , khaki, beige, beige , khaki);width:450px;height:600px;}
+.pageL {padding:7px;position:fixed;left:16px;top:-120px;border:1px solid grey;box-shadow:grey -2px 2px 2px;background:linear-gradient(to left, goldenrod , khaki , beige, beige , khaki);width:450px;height:600px;}
+.boek h2,h3 {text-align:center;}
+
+.front img {position:absolute;left:30px;top:175px;width:390px;height:260px;}
+.fronta {position:absolute;left:30px;top:140px;}
+.foto {position:relative;left:40px;width:360px;}
+.mid {position:relative;left:115px;}
+.rline {border-bottom:3px solid crimson;}
+tr {color:blue;font-size:12px;}
+td {vertical-align:top;}
+td+td {color:black;font-size:13px;}
+
+.blok {margin:0.2em;border:1px solid black;border-radius: 0.5em;background-color:beige;box-shadow:grey 5px 5px;padding:0.2em;display:inline-block;}
+.note {border:1px solid black;transform: rotate(20deg);background-color:beige;box-shadow:grey 5px 5px;padding:0.5em;display:inline-block;}
+.pnote {padding:1em;font-family: "Comic Sans MS", cursive, sans-serif;display:inline-block;}
+.outnote {border:1px solid black;background-color:beige;box-shadow:black 1px 1px 2px;padding:0;display:inline-block;}
+.blad {border:1px solid black;background-color:beige;box-shadow:grey 5px 5px;padding:1em;display:inline-block;}
+.anote {border:1px solid black;transform: rotate(-10deg);background-color:beige;box-shadow:grey 5px 5px;padding:1em;display:inline-block;}
+.blok2 {border:1px solid black;background-color:beige;box-shadow:grey 5px 5px;padding:0 1em;display:inline-block;text-align:center;}
+.vel {box-sizing: border-box;width:80%;border-bottom:1px solid black;border-left:1px solid black;border-right:1px solid black;background-color:beige;box-shadow:grey 5px 2px;padding:0 1em;z-index:-2; }
+
+.green {background:radial-gradient(lightgreen,beige);color:green;}
+.geel {background:radial-gradient(gold,beige);color:black;}
+.dgeel {background-color:gold;height:25px;padding:8px 15px 0;}
+.red {background:radial-gradient(lightpink,beige);color:crimson;}
+.blue {background:radial-gradient(skyblue,beige);color:blue;}
+
+.mmind {position:absolute;left:35px;top:35px;}
+.uitkomst {position:absolute;left:260px;top:60px;}
+.gatn {border:1px solid black;margin:4px;border-radius:5px;background-color:beige;box-shadow:grey 5px 5px inset;width:10px;height:10px;display:block;}
+.gat {border:1px solid black;margin:0.3em;border-radius:0.4em;background-color:beige;box-shadow:grey 5px 5px inset;width:0.8em;height:0.8em;display:inline-block;}
+.gatg {border:1px solid black;margin:0.3em;border-radius:0.7em;background-color:beige;box-shadow:grey 5px 5px inset;width:1.4em;height:1.4em;display:inline-block;}
+.bolg {border:1px solid black;border-radius:0.7em;box-shadow:grey 5px 5px;width:1.4em;height:1.4em;display:inline-block;}
+.bol {border:1px solid black;border-radius:0.4em;box-shadow:grey 5px 5px;width:0.8em;height:0.8em;display:inline-block;}
+.kl10 {background:black;background:radial-gradient(farthest-corner at 0.1em 0.1em, white, grey, black);}
+.kl11 {background:white;background:radial-gradient(farthest-corner at 0.1em 0.1em, white, white, grey);}
+.kl0 {background:blue;background:radial-gradient(farthest-corner at 0.4em 0.4em, skyblue, blue, black);}
+.kl1 {background:green;background:radial-gradient(farthest-corner at 0.4em 0.4em, lightgreen, green, black);}
+.kl2 {background:crimson;background:radial-gradient(farthest-corner at 0.4em 0.4em, lightpink, crimson, black);}
+.kl3 {background:orange;background:radial-gradient(farthest-corner at 0.4em 0.4em, yellow, orange, black);}
+.kl4 {background:purple;background:radial-gradient(farthest-corner at 0.4em 0.4em, plum, purple, black);}
+.kl5 {background:darkcyan;background:radial-gradient(farthest-corner at 0.4em 0.4em, aquamarine, darkcyan, black);}
+.kl6 {background:black;background:radial-gradient(farthest-corner at 0.4em 0.4em, white, grey, black);}
+.kl7 {background:white;background:radial-gradient(farthest-corner at 0.4em 0.4em, white, white, grey);}
+.kl8 {background:lime;background:radial-gradient(farthest-corner at 0.4em 0.4em, greenyellow, lime, black);}
+.kl9 {background:pink;background:radial-gradient(farthest-corner at 0.4em 0.4em, mistyrose, pink, black);}
+.board {border:1px solid black;border-radius: 0.5em;background-color:beige;box-shadow:grey 5px 5px;padding:0.2em;width:20.6em;}
+
+.sshow {border:1px solid black;box-shadow:black 3px 3px 3px;}
+.sshow img {position:absolute;left:200px;top:15px;width:500px;height:200px;border:1px solid black;box-shadow:black 3px 3px 3px}
+.small img {border:2px solid black;box-shadow:black 3px 3px 3px;width:100px;}
+.right {float:right;}
+.left {float:left;}
+
+.gallery {position:absolute;top:65px;left:325px;width:100px;border:1px solid black;margin:4px;padding:0;box-shadow:black 3px 3px 3px;}
+.gallery img {width:100px;height:60px;}
+.in {transform:rotate(20deg);opacity:0.5;}
+.out {transform:rotate(-20deg);opacity:0.5;}
+
+img {border:1px solid black;box-shadow:black 3px 3px 3px;}
+#logo {border:none;box-shadow:none;}
+
+input, textarea {background-color:lightyellow;margin-right:5px;}
+textarea {box-shadow:black 3px 3px 3px;}
+.redt {color:crimson;}
+
+.boek {perspective:2000px;perspective-origin: 50% 80%;}
+.open {;animation:open 2s ease-out;}
+.dicht {;animation:dicht 2s ease-in;}
+.openl {;animation:openl 2s ease-out;}
+.dichtl {;animation:dichtl 2s ease-in;}
+@keyframes open {
+    0%   {transform-origin: left;transform: rotateY(0deg);}
+    100%  {transform-origin: left;transform: rotateY(-90deg);}}
+@keyframes dicht {
+    0%   {transform-origin: right;transform: rotateY(90deg);}
+    100%  {transform-origin: right;transform: rotateY(0deg);}}
+@keyframes openl {
+    0%   {transform-origin: right;transform: rotateY(0deg);}
+    100%  {transform-origin: right;transform: rotateY(90deg);}}
+@keyframes dichtl {
+    0%   {transform-origin: left;transform: rotateY(-90deg);}
+    100%  {transform-origin: left;transform: rotateY(0deg);}}
+
+/*clearfix hack*/
+.cf:before, .cf:after {content: " "; display: table;}
+.cf:after {clear:both;}
+/* IE6/7 */
+.cf {*zoom: 1;}
+</style>
+
+<script src="jquery/jquery-3.1.1.js"></script>
+<script>
+    // Data Keuzen
+    var karr=[['personalia',1,'vaardigheden',3,'ervaring',5,'opleidingen',7],['Het zwaard van Kambar',9],['gallery',11],['Master Mind game',13],['Contact',15]];
+        
+    // Data Boek
+    var pr=[];var pl=[];
+    pr[0]='<h2>Boek of my life</h2><div class="fronta"></div><div class="front"></div>';
+    pl[0]='<h3 class="rline">Personalia</h3>\n\
+    <table><tr><td>Geboortedatum en -plaats <td>: <td>03 mei 1967, Delft, Nederland\n\
+    <tr><td>Nationaliteit <td>: <td>Nederlander<tr><td>Geslacht <td>: <td>man\n\
+    <tr><td>Rijbewijs <td>: <td>B\n\
+    <tr><td colspan="3"><img src="images/ons.jpg" alt="ons" title="Mijn gezin" class="foto">\n\
+    <tr><td>Gezinssamenstelling <td>: <td>gehuwd met leuke vrouw en heb ook een lieve dochter\n\
+    <tr><td>Overige punten <td>: <td>Niet roker, Niet drinker\n\
+    <tr><td><br>\n\
+    <tr><td><td><td>Lever kwalitatief en kwantitatief goed werk af.<br>\n\
+    In goede kennis wetenschappen , innovatief en meedenkend, maar vooral zeer leergierig.</table>';
+    pr[1]='<h3>Personalia</h3><img src="images/Erwin.jpg" alt="Erwin" title="Erwin van Houten" class="mid">\n\
+    <p class="rline"></p>\n\
+    <table><tr><td>Straat <td>: <td>Rode Kruisstraat 49 bus 301\n\
+    <tr><td>Postcode <td>: <td>2200 Herentals<tr><td>Land <td>: <td>België\n\
+    <tr><td>Telefoon (GSM) <td>: <td>0488-030039\n\
+    <tr><td>Email <td>: <td><a href="erwinvanhouten@yahoo.com">erwinvanhouten@yahoo.com</a></table>';
+    pl[1]='<h3 class="rline">Vaardigheden</h3>\n\
+    <table><tr><td>Wetenschappen <td>: <td>Chemisch-, fysisch-, medisch-, en bacteriologisch onderzoek waaronder:<br>\n\
+    VOC, PAK’s, EOX, PH, BZV, LUTUM, aromaten, kwik, zware metalen, pesticiden, minerale oliën, Kjeldahl, hematologie, stolling, allergie, hormonen, drugs, electroforese.<br>\n\
+    Kweekbuizen en platen enten, kleuringen, tellingen, sneltesten, voedingsstoffen, kleurtesten, plaktesten, viscositeit, rek en scheurtesten op papier en plastic etc.<br>\n\
+    d.m.v. GC-MS, HPLC, IR, ICP, COBAS 8000, ADVIA, IMMULITE, VIDAS, CAPILLARIS, VITEC, SYSMEX, AKRAY, werken met de Microscoop etc.<br>\n\
+    Verder hobbymatig: Biologie, Archeologie, Mineralogie, Geologie, Dier- en Plantkunde.\n\
+    <tr><td>Computer <td>: <td>Programmeren: Pascal, Python, HTML5, CSS, PHP, SQL, JavaScript, Jquery, Drupal 7 etc.<br>\n\
+    Turbochrom, Limits, X-calibur, Envirolabforms,<br>\n\
+    LIMS, GLIMS, CITM etc.<br>\n\
+    Windows, Excel, Word, Macromedia webprogramma´s,<br>\n\
+    Photoshop 7.0 etc.\n\
+    <tr><td>Grafisch <td>: <td>Fotografeer, teken, ontwerp en schrijf SF en Fantasy<br>\n\
+    (o.a. Het zwaard van Kambar).</table>';
+    pr[2]='<h3>Vaardigheden</h3>\n\
+    <table><tr><td>Taal <td>: <td>Nederlands (moedertaal),<br>\n\
+    Engels (zeer goede kennis (schrijven en spreken)),<br>\n\
+    Duits (goede kennis (schrijven en spreken)),<br>\n\
+    Frans (basiskennis (spreken)),<br>\n\
+    Thai (redelijk goede kennis(schrijven en spreken))<br>\n\
+    verder veel interesse voor oosterse talen.\n\
+    <tr><td>Handel <td>: <td>Goederen inkopen en verkopen, handel via internet.<br>\n\
+    Beheer van een winkel, restaurant en klein hotel.\n\
+    <tr><td>Internationaal <td>: <td>Kennis van diverse culturen en gebruiken,<br>\n\
+    rondreizen geleid en georganiseerd.<br>\n\
+    Hotels, vervoer en entertainment geregeld.<br>\n\
+    Lesgegeven Engels/Thai en Thai/Engels.\n\
+    <tr><td>Voeding <td>: <td>Westers en Oosters voedsel bereid, banket, brood, cocktails etc.\n\
+    <tr><td>Overig <td>: <td>Mensen ingewerkt en getraind in de job, voorschriften geschreven, kalibraties en validaties uitgevoerd</table>';
+    pl[2]='<h3 class="rline">Ervaring</h3>\n\
+    <table>\n\
+    <tr><td><b><u>België</u></b>\n\
+    <tr><td>C.R.I. BVBA  <td>te Zwijnaarde 01/11/2011-12/09/2014<br>\n\
+    (na overname Medic Lab BV)<br>\n\
+    Medisch onderzoek op bloedstalen.\n\
+    <tr><td>Medic Lab BV <td>te Aalst 20/01/2009-01/11/2011<br>\n\
+    Bacteriologisch onderzoek  op bloed, urine, feces, wissers etc.<br>\n\
+    Medisch onderzoek op bloedstalen.\n\
+    <tr><td>ERC Eurofins <td>te Hofstade Aalst 05/05/2008-31/12/2008<br>\n\
+    Milieu onderzoek op grond, grondwater, gas en zeedieren.<br>\n\
+    <tr><td><br>\n\
+    <tr><td><b><u>Thailand</u></b>\n\
+    <tr><td>NEW PLACE <td>(reiscafé) te Chiangmai 2002-2003 onder eigen beheer.<br>\n\
+    Klein café met reisinformatie, drinken en snacks.\n\
+    <tr><td>THE OLD INN <td>(guesthouse) te Chiangmai 2003-2006 onder eigen beheer.<br>\n\
+    Klein hotel /restaurant  met inkoop/verkoop boeken en reisinformatie.\n\
+    <tr><td>SUPER BEE <td>(winkel) te Chiangmai 2006-2007 onder eigen beheer.<br>\n\
+    Kleine winkel met verkoop Fashion en Speelgoed.<br>\n\
+    Internet verkoop van T-shirts, handwerk en games.\n\
+    <tr><td>Overige <td>werkzaamheden tijdens verblijf in Thailand<br>\n\
+    Les gegeven aan buitenlanders in Thai en Engelse taal.<br>\n\
+    Rondreizen gegeven in de stad en verder fietstochten georganiseerd.</table>';
+    pr[3]='<h3>Ervaring</h3>\n\
+    <table><tr>\n\
+    <td><b><u>Nederland</u></b>\n\
+    <tr><td>Alcontrol Laboratoria <td>te Hoogvliet, Nederland, 1990-2002<br>\n\
+    (voorheen BIOCHEM Haarlem, -Den Bosch<br>\n\
+    en Het Milieulab te Zoetermeer)<br>\n\
+    Milieu onderzoek op grond en grondwater.<br>Voeding onderzoek op voedingsmiddelen.\n\
+    <tr><td><br>\n\
+    <tr><td><b><u>Nederland / Duitsland</u></b>\n\
+    <tr><td>435 IBV <td>(militaire dienst), 1987-1988<br>\n\
+    Opleiding (Hardewijk NL): Radioverbindingen.<br>\n\
+    Dienst (Buren D): communicatie en verbindingen voor beveiliging sites.<br>\n\
+    Herhaling: 1993 lijnverbindingen (2 weken).</table>\n\
+    <div class="foto"><img src="images/the old inn.jpg" alt="the old inn" title="The Old In" width="100%">\n\
+    <p>The Old Inn, mijn guesthouse in Chiangmai, Thailand.</p></div>';
+    pl[3]='<h3 class="rline">Opleidingen</h3><table>\n\
+    <tr><td>PHP ontwikkelaar <td>: <td>VDAB , sep. 2016-2017 (nog bezig).<br>\n\
+    HTML5, CSS, PHP, SQL, Javascript, Jquery, Drupal.\n\
+    <tr><td>Programmeer logica <td>: <td>VDAB, aug+sep 2017, Pascal.\n\
+    <tr><td>Shopmanager <td>: <td>CVA, 2015, (geen examen gedaan).\n\
+    <tr><td>Bedrijfsbeheer <td>: <td>CVA, 1 juli 2015, Basiskennis Bedrijfsbeheer.\n\
+    <tr><td>Cobas 8000 operator <td>: <td>Roche Diagnostics 2010, Cobas 502/602/701.\n\
+    <tr><td>RD/Modular operator <td>: <td>Roche Diagnostics 2009, Extenson Module E170.\n\
+    <tr><td>Thaise taal <td>: <td>AUA Chiangmai 2003, Speak Thai 1+2,<br>\n\
+    Read & Write Thai 1+2, Conversatie.\n\
+    <tr><td>Excel  97 <td>: <td>Intern, 2002, Werken met rekensheets op de computer.\n\
+    <tr><td>Bedrijfsbeheer <td>: <td>LOI, 2002,Thuiscursus bedrijfsbeheer voor winkel<br>\n\
+    (geen examen afgelegd).\n\
+    <tr><td>Website designer <td>: <td>LOI, 2001,Frontpage, Dreamweaver, -Flash, -Fireworks<br>\n\
+    en Javascript.\n\
+    <tr><td>Euroglas EOX <td>: <td>Intern, 2001,Theoretical EOX, Practical EOX,<br>\n\
+    Trouble shooting EOX. \n\
+    <tr><td>SEPR 1 <td>: <td>LOI, 1999, Vakbekwaamheid reisbureau.\n\
+    <tr><td>Reisbegeleider <td>: <td>LOI 1996, Reisbegeleiding buitenland.\n\
+    <tr><td>PDI 1 <td>: <td>LOI 1994, Informatica (Word(perfect), Database etc.).</table>';
+    pr[4]='<h3>Opleidingen</h3><table>\n\
+    <tr><td>Laborant <td>: <td>KMLO (kort middelbaar laboratorium onderwijs), 1988-1990,<br>\n\
+    2e jaar begonnen.<br>\n\
+    (praktijk gericht, chemisch, biologisch en fysisch).<br>\n\
+    Stage: Fasson Nederland BV, 1989-1990.<br>\n\
+    (fysische testen op papier en plakmaterialen).<br>\n\
+    <tr><td><td>: <td>MLO (middelbaar laboratorium onderwijs), 1984-1986,<br>\n\
+    2 jaar gevolgd erna militaire dienst.<br>\n\
+    (chemisch, biologisch en fysisch).\n\
+    <tr><td>Wetenschappen <td>: <td>MAVO (middelbaar algemeen voortgezet onderwijs), 1980-1984,<br>\n\
+    wetenschappen.<br>\n\
+    (scheikunde, biologie, natuurkunde, wiskunde, Nederlands<br>\n\
+    en Duits).\n\
+    <tr><td><br><tr><td><br><tr><td><br><tr><td><br>\n\
+    <tr><td><td><td><b>Onmiddellijk beschikbaar</b><br>\n\
+    <tr><td><br>\n\
+    <tr><td><td><td><b>Kom voor IT in aanmerking voor een stage (6 weken)<br>\n\
+    of IBO (max. 6 maanden).</b></table>';
+    pl[4]='<h3>Mijn boek, Het zwaard van Kambar</h3><img src="images/kambar.jpg" alt="kambar" title="Het zwaard van Kambar" class="mid">\n\
+    <p><b>Productinformatie :</b></p><table>\n\
+    <tr><td>Auteur <td>: <td> Houten, Erwin van\n\
+    <tr><td>Genre <td>: <td> Fantasy\n\
+    <tr><td>ISBN <td>: <td>	9789085399940\n\
+    <tr><td>Verkoopprijs <td>: <td>	€ 16,95\n\
+    <tr><td>Verschijningsdatum <td>: <td> 06 maart 2008\n\
+    <tr><td> Formaat <td>: <td>	145 x 205\n\
+    <tr><td> Uitvoering <td>: <td> Softcover\n\
+    <tr><td> Aantal pagina’s <td>:	<td> 138\n\
+    <tr><td> Taal <td>:	<td>Nederlands\n\
+    </table>';
+    pr[5]='<h3>boek</h3>\n\
+    <p>Ridder Landelor knijpt er samen met zijn schildknaap Ewan tijdens een legeroefening tussenuit. Ze besluiten om een bestolen dwerg te helpen, en komen erachter dat er iets niet pluis is in het verre zuiden. Als er dan ook nog eens een belangrijk magisch zwaard gestolen wordt, stuurt de koning Landelor en Ewan op onderzoek uit.</p>\n\
+    <p>De twee vrienden beginnen een lange en gevaarlijke reis richting het zuiden.Geholpen door bondgenoten proberen ze een strijd te stoppen tussen de zuidelijke stammen, die gesteund worden door een machtige magiër en de noordelijker gelegen volkeren.</p>\n\
+    <p>Een avontuurlijk verhaal vol spanning dat zich afspeeld in een fantasie wereld.</p><br><br>\n\
+    <p>Bestel nu, </p><a href="http://shop.lecturium.nl/boek/3128/het-zwaard-van-kambar">Het zwaard van Kambar</a>';
+    pl[5]='<h3>Mijn foto gallery</h3><div class="gallery"></div><br>\n\
+    <p>Dit is mijn gallery van Thailand,</p>\n\
+    <p>met een aantal mooie en interesante foto\'s.</p>\n\
+    <p>Veel uit Thailand en een paar ten zuiden ervan.</p>\n\
+    <p>Niet de bekende plaatjes zoals uit reisgidsen,</p>\n\
+    <p>maar foto\'s die een goede indruk ervan geven.</p><br>\n\
+    <p>Ik heb zelf deze foto gallery gemaakt om een goede indruk te geven waarom ik een liefhebber van zuid-oost Azië ben.\n\
+    Ik heb er veel rondgetrokken en uiteindelijk daar ook mijn vrouw ontmoet.\n\
+    Een tijd hebben we in het noorden van Thailand gewoond in een door touristen geliefde stad Chiangmai waar we eerst een reiscafetje opende en vervolgens een guesthouse.\n\
+    Het guesthouse dat oorspronkelijk een handelspand was had ik zelf omgebouwd en bestond uit een restaurant gedeelte, een winkeltje voor informatie met boeken in en verkoop en hadden we 3 kamers te huur.\n\
+    Dit was mijn beste tijd van mijn leven en heb er veel geleerd en gedaan.\n\
+    Mensen rond geleid, te voet en met de fiets ook lesgegeven in zowel Thais als Engels en veel in de keuken gestaan om maaltijden te bereiden.</p>\n\
+    <p>Het is een prachtig land met zeer veel mogelijkheden en een fantastisch klimaat al kan het in april toch echt iets te heet worden.</p>';
+    pr[6]='<h3>Gallery</h3><div class="mpage"></div>';
+    pl[6]='<div class="uitleg"></div><div class="uitkomst green"></div>';
+    pr[7]='<div class="mmind"></div>';
+    pl[7]='<h3 class="rline">Contact</h3>\n\
+    <p>Wilt u me contacteren, vul dan onderstaand formulier in.</p>\n\
+    <p>Zal dan zo spoedig mogelijk uw bericht behandelen.</p><br>\n\
+    <form><table>\n\
+    <tr><td>naam <td>: <td><input type="text" name="naam" id="naam"><b class="redt">*</b><br><b class="redt nok">Let op!, verplicht veld.</b>\n\
+    <tr><td>familienaam <td>: <td><input type="text" name="fnaam" if="fnaam"><br>\n\
+    <tr><td>email <td>: <td><input type="text" name="email" id="email"><b class="redt">*</b><br><b class="redt nok">Let op!, verplicht veld.</b><b class="redt ok">Let op!, uw email is niet correct.</b>\n\
+    <tr><td>telefoon (gsm) <td>: <td><input type="text" name="tel" id="tel"><br><b class="redt ok">Let op!, uw telefoonnummer klop niet.</b><br><sup class="ok">(tel.nr. BE of NL zonder - ertussen)</sup>\n\
+    <tr><td>bericht <td>: <td><textarea rows="5" cols="40" name="bericht" id="bericht"></textarea><b class="redt">*</b><br><b class="redt nok">Let op!, verplicht veld.</b>\n\
+    <tr><td><td><td><input type="submit" value="versturen" class="green"><input type="reset" value="wissen" class="red">\n\
+    </table></form>';
+    pr[8]='<h3>Contact</h3>\n\
+    <div id="zp"></div>';
+    pl[8]='<h3>xx EINDE xx</h3>';
+    
+    // Data Foto familie
+    var e=[];
+    e[0]='<img src="images/bee.jpg" alt="bee" title="Dit is Bee mijn dochter."';
+    e[1]='<img src="images/sneeuw tum.jpg" alt="sneeuw tum" title="Voor mijn vrouw is het soms wat koud hier."';
+    e[2]='<img src="images/tum bij poes.jpg" alt="tum bij poes" title="Mijn vrouw houd net als ik van dieren."';
+    e[3]='<img src="images/ik in het bos.jpg" alt="ik in het bos" title="Ik hou van het bos."';
+    e[4]='<img src="images/in het bos.jpg" alt="in het bos" title="Mijn dochter houd ook van het bos."';
+    e[5]='<img src="images/op bank.jpg" alt="op bank" title="Ik hou van de natuur."';
+    e[6]='<img src="images/tum en bee.jpg" alt="tum en bee" title="Mijn vrouw en dochter houden ook van de natuur."';
+    e[7]='<img src="images/duitsland.jpg" alt="duitsland" title="Ik hou van mooie steden."';
+    e[8]='<img src="images/aalst.jpg" alt="aalst" title="In Aalst heb ik een tijdje gewoond."';
+    e[9]='<img src="images/de haar.jpg" alt="de haar" title="Ik hou van kastelen."';
+    e[10]='<img src="images/ik en bee in bob.jpg" alt="ik en bee in bob" title="Ik hou van eten in de buitenlucht."';
+    e[11]='<img src="images/ik en bee.jpg" alt="ik en bee" title="Maar ik hou het meest van mijn gezin."';
+    
+    // Data Foto Thailand
+    var f=[];var t=[];
+    f[0]='<img src="images/haventje.jpg" alt="haventje"';
+    t[0]='<p>Haventje in het zuiden van Thailand.</p>\n\
+    <p>Het zuiden van Thailand heeft een lange kustlijn zowel ten westen met de Indische Oceaan als ten oosten met de Golf van Thailand. Veel van de mensen hier leven van de visvangst en vervoer van groenten en andere producten naar de vele aanwezige eilandjes. De laatste tijd worden bootjes ook gebruikt voor de touristen te vervoeren naar de populaire eilanden, zoals Ko Samui waar ik deze foto genomen heb.</p>';
+    f[1]='<img src="images/palm beach.jpg" alt="palm beach"';
+    t[1]='<p>Ko Samui is een in het zuiden gelegen eiland met prachtige stranden.</p>\n\
+    <p>De vele eilanden in het zuiden zijn een lust voor het oog met prachtige soms hagel witte stranden. Ko Samui is een groot eiland met veel verblijfsgelegenheid voor touristen.</p>';
+    f[2]='<img src="images/krabi.jpg" alt="krabi"';
+    t[2]='<p>Mooi strand nabij Krabi.</p>\n\
+    <p>Verder zuid in Thailand bevind zich het populaire plaatsje Krabi met mooie stranden en eilanden in de buurd. Deze foto heb ik genomen op Hat Nopparat een strand ten noorden van Ao Nang. Mijn dochter had het er erg naar haar zin.</p>';
+    f[3]='<img src="images/penang.jpg" alt="penang"';
+    t[3]='<p>Georgetown, Penang te Malasia.</p>\n\
+    <p>Ten noord-westen van Maleisië is een prachtig multicultureel eiland Penang. De hoofdstan van het eiland, Georgetown heeft een hoop cultuur te bieden en heerlijk voedsel. Op deze foto zie je een karakterestiek chinees handelshuis met op de voorgrond een tempeltje waar men (namaak) geld kan verbranden voor geluk en op de achtergrond is het bekende shopping mall te zien.</p>';
+    f[4]='<img src="images/moskee penang.jpg" alt="moskee penang"';
+    t[4]='<p>De grote moskee op Penang.</p>\n\
+    <p>Penang heeft een diversiteit aan culturen, westerse cristenen, hindoes van Indiërs, boedisten van chinezen en natuurlijk moslims van de Maleisiërs zelf. Er zijn meerdere moskeën in Georgetown maar dit is de mooiste. Op de voorgrond gaan kinderen in teneu naar school.</p>';
+    f[5]='<img src="images/medan.jpg" alt="medan"';
+    t[5]='<p>Medan, hoofdstad van Sumatra.</p>\n\
+    <p>Medan is eenvoudig te bereiken vanaf Penang in Maleisië met de veerboot, Daar Medan voornamelijk moslim is zijn er veel moskeën waarvan deze de grootste en mooiste is. In de stad zijn nog veel fietstaxi\'s.</p>';
+    f[6]='<img src="images/grand palace.jpg" alt="grand palace"';
+    t[6]='<p>Bankok hoofdstad van Thailand.</p>\n\
+    <p>Bangkok is met een inwoner aantal van bijna 10 miljoen mensen verre weg de grootste stad van het land. Hier op deze foto zie je op de achtergrond het Grand Palace een mooi tempelcomplex. Op de voorgrond een verkoper zoals je ze veel in de straten van bangkok kan tegenkomen.</p>';
+    f[7]='<img src="images/golden mount temple.jpg" alt="golden mount temple"';
+    t[7]='<p>Golden Mount tempel te Bangkok.</p>\n\
+    <p>Vrij centraal gelegen in Bankok staat deze op een kustmatig gemaakte berg geplaatste tempel die een mooi uitzicht geeft over de stad.</p>';
+    f[8]='<img src="images/ayuthaya2.jpg" alt="ayuthaya2"';
+    t[8]='<p>Ayuthaya, de oude hoofdstad van Thailand.</P>\n\
+    <p>Deze stad is lange tijd de belangrijkste stad van het land geweest en meermaals veroverd geweest door de burmezen die het uiteidelijk vernietigt hebben. Nu is de oude stad een leuke plaats om te verblijven met erg veel tempels te bezichtigen.</p>';
+    f[9]='<img src="images/lopburi.jpg" alt="lopburi"';
+    t[9]='<p>Lopburi, veel geschiedenis en veel apen.</P>\n\
+    <p>Deze stad ooit ook tijdelijk een hoofdstad geweest heeft net als Ayuthaya veel tempels te bezichtigen niet allen van de Thai maar ook van de Kmer waardoor deze stad erg interesand is. Pas wel op voor de vele apen die de straten onveilig maken (tof!).</p>';
+    f[10]='<img src="images/pimai.jpg" alt="pimai"';
+    t[10]='<p>Phimai een prachtige Kmer vesting.</p>\n\
+    <p>Wil je echt een oude Kmer stad bezoeken hoef je niet ver te reizen, Phimai is een kleine stad niet ver in de Isaan. Het is er gezellig te verblijven en de hoofdtempel is schitterend.</p>';
+    f[11]='<img src="images/tum bij muur.jpg" alt="tum bij muur"';
+    t[11]='<p>Oude ommuring van Phimai stad.</p>\n\
+    <p>Om de oude stad van Phimai zijn nog de restanten te zien van de oude muur. Hier een foto van mijn vrouw bij een stuk muur bij de Pratu Phi ofwel de geesten poort (hier werden de doden door de stad uitgebracht).</p>';
+    f[12]='<img src="images/tum bij boom.jpg" alt="tum bij boom"';
+    t[12]='<p>De oude en heilige banjan tree nabij Phimai.</p>\n\
+    <p>Ten noorden van Phimai staat de beroemde banjan tree, deze heeft een zeer complex stelsel van luchtwortels en omvat een groot oppervlak. Voor de boom te eren en voor geluk te vragen worden bloemenlinten eraan geschonken.</p>';
+    f[13]='<img src="images/geluk.jpg" alt="geluk"';
+    t[13]='<p>Traditionele gelukwensen.</p>\n\
+    <p>Bij een bezoek aan familie (hier mijn schoonouders) worden vaak gelukwensen gegeven voor een goede toekomst etc. Op deze foto zijn we voor de ouders getrouwd en krijgen we geluks touwtjes om.</p>';
+    f[14]='<img src="images/eten.jpg" alt="eten"';
+    t[14]='<p>Heerlijk eten in Thailand.</p>\n\
+    <p>Alleen voor het eten is Thailand de moeite waard van mild tot zeer spicy maar alles is er smakelijk en gezond. De vele restaurantjes zijn prettig vertoeven en erg goedkoop.</p>';
+    f[15]='<img src="images/temple chiangmai.jpg" alt="temple chiangmai"';
+    t[15]='<p>De prachtige tempels van Chiangmai.</p>\n\
+    <p>Chiangmai mag aan een reis nooit ontbreken en heeft het grootste aantal tempels van Thailand. door de vele verblijfsmogelijkheden is het ook een ideaal touristen oord waarvan met tevens trekkingen kan boeken.</p>';
+    f[16]='<img src="images/wat saen fang.jpg" alt="wat saen fang"';
+    t[16]='<p>Wat Sean Fang te Chiangmai.</p>\n\
+    <p>Dit is een vrij grote tempel met een mooi voorbeeld van een orginele bibliotheek geplaatst boven water (ter bescherming van de boeken etc.). Tempels zijn vaak ook een plaats van rust waar men even weg kan zijn van het drukke verkeer in de stad. Op deze foto zijn een paar fiets-taxis te zien die tegenwordig er bijna niet meer zijn.</p>';
+    f[17]='<img src="images/wat umong.jpg" alt="wat umong"';
+    t[17]='<p>Wat Umong te Chiangmai.</p>\n\
+    <p>Wat verder buiten het centum bevind zich een bostempel die een merkwaardig stelsel heeft van ondergrondse gangen onder de chedi (de puntige toren die vaak belangrijke dingen bevat zoals botjes van belangrijke monniken of boeda zelf). Op deze foto is de chedi zichtbaar met ervoor restanten van beelden.</p>';
+    f[18]='<img src="images/trekking.jpg" alt="trekking"';
+    t[18]='<p>Trekkingen in Noord Thailand.</p>\n\
+    <p>De meeste mensen die het noorden bezoeken nemen hier ook een trektocht door natuur die hier alom aanwezig is. Vaak te voet maar soms ook op de rug van een olifant dat geeft een zeer indrukwekkende ervaring.</p>';
+    f[19]='<img src="images/aka dorp.jpg" alt="aka dorp"';
+    t[19]='<p>Hilltribes in Noord Thailand.</p>\n\
+    <p>Op de trekkingen komt men vaak door diverse hilltribe dorpen zoal dit Akha dorp welk vaak op een heuveltop is gelegen. Hilltribes komen oorspronkelijk uit de nabuurige landen zoals Burma en China en hebben zich voornamelijk in het westen en noorden van Thailand gevestigt.</p>';
+    f[20]='<img src="images/waterfall.jpg" alt="waterfall"';
+    t[20]='<p>Natuurschoon in Noord Thailand.</p>\n\
+    <p>In het westen en noorden van het land zijn veel bergen en watervallen te bewondere sommige groot en sommige wat kleiner maar allen prachtig om te zien.</p>';
+    f[21]='<img src="images/hotspring.jpg" alt="hotspring"';
+    t[21]='<p>Hotsprings nabij Chiangmai.</p>\n\
+    <p>Ten noorden en oosten van Chiangmai zijn er hier en daar hotsprings te bezoeken. Hier kan met eieren koken in het water of er zelfs een bad in nemen. Op deze foto bezoek ik een mooie hotspring nabij San Khampheng en hang er een mandje eieren in het water.</p>';
+    f[22]='<img src="images/mae sai.jpg" alt="mae sai"';
+    t[22]='<p>Leuke souvenier winkeltjes in Mae Sai bij de grens van Burma.</p>\n\
+    <p>Geheel ten noorden is het grensstadje Mae Sai aan de Burmeese grens, hier aan beide kanten van de grens zijn veel winkeltjes waar echt wel veel interesants te koop is. Let wel op veel electische goederen zijn namaak of van slechte kwaliteit.</p>';
+    f[23]='<img src="images/erawan park.jpg" alt="erawan park"';
+    t[23]='<p>Schitterend natuurpark Erawan Nationalpark.</p>\n\
+    <p>In het westen van het land niet ver van de stad Kanchanaburi is een prachtig natuur park, Erawan Nationalpark. Dit park heeft een groot aantal waterlopen en watervallen met prachtig water, mooi natuurschoon en een hoop apen.</p>';
+    f[24]='<img src="images/met bee bij waterval.jpg" alt="met bee bij waterval"';
+    t[24]='<p>Prachtige watervallen in Erawan Nationalpark.</p>\n\
+    <p>Het water is hier helder en ziet er blauw uit door de lichte kalkbodem, het zit er vaak vol van niet schuwe vissen en bied een prachtige locatie voor een picnic. Op deze foto geniet ik van het park samen met mijn nog jonge dochter.</p>';
+      
+    // Data Mind
+    var uitk=[];var uik=[];var gok=[];
+    var v=0;var w=0;
+    var lev=3;var sc=0;var gew='?';
+    var store=localStorage.score;    
+    if (!store){localStorage.score=0;}
+        
+    $(document).ready(function(){// ** start ready doc. **
+    
+    //keuzen
+    $(".keuzen button").hover(function(){
+        $(this).animate({fontSize:'24px'});
+        var x=$(this).index();var l=karr[x].length;
+        for (var i=0;i<l;i+=2) {$(this).append('<button class="b">'+karr[x][i]+'</button>');}
+        $(".b").click(function(){var y=$(this).index();var pl=karr[x][(y*2)+1];
+        $('.boek').children().hide().removeClass('dicht').removeClass('dichtl');
+        for (var i=0;i<=pl;i+=2) {$('.boek div:nth-child('+(i+2)+')').show();}
+        for (var i=16;i>=pl;i-=2) {$('.boek div:nth-child('+(i+1)+')').show();}
+        });}
+        ,function(){$(this).animate({fontSize:'16px'});
+        $(this).children().remove();});
+        
+    // Boek
+    var tekst='';
+    for (var i=0;i<9;i++) {
+        tekst+='<div class="pageR" id="pr'+i+'" style="z-index:-'+i+'"><button class="right geel">'+(i*2)+' \>\></button>'+pr[i]+'</div>';
+        tekst+='<div class="pageL" id="pl'+i+'" style="z-index:'+i+';display:none"><button class="left geel">\<\< '+(1+i*2)+'</button>'+pl[i]+'</div>';}
+    $('.boek').html(tekst);
+    
+    var wdow=($(window).width())/2;
+    $('.pageR').css('left', ''+wdow+'px');
+    $('.pageL').css('left', ''+(wdow-464)+'px');
+    $(window).resize(function() {var wdow=($(window).width())/2;
+    $('.pageR').css('left', ''+wdow+'px');
+    $('.pageL').css('left', ''+(wdow-464)+'px');});
+        
+    $(".pageR button").click(function(){var p=$(this).parent().attr('id').slice(2);
+        $('#pr'+p+'').removeClass('dichtl');
+        $('#pr'+p+'').addClass('open');
+        window.setTimeout(function(){
+        $('#pr'+p+'').removeClass('open').hide();
+        $('#pl'+p+'').addClass('dicht').show();}, 1900);}); 
+    
+    $(".pageL button").click(function(){var p=$(this).parent().attr('id').slice(2);
+        $('#pl'+p+'').removeClass('dicht');
+        $('#pl'+p+'').addClass('openl');
+        window.setTimeout(function(){
+        $('#pl'+p+'').removeClass('openl').hide();
+        $('#pr'+p+'').addClass('dichtl').show();}, 1900);});
+
+    // Slideshow
+    for (var i=0;i<12;i++){$('.front').append(e[i]+' id="e'+i+'">');}
+    var sa=2;var go=0;
+    setInterval(function(){
+        var sb=sa-1; if (sb<0){sb+=12;}
+        var sc=sa-2; if (sc<0){sc+=12;}
+        $('#e'+sa).fadeIn(1000);
+        $('#e'+sa).css('z-index', '-1');
+        $('#e'+sb).css('z-index', '-2');
+        $('#e'+sc).css('z-index', '-3');
+        $('#e'+sc).fadeOut(1000);
+        if (go==1) {var tekst=$('#e'+sa).attr('title');$('.fronta').html('<p>'+tekst+'</p>');}
+        sa++; if (sa>11){sa=0;go=1;}}, 3000);
+
+    // Gallery
+    $('.gallery').html(f[0]+' class="in">');
+    $('.gallery').append(f[1]+'>');
+    $('.gallery').append(f[2]+' class="out">');
+    $('.mpage').html('<div>'+f[1]+' width="100%">'+t[1]+'</div>');
+    
+    var pl0=0;var pl1=1;var pl2=2;
+    $('.gallery').click(function(e){ypos=e.pageY-$(this).offset().top;
+    if (ypos>125) {
+    pl0++;if (pl0>24) {pl0-=25;};pl1++;if (pl1>24) {pl1-=25;};pl2++;if (pl2>24) {pl2-=25;};
+    $('.gallery').html(f[pl0]+' class="in">');
+    $('.gallery').append(f[pl1]+'>');
+    $('.gallery').append(f[pl2]+' class="out">');}
+    else if (ypos<64) {
+    pl0--;if (pl0<0) {pl0+=25;};pl1--;if (pl1<0) {pl1+=25;};pl2--;if (pl2<0) {pl2+=25;};
+    $('.gallery').html(f[pl0]+' class="in">');
+    $('.gallery').append(f[pl1]+'>');
+    $('.gallery').append(f[pl2]+' class="out">');}
+    else {$('.mpage').html('<div>'+f[pl1]+' width="100%">'+t[pl1]+'</div>');}
+    });
+    
+    //Mind
+    mind(lev, sc);
+    
+    //Form
+    $('.ok').hide();
+    $('.nok').hide();
+    $('input, textarea').change(function() {$(this).parent().find('.nok').fadeOut();
+        switch($(this).attr('name')){
+            case 'naam': {if ($(this).val()=="") {$(this).siblings('.nok').fadeIn();}break;}
+            case 'fnaam': {break;}
+            case 'email': {if ($(this).val()=="") {$(this).siblings('.nok').fadeIn();$(this).parent().find('.ok').fadeOut();break;}
+            var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+            if (!filter.test($(this).val())) {$(this).parent().find('.ok').fadeIn();}
+            else {$(this).parent().find('.ok').fadeOut();};break;}
+            case 'tel': {if ($(this).val()=="") {$(this).parent().find('.ok').fadeOut();break;}
+            var filter = /^(\+[1-9]{2}|0|(00)[1-9]{2})[1-9][0-9]{8}[-]?$/;
+            if (!filter.test($(this).val())) {$(this).parent().find('.ok').fadeIn();}
+            else {$(this).parent().find('.ok').fadeOut();};break;}
+            case 'bericht': {if ($(this).val()=="") {$(this).siblings('.nok').fadeIn();}break;}
+        };
+    });
+    $(':reset').click(function() {$('.ok').hide();$('.nok').hide();
+    });
+    $('form').submit(function(e) {e.preventDefault();var ok=0;
+        if (($('#naam').val())=="") {$('#naam').siblings('.nok').fadeIn();ok=1;}
+        if ($('#email').val()!="") {var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+            if (!filter.test($('#email').val())) {$('#email').parent().find('.ok').fadeIn();ok=1;}
+            else {$(this).parent().find('.ok').fadeOut();}}
+        else {$('#email').siblings('.nok').fadeIn();$('#email').parent().find('.ok').fadeOut();ok=1;}
+        if ($('#tel').val()!="") {var filter = /^(\+[1-9]{2}|0|(00)[1-9]{2})[1-9][0-9]{8}[-]?$/;
+            if (!filter.test($('#tel').val())) {$('#tel').parent().find('.ok').fadeIn();ok=1;}
+            else {$('#tel').parent().find('.ok').fadeOut();}}
+        else {$('#tel').parent().find('.ok').fadeOut();}
+        if ($('#bericht').val()=="") {$('#bericht').siblings('.nok').fadeIn();ok=1;}
+        if (ok==0) {var dt= $('form').serialize();
+        $.get("php/contact.php", dt, function(data) {
+        $('#zp').html('<div class="note zend"><p>Hallo <b>'+data+'</b> bedankt voor het bericht.</p><p>Uw bericht wordt zo spoedig mogelijk behandeld.</p></div>');
+        $('.zend').fadeOut(9000);});}
+    });
+   
+    });// ** einde doc.ready **
+
+// Opmaak Mind
+function mind(lev, sc){
+    intro="<h2>Master Mind game</h2><p><sup>(raad de kleurcode)</sup></p>\n\
+    <p>kies uw kleuren:</p>";
+    for (var i=0;i<lev;i++){intro+="<div class='bolg kl"+i+"'></div>";}
+    intro+="<p><b>level: "+lev+" - score: "+sc+" punten</b></p><p></p><h3>Top Score: "+localStorage.score+"</h3>";
+    $('.uitleg').html(intro);
+    
+    var uk="<p>het was: </p>";
+    for (var i=0;i<5;i++){
+    var k=Math.floor(Math.random()*lev);
+    uitk[i]=k;
+    uk+="<div class='bolg kl"+k+"'></div>";}
+            
+    var bord="";
+    var gatg="";
+    var gat="";
+    for (var i=0;i<5;i++){
+    gatg+= "<div class='gatg g"+i+"'></div>"; 
+    gat+= "<div class='gat k"+i+"'></div>";}
+    for (var i=0;i<10;i++){
+    bord+= "<div class='blok lg"+i+"'>"+gatg+"</div><div class='blok lk"+i+"'>"+gat+"</div>";}
+    $('.mmind').html("<div class='board'>"+bord+"</div>");
+    
+    //kleur zetten Mind
+    $('.bolg').click(function() {
+        var pos=".lg"+w+" .g"+v+"";
+        kleur= $(this).attr('class');
+        $(pos).addClass(kleur);
+        gok[v]=kleur.slice(-1);
+        v++;
+        if (v==5) {var p=0;for (var i=0;i<5;i++){uik[i]=uitk[i];};
+            for (var x=0;x<5;x++){if (gok[x]==uik[x]){gok[x]=10;uik[x]=11;var pos=".lk"+w+" .k"+p+"";
+                $(pos).addClass('bol kl10');p++;}}
+            if (p==5){gew='<p><b>goed gedaan!</b></p>';
+                $('.uitkomst').html(uk).prepend(gew).slideDown(2500).delay(7500).slideUp(2500);
+                sc+=(10-w)*lev*2;if (sc>localStorage.score) {localStorage.score=sc;}
+                lev++;v=0;w=0;mind(lev, sc);} 
+            else {for (var y=0;y<5;y++){for (var x=0;x<5;x++){if (gok[y]==uik[x]){gok[y]=10;uik[x]=11;var pos=".lk"+w+" .k"+p+"";
+                $(pos).addClass('bol kl11');p++;}}}
+            v=0;w++; if (w==10){gew='<p><b>helaas verloren!</b></p>';
+                $('.uitkomst').html(uk).prepend(gew).slideDown(2500).delay(7500).slideUp(2500);
+                w=0;sc=0;lev=3;mind(lev, sc);}}}
+    });
+}
+    
+</script>
+</head>
+
+<header>
+    
+<!-- <h1>Erwin van Houten Showcase</h1> -->
+<div class="logo">
+    <img src="images/planet-icon.png" alt="aarde" title="Fantasy Friends" id="logo">
+    <p id="t1"><b>Fantasy</b></p><p id="t2"><b>Friends</b></p>
+</div>
+
+<div class="keuzen balk">
+    <nav>
+    <button class="geel" id="k0">CV</button>
+    <button class="geel" id="k1">boek</button>
+    <button class="geel" id="k2">gallery</button>
+    <button class="geel" id="k3">game</button>
+    <button class="geel" id="k4">contact</button>
+    </nav>
+</div>
+</header>
+
+<section class="boek">
+</section>
+
+<footer>
+<div class="balk onder">
+    <button class="geel">(f.f.) Erwin van Houten 2017</button>
+</div>
+</footer>
+    
+</body>
+</html>

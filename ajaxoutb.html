@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Showcase</title>
+    <style>
+        html {margin:0;padding:0;}
+        body {background-color:beige;color:black;font-family:Arial, Helvetica, sans-serif; width:100%;margin:0;padding:0;font-size:16px;}
+        
+    </style>
+    <script src="jquery/jquery-3.1.1.js"></script>
+    <script>
+            
+    $(document).ready(function(){
+    var database="test";
+    var tabel="berichtjes";
+    var kolommen="naam,bericht";
+    var waarden="'Bee','Dit is een testje'";
+    var login="nee";
+    var connect="nee";
+    
+    
+    $('#begin').html('<label>Je naam: <input name="naam"></label><button id="naam">ok</button>');
+    $('#naam').click(function(){kolommen="naam";waarden=$('input').val();
+    var input="SELECT "+kolommen+" FROM "+tabel+" WHERE naam = '"+waarden+"'";
+    $.get("src/Mappen/Data/testDBoutputDBb.php", {update:input,db:database,kl:kolommen}, function( data ) {    
+        if (data==waarden) {$('#begin').html('<h1>Welkom '+data+'</h1>');}
+        else {var input="INSERT INTO "+tabel+" ("+kolommen+") VALUES ('"+waarden+"')";
+        $.get("src/Mappen/Data/testDBupdateDBb.php", {update:input,db:database}, function( data ) {
+        $('#begin').html('<p>'+data+'</p>');//kan weg
+        });    
+        };
+        login="ja";
+        });
+    $('.start').html('<h3>Je berichtje: </h3><textarea rows="3" cols="40" name="bericht"></textarea><br><button id="bericht">verstuur</button>');
+    $('#bericht').click(function(){alert(login);});
+    });
+    
+    setInterval(function(){if (login=="ja" && connect=="nee"){$('.start').append('<p>testje</p>');}},20000);
+    var input="SELECT id,naam FROM berichtjes WHERE naam = '"+waarden+"'";
+    $.get("src/Mappen/Data/testDBoutputDBb.php", {update:input,db:database,kl:kolommen}, function( data ) {});
+    });
+            
+    </script>
+</head>
+<body>
+    <div id="begin"></div>
+    <div class="start"></div>
+</body>
+</html>

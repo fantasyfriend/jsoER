@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Showcase</title>
+    <style>
+        html {margin:0;padding:0;}
+        body {background-color:beige;color:black;font-family:Arial, Helvetica, sans-serif; width:100%;margin:0;padding:0;font-size:16px;min-height:800px;} 
+        table {border:1px solid red;}
+        td {background-color: plum;color:black;}
+        .green {background-color:lightgreen;}
+        .red {background-color:lightsalmon;}
+        
+        .centraal {position:absolute;top:100px;left:100px;}
+        .center {display:inline;margin:0 30%;}
+        
+        section {border:2px solid black;background-color:palegoldenrod ;display:inline-block;box-shadow:black 3px 3px 3px;padding:10px;}
+    </style>
+    <script src="jquery/jquery-3.1.1.js"></script>
+    <script>
+    var database="test";
+    var tabel="friend";
+    
+    $(document).ready(function(){
+        
+    $('.p1').toggle();
+    if (localStorage.webname){$('#on').val(localStorage.webname);}
+    if (localStorage.code){$('#oc').val(localStorage.code);}
+    
+    $('.centraal').each(function(){
+    var xdiv=$(this).width(); var ydiv=$(this).height();
+    var xwin=$(window).width(); var ywin=$(window).height();
+    var xloc=(xwin/2)-(xdiv/2); var yloc=(ywin/2)-(ydiv/2);
+    $(this).css({'top':yloc+'px','left':xloc+'px'});
+    });    
+    
+    $('.b1').click(function(){
+        $('.p1').toggle();
+        $('.p2').toggle();
+    });
+    
+    $('.b2').click(function(){
+        $('.p1').toggle();
+        $('.p3').toggle();
+    });
+    
+    $('.b3').click(function(){
+       
+        var iname=$('#in').val();var icode=$('#ic').val();
+        $.get("src/Mappen/Data/aanmelden.php", {n:iname,c:icode}, function( data ) {    
+        alert(data);
+        
+        $('.p3').toggle();
+        $('.p2').toggle();
+        localStorage.webname=iname;$('#on').val(iname);
+        localStorage.code=icode;$('#oc').val(icode);
+        $('.b4').addClass('green');
+        });
+    });
+    
+    $('.b4').click(function(){
+       
+        var iname=$('#in').val();var icode=$('#ic').val();
+        $.get("src/Mappen/Data/aanmelden.php", {n:iname,c:icode}, function( data ) {    
+        alert(data);
+        
+        $('.p3').toggle();
+        $('.p2').toggle();
+        localStorage.webname=iname;$('#on').val(iname);
+        localStorage.code=icode;$('#oc').val(icode);
+        $('.b4').addClass('green');
+        });
+    });
+    
+        
+    var input="SHOW FIELDS FROM "+tabel;
+    
+    $.get("src/Mappen/Data/testDBoutputDBtables.php", {update:input,db:database}, function( data ) {    
+   
+    $('.start').html(data);
+    });        
+    
+    $('.b').click(function(){var i=$('.tabel:checked').map(function() {
+    return this.value;}).get();
+    var kolommen=String(i);
+    var input="SELECT "+kolommen+" FROM "+tabel;
+    
+    $.get("src/Mappen/Data/testDBoutputDB.php", {update:input,db:database,kl:kolommen}, function( data ) {    
+   
+    $('.start2').html(data);
+    });
+    });
+
+    });
+            
+    </script>
+</head>
+<body>
+    <section class='centraal p1' style='display:none'>
+        <h1>Welkom op de Friends site</h1>
+        <button class="center b1">Ik ben nieuw</button><br><br>
+        <button class="center b2">Ik ben al een Friend</button>
+    </section>
+    <section class='centraal p2' style='display:none'>
+        <h1>Aanmelden</h1>
+        <label>kies een webnaam:<input type="text" name="webname" id="in"></label><br><br>
+        <label>kies een wachtwoord:<input type="text" name="code" id="ic" placeholder="8-12 karakters"></label><br><br>
+        <button class="b3">verstuur</button>
+    </section>
+    <section class='centraal p3' style='display:none'>
+        <h1>Login</h1>
+        <label>webnaam:<input type="text" name="webname" id="on"></label><br><br>
+        <label>wachtwoord:<input type="text" name="code" id="oc"></label><br><br>
+        <button class="b4">ga naar de friendsite</button>
+    </section>
+    <div class="start"></div>
+    <button class="b">ok</button>
+    <div class="start2"></div>
+</body>
+</html>

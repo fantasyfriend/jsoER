@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Testcase</title>
+    <style>
+        html {margin:0;padding:0;}
+        body {background-color:beige;color:black;font:Arial, Helvetica, sans-serif; width:100%;margin:0;padding:0;font-size:16px;} 
+        table {border:1px solid red;}
+        td {background-color: plum;color:black;}
+        .kop td {background-color: lightpink;}
+        option {background-color: lavender;z-index: 5;}
+        td input[type="checkbox"] {float: left;margin: 0 auto;width: 100%;}
+    </style>
+    <script src="jquery/jquery-3.1.1.js"></script>
+    <script>
+    
+    $(document).ready(function(){
+     
+    var order="showt";
+    var info1='';//tabel
+    var info2='';//kolommen
+    var info3='';//waarden
+    $.get("ajaxtestDB.php", {keuze:order,data1:info1,data2:info2,data3:info3}, function( data ) {    
+    $('.start').html(data);
+     
+    $('button').click(function(){
+    var info1=this.value;
+    var order="showf";
+        
+    $.get("ajaxtestDB.php", {keuze:order,data1:info1,data2:info2,data3:info3}, function( data ) {   
+    $('.start').html(data);
+    
+    $('.set').hover(function(){$(this).css({'overflow': 'visible','width': ''+$(this).outerWidth()+'px'});},function(){$(this).css('overflow-x','hidden');});
+    
+    $('#input').click(function(){
+    var x=[];for (var t=0;t<$('.input').length;t++) {
+        if ($('.input').eq(t).hasClass('set')) {var y=[];($('.input').eq(t)).find('option:selected').each(function() {y.push(this.value);});x[t]="'"+y+"'";}
+        else {x[t]="'"+$('.input')[t].value+"'";}
+        };
+        
+    var info3=String(x);alert(info3);
+    var i=$('.field').map(function() {return this.value;}).get();
+    var info2=String(i);alert(info2);//info2="firstname,lastname,email";info3="'er','hup','erw@pop.com'";
+    var order="input";
+    $.get("ajaxtestDB.php", {keuze:order,data1:info1,data2:info2,data3:info3}, function( data ) {   
+    $('.start').append(data);
+    });
+    });
+    
+    $('#show').click(function(){var i=$('.field:checked').map(function() {
+    return this.value;}).get();
+    var info2=String(i);
+    var order="select";
+        
+    $.get("ajaxtestDB.php", {keuze:order,data1:info1,data2:info2,data3:info3}, function( data ) {   
+    $('.start2').html(data);
+    });
+    });
+    });
+    });
+    });
+
+    });
+            
+    </script>
+</head>
+<body>
+    <div class="start2"></div>
+    <div class="start"></div>
+</body>
+</html>

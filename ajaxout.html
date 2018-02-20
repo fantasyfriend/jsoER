@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Showcase</title>
+    <style>
+        html {margin:0;padding:0;}
+        body {background-color:beige;color:black;font:Arial, Helvetica, sans-serif; width:100%;margin:0;padding:0;font-size:16px;} 
+    </style>
+    <script src="jquery/jquery-3.1.1.js"></script>
+    <script>
+            
+    $(document).ready(function(){
+    var database="test";
+    var tabel="myguests";
+    var kolommen="firstname,lastname,email";
+    var waarden="'groupje','Nolo','nollo@nee.com'";
+    var input="INSERT INTO "+tabel+" ("+kolommen+") VALUES ("+waarden+")";
+    
+        
+    //var input="INSERT INTO MyGuests (firstname, lastname, email)VALUES ('ohn', 'oe', 'ohn@example.com')";
+    //$.get("src/Mappen/Data/testDBcreateDB.php", {naam:"CREATE DATABASE testioso"}, function( data ) {
+    $.get("src/Mappen/Data/testDBupdateDB.php", {update:input,db:database}, function( data ) {    
+   
+    $('.start').html('<p>'+data+'</p>');
+    });
+
+    });
+            
+    </script>
+</head>
+<body>
+    <div class="start"></div>
+</body>
+</html>
