@@ -1,0 +1,11 @@
+<form>
+    
+  <label for="NrAantal">Aantal: </label>
+  <input type="number"  id="NrAantal" [(ngModel)]="aantal" name="NrAantal" >
+  <br/>
+  <label for="NrEenheidsprijs">Eenheidsprijs: </label>
+  <input type="number"  id="NrEenheidsprijs" [(ngModel)]="eenheidsprijs" name="NrEenheidsprijs" step="0.01" >
+  <br><br>
+  <span>Totaal: {{ totaal() }} Euro</span>
+  
+</form>

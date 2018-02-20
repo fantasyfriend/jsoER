@@ -1,0 +1,20 @@
+<h1>{{ titel }}</h1>
+<form #frmCur="ngForm">
+  
+  <input #nr type="number" min="1" name="in" required [(ngModel)]="in" (focus)="nr.select();" #txtIn="ngModel" autofocus>
+  <!-- name nodig bij invoer veld voor ngModel!! -->
+  <span style="color:red" *ngIf="txtIn.dirty  && txtIn.invalid">
+    <span *ngIf="txtIn.errors.required">Vul een getal in aub</span>
+  </span>
+  <select [(ngModel)]="curIn" name="curIn">
+    <option value="EUR" selected>EUR</option>
+    <option *ngFor="let cur of geld" [ngValue]="cur">{{cur}}</option>
+  </select>
+  <input type="submit" value="Converteer" [disabled]="!frmCur.form.valid " (click)="verwerk();nr.focus();" />
+  <select [(ngModel)]="curUit" name="curUit">
+    <option value="EUR">EUR</option>
+    <option *ngFor="let cur of geld" [ngValue]="cur">{{cur}}</option>
+  </select>
+  <input #nr type="number" name="uit" required [(ngModel)]="uit" #txtUit="ngModel" [disabled]="true">
+  
+</form>

@@ -1,0 +1,17 @@
+<h1>ngFor</h1>
+<p>ngFor voegt een element toe aan de DOM-tree voor elk element in een lijst</p>
+<h2>Piraten</h2>
+<form>
+  
+  
+  <label for="txtNaam">Naam: </label>
+  <input #txt type="text"  id="txtNaam" [(ngModel)]="naam" name="txtNaam" (focus)="txt.setSelectionRange(0,0);" autofocus>
+  <button (click)="toevoegen();txt.focus()" [disabled]="naam.length==0?true:false" >Toevoegen</button>
+</form>
+<ul *ngIf="piraten.length > 0">
+  <li  *ngFor="let piraat of piraten">{{ piraat }}</li>
+</ul>
+
+<h4>uitbreiding (oef)</h4>
+Voeg een formulier met een knop en een tekstvak toe.
+Als de gebruiker op de knop klikt, wordt een piraat met de ingetikte naam toegevoegd aan de lijst.

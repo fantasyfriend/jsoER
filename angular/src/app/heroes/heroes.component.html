@@ -1,0 +1,16 @@
+<h1>{{ titel }}</h1>
+enkel beschikbare helden tonen<input type="checkbox" name="beschikbareHelden" required [(ngModel)]="beschikbareHelden">
+<table>
+    <tr *ngFor="let h of hero">
+      <div *ngIf="!beschikbareHelden">
+      <td (click)="geefNaam(h.naam)"><button>{{h.id}}</button></td>
+      <td>{{h.naam}}</td>
+      </div>
+      <div *ngIf="beschikbareHelden && h.beschikbaar">
+      <td (click)="geefNaam(h.naam)"><button>{{h.id}}</button></td>
+      <td>{{h.naam}}</td>
+      </div>
+    </tr>
+  </table>
+<p>{{ activeNaam }}</p>
+<p>{{ isVeel() }}</p>

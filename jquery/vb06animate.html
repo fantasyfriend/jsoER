@@ -1,31 +1,47 @@
 <!DOCTYPE html>
 <html lang="nl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>het beweegt</title>
     <style>
-        div{
+        div {
             width: 200px;
             height: 200px;
         }
+<<<<<<< HEAD
         #rood{
             background-color:red;
             opacity:1;
             display:none;
+=======
+
+        #rood {
+            background-color: red;
+            opacity: 1;
+            position: absolute;
+        }
+        img {
+>>>>>>> 10ac3980364e43c4b98d486fad80f662a90331f3
            
         }
     </style>
     <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script
-    src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <script>
+<<<<<<< HEAD
         $(function(){
             $('#rood').slideDown(5000);
+=======
+        $(function () {
+           
+           $('#rood').animate({left:'+=400px'},2000,'easeOutBounce', function(){$('#rood').css('height','400')});
+            //$('img').slideDown(5000);
+>>>>>>> 10ac3980364e43c4b98d486fad80f662a90331f3
             //$('#foto').show(5000);
             //$('#rood').show(5000);
-            //$('#foto').hide();
             //$('#foto').show();
             //$('#rood').fadeIn(2000);
             //$('#rood').fadeTo(2000, 1);
@@ -46,10 +62,13 @@
         })
     </script>
 </head>
+
 <body>
 
-<div id="rood">
-
-</div>
+    <div id="rood">
+        <img src="koptelefoon.jpg"/>
+    </div>
+    <button onclick="alert('hallo');">Klik</button>
 </body>
+
 </html>

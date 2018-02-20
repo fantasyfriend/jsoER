@@ -1,0 +1,31 @@
+{
+  "name": "sassvb",
+  "version": "0.0.1",
+  "description": "Enkele SASS voorbeelden",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:sass": "node-sass --output-style expanded scss/ -o css/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/betavzw/jsonj2017.git"
+  },
+  "keywords": [
+    "sass"
+  ],
+  "author": "Jef",
+  "license": "Beerware",
+  "bugs": {
+    "url": "https://github.com/betavzw/jsonj2017/issues"
+  },
+  "homepage": "https://github.com/betavzw/jsonj2017#readme",
+  "devDependencies": {
+    "browser-sync": "^2.23.6",
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^3.9.2",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^3.1.0",
+    "node-sass": "^4.7.2"
+  }
+}
