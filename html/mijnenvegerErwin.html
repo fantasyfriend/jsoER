@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mijnenveger</title>
+    <style>
+    :root{--x:16;--y:16;--b:10;}
+    #speelveld{border:2px solid red;position:relative;background-color: lightgrey;}
+    .blokje{width:26px;height:26px;background-color:beige;border:1px solid green;box-shadow:black 2px 2px 1px 1px; 
+    position:absolute;margin:1px;}
+    .blokje:hover{background-color: khaki;box-shadow:black 1px 1px 0px 1px;}
+    .leeg{width:30px;height:30px;background-color:lightgrey;border:1px solid grey;box-shadow: none;
+    position:absolute;margin: 0 ;}
+    .r0{background-color:lightgrey;}
+    .r1{background-color:green;}
+    .r2{background-color:red;}
+    </style>
+    <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script>
+
+        
+        var x=16;//aantal kolommen
+        var y=16;//aantal rijen
+        var b=10;//aantal bommen
+        var bom=new Array(0);//plaats van bom
+        var p=new Array(x*y);//array posities
+        for(var i=0;i<p.length;i++){p[i]=0;};
+
+        function frame(x,y,b){
+            field.innerHTML="<div id='speelveld' style='width:"+(x*32)+"px;height:"+(y*32)+"px;'></div>";
+            var html="";
+            for(var j=0;j<y;j++){
+                for(var i=0;i<x;i++){
+                    html+="<div class='blokje' id='"+((j==0?0:j*x)+i)+"' onclick='klikLinks(event,"+((j==0?0:j*x)+i)+")' "+
+                        "oncontextmenu='klikRechts(event,"+((j==0?0:j*x)+i)+")' style='left:"+(i*32)+"px;top:"+(j*32)+"px;'></div>"
+                }
+            }
+            speelveld.innerHTML=html;
+        }
+
+        function klikLinks(event,xy){
+            $('#'+xy).removeClass().addClass('leeg');
+        }
+
+        function klikRechts(event,xy){
+            event.preventDefault();
+            if($('#'+xy).hasClass('blokje')){
+            $('#'+xy).removeClass('r'+p[xy]).addClass('r'+(p[xy]>2?p[xy]=0:p[xy]+=1));
+            }
+        }
+
+        function bommen(b){
+            while(bom.length<b){
+                var x=Math.floor(Math.random()*p.length);
+                if($.inArray(x, bom)){bom.push(x)};
+            }
+        }
+
+                
+
+    $(function(){
+        frame(x,y,b);
+        bommen(b);
+
+    });
+
+    </script>
+</head>
+<body>
+    <div id="field"></div>
+    <button id="btn" onmousedown="actie(event)">test</button>
+    
+</body>
+</html>
