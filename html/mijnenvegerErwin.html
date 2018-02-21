@@ -20,11 +20,12 @@
     <script>
 
         
-        var x=10;//aantal kolommen
+        var x=16;//aantal kolommen
         var y=10;//aantal rijen
         var b=10;//aantal bommen
         var bom=new Array(0);//plaats van bom
         var p=new Array(x*y);//array posities
+        var gb=new Array(0);//plaats gecheckt zonder bom
         for(var i=0;i<p.length;i++){p[i]=0;};
 
         function frame(x,y,b){
@@ -42,13 +43,23 @@
         function klikLinks(event,xy){
             $('#'+xy).removeClass().addClass('leeg');
             if($.inArray(xy, bom) !== -1){$('#'+xy).text("x");}
-            else{var a=0;
-            for(var j=-1*y;j<2*y;j+=y){
-                for(var i=-1;i<2;i++){var z=xy+j+i;
-                if($.inArray(z, bom) !== -1){a++}} 
+            else{geenBom(xy)}
+        }
+
+        function geenBom(xy){
+            $('#'+xy).addClass("leeg o");
+            var a=0;var aa=0;
+            for(var j=-1*x;j<2*x;j+=x){
+                for(var i=xy%x==0?0:-1;i<((xy+1)%x==0?1:2);i++){var z=(xy+j)+i;
+                    if(z>=0 && z<x*y){
+                        if($.inArray(z, bom) !== -1){a++}
+                        else if(!$('#'+z).hasClass('o') && $.inArray(z, gb) == -1){gb.push(z);aa++}
+                    }
+                } 
             }
-            $('#'+xy).text(""+a);
-            }
+            $('#'+xy).text(""+a==0?"":a).css("color", "rgb("+(0+(60*(a==0?1:a>4?4.2:a)))+","+(255-(60*(a==0?1:a>4?4.2:a)))+",0)");
+            if(a>0){for(var i=0;i<aa;i++){gb.pop();}};
+            if(gb.length>0){let next=gb[0];gb.splice(0,1);geenBom(next);}
         }
 
         function klikRechts(event,xy){
