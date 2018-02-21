@@ -6,30 +6,40 @@
     <title>Mijnenveger</title>
     <style>
     :root{--x:16;--y:16;--b:10;}
-    #speelveld{border:2px solid red;position:relative;background-color: lightgrey;}
+    #mvWrapper{background-color: crimson;box-shadow: black 4px 4px 2px 2px;display:inline-block;padding:8px;
+        border-bottom:2px solid darkred;border-right:2px solid darkred;border-top:2px solid red;border-left:2px solid red;}
+    #speelveld{border-bottom:2px solid red;border-right:2px solid red;border-top:2px solid darkred;border-left:2px solid darkred;
+    position:relative;background-color: lightgrey;margin:0 auto;}
     .blokje{width:20px;height:26px;background-color:beige;border:1px solid green;box-shadow:black 2px 2px 1px 1px; 
     position:absolute;margin:1px;font-size:24px;font-weight: 900;padding-left:6px;}
     .blokje:hover{background-color: khaki;box-shadow:black 1px 1px 0px 1px;}
     .leeg{width:22px;height:30px;background-color:lightgrey;border:1px solid grey;box-shadow: none;
     position:absolute;margin:0;font-size:24px;font-weight: 900;padding-left:8px;}
+    .explo{background:radial-gradient(lightgrey,red,lightgrey,black); }
     .r0{color:lightgrey;}
     .r1{color:green;}
     .r2{color:red;}
+    #klok{font-size: 2em;background-color: lightgray;margin:2px;padding:4px;float:right;
+        border-bottom:2px solid grey;border-right:2px solid grey;border-top:2px solid white;border-left:2px solid white;}
+    #titel{display:inline-block;text-shadow: 3px 3px 2px black;color:beige;margin:4px 16px 16px 8px;}
     </style>
     <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script>
 
-        
-        var x=16;//aantal kolommen
-        var y=10;//aantal rijen
-        var b=10;//aantal bommen
+        // *** speelveld ***
+        var x=12;//aantal kolommen
+        var y=8;//aantal rijen
+        var b=8;//aantal bommen
         var bom=new Array(0);//plaats van bom
-        var p=new Array(x*y);//array posities
         var gb=new Array(0);//plaats gecheckt zonder bom
+        var p=new Array(x*y);//array posities
         for(var i=0;i<p.length;i++){p[i]=0;};
+        var sec=0,min=0,tijd=null;
+        var totaal=0;
+        var titel="MijnenVeger";
 
         function frame(x,y,b){
-            field.innerHTML="<div id='speelveld' style='width:"+(x*32)+"px;height:"+(y*32)+"px;'></div>";
+            field.innerHTML="<div id='mvWrapper'><h1 id='titel'>"+titel+"</h1><div id='klok'>00:00</div><div id='speelveld' style='width:"+(x*32)+"px;height:"+(y*32)+"px;'></div></div>";
             var html="";
             for(var j=0;j<y;j++){
                 for(var i=0;i<x;i++){
@@ -41,13 +51,16 @@
         }
 
         function klikLinks(event,xy){
-            $('#'+xy).removeClass().addClass('leeg');
-            if($.inArray(xy, bom) !== -1){$('#'+xy).text("x");}
+            if(sec==0 && min==0){tijd=setInterval(klok,1000);}
+            if($.inArray(xy, bom) !== -1){
+                $('#'+xy).removeClass().addClass('leeg explo');
+                showBom();
+            }
             else{geenBom(xy)}
         }
 
         function geenBom(xy){
-            $('#'+xy).addClass("leeg o");
+            $('#'+xy).removeClass().addClass("leeg o");totaal++;
             var a=0;var aa=0;
             for(var j=-1*x;j<2*x;j+=x){
                 for(var i=xy%x==0?0:-1;i<((xy+1)%x==0?1:2);i++){var z=(xy+j)+i;
@@ -60,10 +73,12 @@
             $('#'+xy).text(""+a==0?"":a).css("color", "rgb("+(0+(60*(a==0?1:a>4?4.2:a)))+","+(255-(60*(a==0?1:a>4?4.2:a)))+",0)");
             if(a>0){for(var i=0;i<aa;i++){gb.pop();}};
             if(gb.length>0){let next=gb[0];gb.splice(0,1);geenBom(next);}
+            if(totaal==(x*y)-b){alert('gewonnen!');showBom();}
         }
 
         function klikRechts(event,xy){
             event.preventDefault();
+            if(sec==0 && min==0){tijd=setInterval(klok,1000);}
             if($('#'+xy).hasClass('blokje')){
             $('#'+xy).removeClass('r'+p[xy]).addClass('r'+(p[xy]>2?p[xy]=0:p[xy]+=1)).text(p[xy]==1?"v":p[xy]==2?"?":"");
             }
@@ -76,8 +91,17 @@
             };alert(bom);
         }
 
-                
+        function showBom(){
+            for(bb in bom){$('#'+bom[bb]).text("x");}
+            clearInterval(tijd);
+            //$('blokje').removeAttr('onclick');
+        }
 
+        function klok(){
+            sec++;if(sec>59){sec=0;min++;}
+            $('#klok').text((min<10?"0"+min:min)+":"+(sec<10?"0"+sec:sec));
+        }
+        
     $(function(){
         frame(x,y,b);
         bommen(b);
