@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>jQuery, AJAX en JSON</title>
+    <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+    <h1>Overzicht planten</h1>
+    <ul id="scores"></ul>
+    <script>
+    $(document).ready(function(){
+        $.ajax({
+            url: "http://127.0.0.1:1337/scores.json",
+            contentType: "application/json",
+            crossDomain:true,
+            dataType:"json",   
+            success: function(json){
+                $.each( json, function(k,v){
+                    $("#scores").append("<li>"+v.speler1+"</li>");
+                });
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown){
+                alert("Status: " + textStatus);alert("Error: " + errorThrown);}
+        });
+    });
+</script>
+</body>
+</html>

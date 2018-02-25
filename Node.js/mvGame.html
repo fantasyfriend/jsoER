@@ -50,16 +50,18 @@
     @media screen and (max-width: 959px) {
     #gamewrapper{display:grid;grid-template-columns:auto}
     #info{grid-column-start: 1;grid-column-end: 2;}
+    #scores{display:grid;grid-template-columns:1fr 1fr;}
     }
 
     </style>
     <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script>
+        var naam="Erwin"//test naam
 
         // *** speelveld ***
         var x=8;//aantal kolommen
         var y=8;//aantal rijen
-        var b=8;//aantal bommen
+        var b=10;//aantal bommen
         var bom=new Array(0);//plaats van bom
         var gb=new Array(0);//plaats gecheckt zonder bom
         var p=new Array(x*y);//array posities
@@ -101,6 +103,7 @@
             speelveld.innerHTML=html;
 
             $('#invoer').addClass('none');
+            records();
         }
 
         function frame(x,y){
@@ -108,9 +111,9 @@
             "<div id='pauze' onclick='pauze()'>pauze</div><div id='reset' onclick='reset()'>reset</div></div>";
 
             var html="<div id='invoer' class='pauze'>";
-            html+="<p>breedte: <b id='xx'>4</b></p><input id='x' type='range' onchange='slider()' min='4' max='18' step='2' value='4'>";
-            html+="<p>hoogte: <b id='yy'>4</b></p><input id='y' type='range' onchange='slider()' min='4' max='18' step='2' value='4'><br>";
-            html+="<p>bommen: <b id='bb'>2</b></p><input id='b' type='range' onchange='slider()' min='2' max='5' step='1' value='2'><br>";
+            html+="<p>breedte: <b id='xx'>8</b></p><input id='x' type='range' onchange='slider()' min='4' max='18' step='2' value='8'>";
+            html+="<p>hoogte: <b id='yy'>8</b></p><input id='y' type='range' onchange='slider()' min='4' max='18' step='2' value='8'><br>";
+            html+="<p>bommen: <b id='bb'>10</b></p><input id='b' type='range' onchange='slider()' min='6' max='18' step='4' value='10'><br>";
             html+="<button id='start' onclick='invoer()'>start de game</button>";
             html+="</div>";
             speelveld.innerHTML=html;
@@ -149,7 +152,7 @@
             if(a>0){for(var i=0;i<aa;i++){gb.pop();}};
             if(gb.length>0){let next=gb[0];gb.splice(0,1);geenBom(next);}
             if(totaal==(x*y)-b){showBom();$('#tekst').text('GEWONNEN!').css('margin-left',(-95+(x*16))+'px');
-            alert(((b-m==0?0:(b-m)/step)<<6)+(((x/2)-2)<<3)+((y/2)-2));}
+            gewonnen();}
         }
 
         function klikRechts(event,xy){
@@ -186,9 +189,33 @@
                 $('#bericht').removeClass().addClass('none');}
             }
         }
+
+        function gewonnen(){
+            var id=((b-m==0?0:(b-m)/step)<<6)+(((x/2)-2)<<3)+((y/2)-2)+1;
+            alert(id);
+            $.post( "http://127.0.0.1:1337/zetScore", { name: naam, id: id, score: (min*100)+sec }, function(data){
+                alert(data);} );
+        }
+        function eigenrecords(){
+            $.get( "http://127.0.0.1:1337/haalEigenRecords", { name: naam }, function(data){
+                $.each( data, function(k,v){$("#eigenscore")
+                .append("<li>"+(v.speler1!=naam?'--':v.score1)+":"+(v.speler2!=naam?'--':v.score2)+":"+v.score3+"</li>");
+                }); },"json");
+        }
+        function records(){
+            var id=((b-m==0?0:(b-m)/step)<<6)+(((x/2)-2)<<3)+((y/2)-2)+1;
+            $.get( "http://127.0.0.1:1337/haalRecords", { id: id }, function(data){if(data.length>0){
+            $('#score').html('<table><thead><tr><td colspan="3"><h3>Scores bij '+x+'x'+y+' grid en '+b+' bommen</h3></td></tr><tr><td>N°</td><td>naam</td><td>tijd</td></tr></thead>'+
+                '<tbody><tr><td>1</td><td>'+data[0].speler1+'</td><td>'+data[0].score1+'</td></tr><tr><td>2</td><td>'+data[0].speler2+'</td><td>'+data[0].score2+'</td></tr><tr><td>3</td><td>'+data[0].speler3+'</td><td>'+data[0].score3+'</td></tr></tbody></table>');    
+            }else{$('#score').html('<h3>Nog geen record data beschikbaar!</h3>');}},"json");
+        }
+ 
+    
         
     $(function(){
         frame(x,y);
+        eigenrecords();
+        records();
         
 
     });
@@ -197,12 +224,17 @@
 </head>
 <body>
     <div id="gamewrapper">
-        <div id="info">info</div>
+        <div id="info">
+            <h3>Spelinformatie</h3>
+            <p>Hier komt nog een heleboel spelinformatie. Hoe moet je het spel spelen en hoe gebruik je de score tabellen.</p>
+        </div>
         <div id="field"></div>
-        <div id="scores">scores</div>
+        <div id="scores">
+            <div id="score"></div>
+            <div id="eigenscore"></div>
+        </div>
     </div>
     
-    
-    
+   
 </body>
 </html>
