@@ -29,6 +29,14 @@
     .r1{color:green;}
     .r2{color:red;}
     .r3{color:black;}
+    .bgc0{background-color:rgb(250,200,200); }
+    .bgc1{background-color:rgb(250,150,150); }
+    .bgc2{background-color:rgb(250,100,100); }
+    .bgc3{background-color:rgb(250,50,50); }
+    h3 b{border-radius:15%;border:1px solid grey;box-shadow:black 1px 1px;margin:0 4px 0 3px;}
+    h3 b:hover{box-shadow:none;cursor:pointer;}
+    table{border:1px solid red;border-spacing:0px;}
+    td{border:1px solid grey;}
     #klok{font-size: 2em;background-color: lightgray;margin:2px;padding:4px;float:right;
         border-bottom:2px solid grey;border-right:2px solid grey;border-top:2px solid white;border-left:2px solid white;}
     #titel{display:inline-block;text-shadow: 3px 3px 2px black;color:beige;margin:4px 16px 16px 8px;}
@@ -40,8 +48,9 @@
     #gamewrapper{max-width:1280px;min-width:640px;margin:0 auto;background-color: beige;
         display:grid;grid-template-columns:320px auto 320px;}
     #info{border:1px solid black;}
-    #field{border:1px solid black;justify-self: center;margin:10px 0;}
+    #field{justify-self: center;margin:10px 0;}
     #scores{border:1px solid black;}
+    #score{height:160px;}
    
     @media screen and (max-width: 1279px) {
     #gamewrapper{display:grid;grid-template-columns:auto 360px}
@@ -65,11 +74,12 @@
         var bom=new Array(0);//plaats van bom
         var gb=new Array(0);//plaats gecheckt zonder bom
         var p=new Array(x*y);//array posities
+        var dr=new Array(0);//array data records
         for(var i=0;i<p.length;i++){p[i]=0;};
         var sec=0,min=0,tijd=null;
         var totaal=0;
         var stop=false;
-        var m=2,step=1;
+        var m=6,step=4;
         
         function reset(){
         clearInterval(tijd);
@@ -78,10 +88,11 @@
         min=0;
         tijd=null;
         totaal=0;
-        var m=2,step=1;
+        var m=6,step=4;
         gb=new Array(0);
         bom=new Array(0);
         p=new Array(x*y);for(var i=0;i<p.length;i++){p[i]=0;};
+        var dr=new Array(0);
         
         frame(x,y);
         }
@@ -103,7 +114,6 @@
             speelveld.innerHTML=html;
 
             $('#invoer').addClass('none');
-            records();
         }
 
         function frame(x,y){
@@ -126,6 +136,8 @@
             m=Math.floor(Math.sqrt(x*y)-2);step=Math.floor((x*y)/16);
             $('#b').attr('min', m).attr('max', m+(3*step)).attr('step',step);
             $('#bb').text($('#b').val());
+            b=$('#b').val()*1;x=$('#x').val()*1;y=$('#y').val()*1;
+            records();
         }
 
         function klikLinks(event,xy){
@@ -151,8 +163,7 @@
             $('#'+xy).text(""+a==0?"":a).css("color", "rgb("+(0+(60*(a==0?1:a>4?4.2:a)))+","+(255-(60*(a==0?1:a>4?4.2:a)))+",0)");
             if(a>0){for(var i=0;i<aa;i++){gb.pop();}};
             if(gb.length>0){let next=gb[0];gb.splice(0,1);geenBom(next);}
-            if(totaal==(x*y)-b){showBom();$('#tekst').text('GEWONNEN!').css('margin-left',(-95+(x*16))+'px');
-            gewonnen();}
+            if(totaal==(x*y)-b){$.when( showBom() ).done(function() {$('#tekst').text('GEWONNEN!').css('margin-left',(-95+(x*16))+'px');gewonnen();});}
         }
 
         function klikRechts(event,xy){
@@ -171,9 +182,10 @@
         }
 
         function showBom(){
+            clearInterval(tijd);tijd=false;
             for(bb in bom){$('#'+bom[bb]).addClass("r3").text("x");}
-            clearInterval(tijd);
             $('#bericht').removeClass().addClass('win');
+            if(tijd){alert('tijd niet goed');}
         }
 
         function klok(){
@@ -192,24 +204,39 @@
 
         function gewonnen(){
             var id=((b-m==0?0:(b-m)/step)<<6)+(((x/2)-2)<<3)+((y/2)-2)+1;
-            alert(id);
             $.post( "http://127.0.0.1:1337/zetScore", { name: naam, id: id, score: (min*100)+sec }, function(data){
-                alert(data);} );
+                alert(data);
+                $.when( eigenrecords() ).done(function() {records();});    
+            } );
         }
         function eigenrecords(){
-            $.get( "http://127.0.0.1:1337/haalEigenRecords", { name: naam }, function(data){
-                $.each( data, function(k,v){$("#eigenscore")
-                .append("<li>"+(v.speler1!=naam?'--':v.score1)+":"+(v.speler2!=naam?'--':v.score2)+":"+v.score3+"</li>");
-                }); },"json");
+            $.get( "http://127.0.0.1:1337/haalEigenRecords", { name: naam }, function(data){if(data.length>0){
+                var html="";var tel=0;dr=[];
+                $.each( data, function(k,v){
+                var br=Math.floor((v.id-1)/64);
+                var xr=(Math.floor(((v.id-1)%64)/8)*2)+4;
+                var yr=Math.floor(((v.id-1)%8)*2)+4;
+                var bt=(Math.floor((xr*yr)/16)*br)+Math.floor(Math.sqrt(xr*yr)-2);
+                html+="<tr class='bgc"+br+"'><td>"+xr+"x"+yr+"</td><td>"+bt+"</td><td>"+(v.speler1!=naam?'--':maaktijd(v.score1))+"</td><td>"+(v.speler2!=naam?'--':maaktijd(v.score2))+"</td><td>"+(v.speler3!=naam?'--':maaktijd(v.score3))+"</td></tr>";
+                tel++;if(tel==8){dr.push(html);tel=0;html="";}
+                });
+                if(tel>0){dr.push(html)}; 
+                maaklijst(0);
+                }else{$('#eigenscore').html('<h3>Nog geen eigen records!</h3>');}},"json");
         }
         function records(){
             var id=((b-m==0?0:(b-m)/step)<<6)+(((x/2)-2)<<3)+((y/2)-2)+1;
             $.get( "http://127.0.0.1:1337/haalRecords", { id: id }, function(data){if(data.length>0){
-            $('#score').html('<table><thead><tr><td colspan="3"><h3>Scores bij '+x+'x'+y+' grid en '+b+' bommen</h3></td></tr><tr><td>N°</td><td>naam</td><td>tijd</td></tr></thead>'+
-                '<tbody><tr><td>1</td><td>'+data[0].speler1+'</td><td>'+data[0].score1+'</td></tr><tr><td>2</td><td>'+data[0].speler2+'</td><td>'+data[0].score2+'</td></tr><tr><td>3</td><td>'+data[0].speler3+'</td><td>'+data[0].score3+'</td></tr></tbody></table>');    
+            $('#score').html('<table><thead><tr><td colspan="3"><h3>Scores bij '+x+'x'+y+' grid en '+b+' bommen</h3></td></tr><tr><td>Nr</td><td>naam</td><td>tijd</td></tr></thead>'+
+                '<tbody><tr><td>1</td><td>'+data[0].speler1+'</td><td>'+maaktijd(data[0].score1)+'</td></tr><tr><td>2</td><td>'+data[0].speler2+'</td><td>'+maaktijd(data[0].score2)+'</td></tr><tr><td>3</td><td>'+data[0].speler3+'</td><td>'+maaktijd(data[0].score3)+'</td></tr></tbody></table>');    
             }else{$('#score').html('<h3>Nog geen record data beschikbaar!</h3>');}},"json");
         }
- 
+        function maaktijd(st){
+            return ((st-st%100)/100==0?"00":(st-st%100)/100<10?"0"+(st-st%100)/100:(st-st%100)/100)+":"+(st%100<10?"0"+st%100:st%100);
+        }
+        function maaklijst(deel){
+            $('#eigenscore').html("<table><thead><tr><td colspan='5'><h3>Uw behaalde scores: <b onclick='maaklijst("+(deel==0?dr.length-1:deel-1)+")'>< </b>blad "+(deel+1)+"<b onclick='maaklijst("+(deel==dr.length-1?0:deel+1)+")'> ></b></h3></td></tr><tr><td>grid</td><td>bommen</td><td>1</td><td>2</td><td>3</td></tr></thead><tbody>"+dr[deel]+"</tbody></table>");
+        }
     
     $(function(){
         frame(x,y);

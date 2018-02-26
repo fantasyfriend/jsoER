@@ -1,27 +1,25 @@
 
-var express = require('express');
+var express = require('express');//voor app
 var app = express();
-/* bodyParser: 
-  nodig om invoervelden van form die met method='post' verstuurd is te kunnen verwerken 
-*/
-var bodyParser = require('body-parser');
-app.use(bodyParser.urlencoded({
-    extended: true
-}));
+var bodyParser = require('body-parser');// voor .post
+app.use(bodyParser.urlencoded({extended: true}));
 
 var mysql = require('mysql');
 var connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: '',
-  database: 'test'  
+  password: 'root',//leeg
+  database: 'project',//test
+  root: 3306 //niets 
 });
+
 
 app.all('/*', function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
+
 
 app.get('/haalEigenRecords', function(req, res) {
 	console.log(req.query.name);
