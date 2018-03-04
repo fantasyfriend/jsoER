@@ -337,6 +337,11 @@
             margin-bottom: 24px;
         }
 
+        #forms{
+            display:grid;
+            grid-template-columns: auto
+        }
+
         @media screen and (max-width: 1279px) {
             #mv {
                 display: grid;
@@ -361,26 +366,37 @@
                 grid-column-start: 1;
                 grid-column-end: 2;
             }
-            #scores {
+            #scores, #forms {
                 grid-template-columns: auto auto;
                 justify-content: space-around;
             }
         }
 
-        .testlijst>div{
-            border-left: 1px solid black;cursor:pointer;
-        }
-
-        .testlijst div>div,.testlijst fieldset>fieldset {
+        #c0{min-width:320px;padding:20px;border:1px solid grey;}
+        #c0 fieldset>fieldset,.testlijst fieldset>fieldset {
             margin-left: 24px;cursor:pointer;
             display: none;
         }
-        fieldset{border-top-left-radius:25%;border-bottom-left-radius:25%;padding:0;border-top:1px solid grey;border-right:none;
-        border-left:1px solid grey;border-bottom:none;position:relative;}
-        legend{background-color: aquamarine;border-radius: 15%;cursor:pointer;}
-        legend:hover{background-color: aqua;}
+        fieldset{border-radius:5%;padding:0;position:relative;}
+        legend{background-color: lightgrey;border:1px solid grey;border-radius:5%;}
+        [data-t]>legend{background-color: lightcoral;border-radius: 15%;cursor:pointer;}
+        [data-hc]>legend{background-color: aquamarine;border-radius: 15%;cursor:pointer;}
+        [data-hc]>legend:hover{background-color: aqua;}
         .wis{background-color:crimson;color:beige;border-radius:40%;position:absolute;left:-17px;top:-16px;padding:0 4px;}
         .wis:hover{background-color:red;}
+
+        .opslCat, .opslTaak{visibility:hidden;}
+        .zichtbaar{visibility: visible;}
+        #prullenbak{width:100px;height:100px;border:4px solid black;}
+        [data-t]{border:1px solid red;padding:8px;}
+        [data-hc]{border:1px solid green;padding:8px;max-width:300px;}
+
+        #div1,#div2 {
+    width: 350px;
+    height: 70px;
+    padding: 10px;
+    border: 1px solid #aaaaaa;
+}
     </style>
     <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script>
@@ -392,7 +408,7 @@
 
 
 
-
+        var user_id=1;
         var usernameS = "Erwin"//test usernameS
 
         // *** speelveld ***
@@ -571,6 +587,69 @@
             $('#eigenscore').html("<table><thead><tr><td colspan='5'><h3>Uw behaalde scores: <b onclick='maaklijst(" + (deel == 0 ? dr.length - 1 : deel - 1) + ")'>< </b>blad " + (deel + 1) + "<b onclick='maaklijst(" + (deel == dr.length - 1 ? 0 : deel + 1) + ")'> ></b></h3></td></tr><tr><td>grid</td><td>bommen</td><td>1</td><td>2</td><td>3</td></tr></thead><tbody>" + dr[deel] + "</tbody></table>");
         }
 
+
+        function vulCatLijst(){
+            $.get("http://127.0.0.1:1337/haalCatLijst", { user_id: user_id }, function (data) {
+                var html="",htmlHC="";
+                $.each(data, function (k, v) {
+                    html+="<option value='"+v.id+"'>"+(v.parend_id==0?'':'- ')+v.naam+"</option>";
+                    htmlHC+="<fieldset id='c"+v.id+"' data-hc='"+v.id+"' data-sc='"+v.parend_id+"' ondrop='drop(event)' ondragover='allowDrop(event)' draggable='true' ondragstart='drag(event)'><legend>"+v.naam+"</legend></fieldset>";
+                });
+                $('#c0').html(htmlHC);
+                var sub;$('[data-hc]').each(function () {sub=$(this).data("sc");
+                if(sub>0){$('[data-hc='+sub+']').append($(this));}
+                });
+                $('#catLijst1').html("<option value='0'>Hoofdcategorie</option>"+html);
+                $('#catLijst2').html(html)
+                maakTaakLijst();
+                }, "json");
+        }
+        function categorieAanmaken(){
+            $.post("http://127.0.0.1:1337/maakCat", { user_id:user_id,name: $('#catTitel').val(), parent: $('#catLijst1').val() }, function (data) {
+                $('#opslCat').addClass('zichtbaar');setTimeout(function () {$('#opslCat').removeClass('zichtbaar');}, 2500);
+                vulCatLijst();
+            });
+        }
+        function taakAanmaken(){
+            $.post("http://127.0.0.1:1337/maakTaak", { name: $('#taakTitel').val(), info: $('#taakOmschr').val(), parent: $('#catLijst2').val() }, function (data) {
+                $('#opslTaak').addClass('zichtbaar');setTimeout(function () {$('#opslTaak').removeClass('zichtbaar');}, 2500);
+                vulCatLijst();
+            });
+        }
+        function maakTaakLijst(){
+            $.get("http://127.0.0.1:1337/haalTaaklijst", { user_id: user_id }, function (data) {
+                var html="";
+                $.each(data, function (k, v) {html+="<fieldset id='t"+v.id+"' data-t='"+v.id+"' data-sc='"+v.cat_id+"' draggable='true' ondragstart='drag(event)'><legend>"+v.naam+"</legend><p>"+v.info+"</p></fieldset>";});
+                $('#takenLijst2').html(html);
+                var sub;$('[data-t]').each(function () {sub=$(this).data("sc");
+                if(sub>0){$('[data-hc='+sub+']').append($(this));}
+                });
+                $('#c0 fieldset>legend').click(function(){$(this).parent().children('fieldset').toggle();$(this).parent().children('p').toggle();})
+            }, "json");
+        }
+        function updateTaak(){
+            $.post("http://127.0.0.1:1337/updateTaak", { name: $('#taakTitel').val(), info: $('#taakOmschr').val(), parent: $('#catLijst2').val() }, function (data) {
+                $('#opslTaak').addClass('zichtbaar');setTimeout(function () {$('#opslTaak').removeClass('zichtbaar');}, 2500);
+                maakTaakLijst();
+            });    
+        }
+        function allowDrop(ev) {console.log('allow');ev.preventDefault();}
+        function drag(ev) {console.log('drag');ev.dataTransfer.setData("text", ev.target.id);}
+        function drop(ev) {console.log('drop');ev.preventDefault();var data = ev.dataTransfer.getData("text");
+            if((ev.target.id).charAt(0)=="c" && ev.target.id!=data){
+                if(data.charAt(0)=="t" && ev.target.dataset.hc>0){
+                    $.post("http://127.0.0.1:1337/updateTaak", { id: data.charAt(1), parent: ev.target.dataset.hc }, function (data) {}); 
+                    ev.target.appendChild(document.getElementById(data));console.log(ev.target.dataset.hc);}
+                else if(data.charAt(0)=="c"){
+                    $.post("http://127.0.0.1:1337/updateCat", { id: data.charAt(1), parent: ev.target.dataset.hc }, function (data) {});
+                    ev.target.appendChild(document.getElementById(data));console.log(ev.target.dataset.hc);}
+            }
+            else if(ev.target.id=='prullenbak'){ev.target.appendChild(document.getElementById(data));
+            $('#prullenbak').find('legend').siblings().hide();}
+            
+        }
+
+
         $(function () {
             $('#mv').hide(); $('#Tom').hide(); $('#mm').hide();
 
@@ -582,6 +661,12 @@
             $('.testlijst div>p').click(function(){$(this).parent().children('div').toggle();})
             $('.testlijst fieldset>legend').click(function(){$(this).parent().children('fieldset').toggle();})
             $('.wis').hover(function(){$(this).parent().css('box-shadow','1px 1px 2px 1px red');},function(){$(this).parent().css('box-shadow','none');});
+        
+            vulCatLijst();
+            $("#catMaken").click(categorieAanmaken);
+	        $("#taakMaken").click(taakAanmaken);
+            $('#c0 fieldset>legend').click(function(){$(this).parent().children('fieldset').toggle();})
+        
         });
 
     </script>
@@ -625,10 +710,53 @@
     <div id="Tom" class="mainpart">
         <div class="info">
             <div class="btn right" onclick="menu()">MENU</div>
-            <h3>Blok van Tom</h3>
-            <p>Hier komt nog een heleboel informatie. Hoe en wat je moet doen.</p>
+            <h1>Taken invoeren</h1>
+            <div id="forms">
+                        <form action="addCat" id="addCat" name="addCat" onsubmit="return false;">
+                            <fieldset>
+                                <legend>Nieuwe categorie aanmaken</legend>
+                                <label>Selecteer een categorie of subcategorie:</label>
+                                <select id="catLijst1" name="catLijst1">
+                                </select>
+                                <br/>
+                                <label>Naam van de categorie:
+                                    <input type="text" id="catTitel" name="catTitel" />
+                                </label>
+                                <br/>
+                                <input type="button" value="categorie aanmaken" id="catMaken" />
+                                <p id="opslCat" class="opslCat">De categorie werd opgeslagen.</p>
+                            </fieldset>
+                        </form>
+                        <form action="addTaak" id="addTaak" name="addTaak" onsubmit="return false;">
+                            <fieldset>
+                                <legend>Taak ingeven</legend>
+                                <label>Selecteer een categorie of subcategorie:</label>
+                                <select id="catLijst2" name="catLijst2">
+                                </select>
+                                <br/>
+                                <label>Titel van de taak:
+                                    <input type="text" id="taakTitel" name="taakTitel" />
+                                </label>
+                                <br/>
+                                <label>Beschrijving van de taak:
+                                    <textarea name="taakOmschr" id="taakOmschr" cols="40" rows="6"></textarea>
+                                </label>
+                                <br/>
+                                <input type="submit" value="taak aanmaken" id="taakMaken" />
+                                <p id="opslTaak" class="opslTaak">De taak werd opgeslagen.</p>
+                            </fieldset>
+                        </form>
         </div>
-        <div id="main">main blok</div>
+        </div>
+        <div id="main">
+                    <div>
+                        <h1>Taken Lijst</h1><div id="prullenbak" ondrop='drop(event)' ondragover='allowDrop(event)'>prullenbak</div>
+                        <div id="c0" data-hc="0" ondrop='drop(event)' ondragover='allowDrop(event)'></div>
+                        <div id="takenLijst2"></div>
+                
+                        
+                    </div>
+        </div>
 
     </div>
 
