@@ -102,6 +102,7 @@ app.post('/zetScore', function (req, res) {
         }
         else { console.log('Error while performing select.'); }
     });
+    
 });
 
 
