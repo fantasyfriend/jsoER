@@ -74,7 +74,7 @@ function lijstVullen() {
 			}
 			hoofdcats = unic_hoofdcats;
 			for (var i = 0; i < hoofdcats.length; i++) {
-				$("#takenLijst").append("<div id=C" + hoofdcats[i].CATID + " >" + hoofdcats[i].CATNAME + "</div>");
+				$("#takenLijst").append("<fieldset id=C" + hoofdcats[i].CATID + " ><legend onclick='inuit(" + hoofdcats[i].CATID + ")'><i class='fas fa-book'></i> " + hoofdcats[i].CATNAME + "</i></legend><div class='edit fas fa-pencil-alt' onmouseenter='gain(" + hoofdcats[i].CATID + ")' onmouseleave='gauit(" + hoofdcats[i].CATID + ")'></div></fieldset>");
 				verwerksubcat(hoofdcats[i].CATID, data.result);
 			}
 			verwerkTaken(data.result);
@@ -90,7 +90,7 @@ function verwerksubcat(parentid, data) {
 	}
 	subcats = unic_subcats;
 	for (var i = 0; i < subcats.length; i++) {
-		$("#C" + subcats[i].PARENTCATIDC).append("<div id=C" + subcats[i].CATID + " >" + subcats[i].CATNAME + "</div>");
+		$("#C" + subcats[i].PARENTCATIDC).append("<fieldset id=C" + subcats[i].CATID + " ><legend onclick='inuit(" + subcats[i].CATID + ")'><i class='fas fa-book'></i> " + subcats[i].CATNAME + "</legend><div class='edit fas fa-pencil-alt' onmouseenter='gain(" + subcats[i].CATID + ")' onmouseleave='gauit(" + subcats[i].CATID + ")'></div></fieldset>");
 		verwerksubcat(subcats[i].CATID, data);
 	}
 }
@@ -98,9 +98,14 @@ function verwerksubcat(parentid, data) {
 function verwerkTaken(result) {
 	var taken = result.filter(t => t.PARENTCATIDT != undefined);
 	for (var i = 0; i < taken.length; i++) {
-		$("#C" + taken[i].CATID).append("<div>" + taken[i].TITEL + "<p>" + taken[i].TAAKOMSCHR + "</p>" + "</div>");
+		$("#C" + taken[i].CATID).append("<fieldset><legend><i class='fas fa-clipboard'></i> " + taken[i].TITEL + "</legend><div class='edit fas fa-pencil-alt' onmouseenter='gain(" + taken[i].CATID + ")' onmouseleave='gauit(" + taken[i].CATID + ")'></div><p>" + taken[i].TAAKOMSCHR + "</p>" + "</fieldset>");
 	}
 }
+
+function inuit(x){$('#C'+x).children('fieldset').toggle();}
+function wis(x){alert('wis');}
+function gain(x){$('#C'+x+'>.edit').html('<button>update</button><button>wissen</button>');}
+function gauit(x){$('#C'+x+'>.edit').html('');}
 
 function init() {
 	optionsVullen();
@@ -109,5 +114,7 @@ function init() {
 	btn.onclick = categorieAanmaken;
 	var btn = document.getElementById("taakMaken");
 	btn.onclick = taakAanmaken;
+
+	
 }
 window.onload = init;
