@@ -11,9 +11,9 @@ function maakConnectie() {
     var connection = mysql.createConnection({
         host: 'localhost',
         user: 'root',
-        password: 'root',//leeg
-        database: 'project',//test
-        root: 3306 //niets 
+        password: '',//leeg
+        database: 'test',//test project
+        //niets root: 3306
     });
     connection.connect();
     return connection;
@@ -105,6 +105,91 @@ app.post('/zetScore', function (req, res) {
     
 });
 
+app.get('/haalCatLijst', function (req, res) {
+    console.log(req.query.user_id);
+    var user_id = req.query.user_id;
+    //check user tabel
+    var connection = maakConnectie();
+    connection.query('SELECT * FROM categorie WHERE user_id=?',user_id, function (err, rows, fields) {
+        if (!err) {
+            console.log(rows);
+            var result = JSON.stringify(rows); console.log(result);
+            res.send(result);
+        }
+        else { console.log('Error while performing query haalCatLijst.'); }
+        connection.end();
+    });
+});
+app.post('/maakCat', function (req, res) {
+    console.log(req.body.name);
+    console.log(req.body.parent);
+    var user_id = req.body.user_id;
+    var naam = req.body.name;
+    var parent = req.body.parent;
+    var connection = maakConnectie();
+    console.log('insert');
+    connection.query('INSERT INTO categorie (user_id,naam,parend_id) VALUES ('+user_id+',"' + naam + '",' + parent + ')', function (err, rows, fields) {
+    if (!err) { res.send("inserted"); }
+    else { console.log('Error while performing insert.'); }
+    connection.end();
+    });
+});
+app.post('/maakTaak', function (req, res) {
+    console.log(req.body.name);
+    console.log(req.body.parent);
+    console.log(req.body.info);
+    var naam = req.body.name;
+    var info = req.body.info;
+    var parent = req.body.parent;
+    var connection = maakConnectie();
+    console.log('insert');
+    connection.query('INSERT INTO taak (cat_id,naam,info) VALUES ('+parent+',"' + naam + '","' + info + '")', function (err, rows, fields) {
+    if (!err) { res.send("inserted"); }
+    else { console.log('Error while performing insert.'); }
+    connection.end();
+    });
+});
+app.get('/haalTaakLijst', function (req, res) {
+    console.log(req.query.user_id);
+    var user_id = req.query.user_id;
+    //check user tabel
+    var connection = maakConnectie();
+    connection.query('SELECT * FROM `taak` WHERE cat_id in(select id from categorie where user_id=?)',user_id, function (err, rows, fields) {
+        if (!err) {
+            //console.log(rows);
+            var result = JSON.stringify(rows); console.log(result);
+            res.send(result);
+        }
+        else { console.log('Error while performing query haalTaakLijst.'); }
+        connection.end();
+    });
+});
+app.post('/updateTaak', function (req, res) {
+    console.log(req.body.id);
+    console.log(req.body.parent);
+    var id = req.body.id;
+    var parent = req.body.parent;
+    var connection = maakConnectie();
+    console.log('update');
+    connection.query('UPDATE taak SET cat_id='+parent+' WHERE id=' + id + '', function (err, rows, fields) {
+    if (!err) { res.send("updated"); }
+    else { console.log('Error while performing update in Taak.'); }
+    connection.end();
+    });
+});
+app.post('/updateCat', function (req, res) {
+    console.log(req.body.id);
+    console.log(req.body.parent);
+    var id = req.body.id;
+    var parent = req.body.parent;
+    var connection = maakConnectie();
+    console.log('update');
+    connection.query('UPDATE categorie SET parend_id='+parent+' WHERE id=' + id + '', function (err, rows, fields) {
+    if (!err) { res.send("updated"); }
+    else { console.log('Error while performing update in Cat.'); }
+    connection.end();
+    });
+});
 
 var server = app.listen(1337, function () {
     var host = server.address().address;

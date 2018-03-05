@@ -3,27 +3,52 @@
 
 <head>
     <title>jQuery, AJAX en JSON</title>
+    <style>
+        div{width:100px;height:100px;border:1px solid red;background-color: aquamarine;}
+
+        #div1,#div2 {
+    width: 350px;
+    height: 70px;
+    padding: 10px;
+    border: 1px solid #aaaaaa;
+}
+    </style>
     <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script>
+        function eventje(){
+            $('footer').html('<div id="c4" class="c2"></div>'); 
+            $('.c2').click(function(e){alert(e.target.id);});
+        }
+
+        function test(){alert('ok');}
+
+function allowDrop(ev) {ev.preventDefault();}
+function drag(ev) {ev.dataTransfer.setData("text", ev.target.id);}
+function drop(ev) {ev.preventDefault();var data = ev.dataTransfer.getData("text");
+    ev.target.appendChild(document.getElementById(data));}
+
+
+        $(document).ready(function(){
+            
+            $('.c2').click(function(){test();});
+            eventje();
+            
+        });
+    </script>
 </head>
 <body>
-    <h1>Overzicht planten</h1>
-    <ul id="scores"></ul>
-    <script>
-    $(document).ready(function(){
-        $.ajax({
-            url: "http://127.0.0.1:1337/scores.json",
-            contentType: "application/json",
-            crossDomain:true,
-            dataType:"json",   
-            success: function(json){
-                $.each( json, function(k,v){
-                    $("#scores").append("<li>"+v.speler1+"</li>");
-                });
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown){
-                alert("Status: " + textStatus);alert("Error: " + errorThrown);}
-        });
-    });
-</script>
+    <h1>Testen</h1>
+    <div id='c1' class='c1' ondrop='drop(event)' ondragover='allowDrop(event)' draggable='true' ondragstart='drag(event)'></div>
+    <div id='c2' class='c1'></div>
+    <div id='c3' class='c2'></div>
+
+    <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)">iets in staan</div>
+<div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+<br>
+<div id="drag1" draggable="true" ondragstart="drag(event)">Pick me up</div>
+
+    <footer id="f"></footer>
+    
+    
 </body>
 </html>
