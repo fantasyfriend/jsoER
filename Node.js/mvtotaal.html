@@ -520,7 +520,8 @@
             $('#' + xy).text("" + a == 0 ? "" : a).css("color", "rgb(" + (0 + (60 * (a == 0 ? 1 : a > 4 ? 4.2 : a))) + "," + (255 - (60 * (a == 0 ? 1 : a > 4 ? 4.2 : a))) + ",0)");
             if (a > 0) { for (var i = 0; i < aa; i++) { gb.pop(); } };
             if (gb.length > 0) { let next = gb[0]; gb.splice(0, 1); geenBom(next); }
-            if (totaal == (x * y) - b) { $.when(showBom()).done(function () { $('#tekst').text('GEWONNEN!').css('margin-left', (-95 + (x * 16)) + 'px');$('#bommen').html('<p>Het is je gelukt om alle bommen op te sporen!</p>'); gewonnen(); }); }
+            if (totaal == (x * y) - b) { $.when(showBom()).done(function () { $('#tekst').text('GEWONNEN!').css('margin-left', (-95 + (x * 16)) + 'px');$('#bommen').html('<p>Het is je gelukt om alle bommen op te sporen!</p>'); gewonnen(); });}
+            checkmark();
         }
 
         function bommen(b) {
@@ -582,7 +583,7 @@
             var id = ((b - m == 0 ? 0 : (b - m) / step) << 6) + (((x / 2) - 2) << 3) + ((y / 2) - 2) + 1;
             $.get("http://127.0.0.1:1337/haalRecords", { id: id }, function (data) {
                 if (data.length > 0) {
-                    $('#score').html('<table><thead><tr><td colspan="3"><h3>Scores bij ' + x + 'x' + y + ' grid en ' + b + ' bommen</h3></td></tr><tr><td>Nr</td><td>usernameS</td><td>tijd</td></tr></thead>' +
+                    $('#score').html('<table><thead><tr><td colspan="3"><h3>Scores bij ' + x + 'x' + y + ' grid en ' + b + ' bommen</h3></td></tr><tr><td>Nr</td><td>naam</td><td>tijd</td></tr></thead>' +
                         '<tbody class="bgc0"><tr><td>1</td><td>' + data[0].speler1 + '</td><td>' + maaktijd(data[0].score1) + '</td></tr><tr><td>2</td><td>' + data[0].speler2 + '</td><td>' + maaktijd(data[0].score2) + '</td></tr><tr><td>3</td><td>' + data[0].speler3 + '</td><td>' + maaktijd(data[0].score3) + '</td></tr></tbody></table>');
                 } else { $('#score').html('<h3>Nog geen record data van deze grid!</h3>'); }
             }, "json");
