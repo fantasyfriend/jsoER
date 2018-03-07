@@ -11,9 +11,9 @@ function maakConnectie() {
     var connection = mysql.createConnection({
         host: 'localhost',
         user: 'root',
-        password: '',//leeg
-        database: 'test',//test project
-        //niets root: 3306
+        password: 'root',//leeg
+        database: 'project',//test project
+        root: 3306
     });
     connection.connect();
     return connection;
@@ -128,7 +128,7 @@ app.post('/maakCat', function (req, res) {
     var parent = req.body.parent;
     var connection = maakConnectie();
     console.log('insert');
-    connection.query('INSERT INTO categorie (user_id,naam,parend_id) VALUES ('+user_id+',"' + naam + '",' + parent + ')', function (err, rows, fields) {
+    connection.query('INSERT INTO categorie (user_id,naam,parent_id) VALUES ('+user_id+',"' + naam + '",' + parent + ')', function (err, rows, fields) {
     if (!err) { res.send("inserted"); }
     else { console.log('Error while performing insert.'); }
     connection.end();
@@ -184,7 +184,7 @@ app.post('/updateCat', function (req, res) {
     var parent = req.body.parent;
     var connection = maakConnectie();
     console.log('update');
-    connection.query('UPDATE categorie SET parend_id='+parent+' WHERE id=' + id + '', function (err, rows, fields) {
+    connection.query('UPDATE categorie SET parent_id='+parent+' WHERE id=' + id + '', function (err, rows, fields) {
     if (!err) { res.send("updated"); }
     else { console.log('Error while performing update in Cat.'); }
     connection.end();

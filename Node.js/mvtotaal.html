@@ -147,6 +147,8 @@
             padding-left: 8px;
         }
 
+        #bommen p{margin:4px 0 0 0;}
+
         .explo {
             background: radial-gradient(lightcoral, red, darkred, black);
         }
@@ -342,7 +344,9 @@
             grid-template-columns: auto
         }
 
-        @media screen and (max-width: 1279px) {
+        .alssmal{visibility: hidden}
+
+        @media screen and (max-width: 1260px) {
             #mv {
                 display: grid;
                 grid-template-columns: auto 360px
@@ -351,6 +355,7 @@
                 grid-column-start: 1;
                 grid-column-end: 3;
             }
+            .alssmal{visibility: visible}
         }
 
         @media screen and (max-width: 959px) {
@@ -426,6 +431,7 @@
         var m = 6, step = 4;//instellingen slider grid (m=min)
 
         function reset() {
+            $('#bommen').html('');//extra
             ci();//clear alle intervals
             x = 8; y = 8;
             sec = 0; min = 0;
@@ -441,10 +447,8 @@
 
         function ci() {
             for (var i = 0; i < 2000; i++) { clearInterval(i); }
-            //clearInterval(tijd);
-            console.log(tijd);        
-}
-
+        }
+        
         function invoer() {
             b = $('#b').val() * 1; x = $('#x').val() * 1; y = $('#y').val() * 1;
             p = new Array(x * y); for (var i = 0; i < p.length; i++) { p[i] = 0; };
@@ -485,18 +489,21 @@
             if (sec == 0 && min == 0) { tijd = setInterval(klok, 1000); }
             if ($.inArray(xy, bom) !== -1) {
                 $('#' + xy).removeClass().addClass('leeg explo');
-                showBom(); $('#tekst').text('VERLOREN!').css('margin-left', (-95 + (x * 16)) + 'px');
+                showBom(); $('#tekst').text('VERLOREN!').css('margin-left', (-95 + (x * 16)) + 'px');$('#bommen').html("<p>Helaas!</p>");//extra
             }
-            else { geenBom(xy) }
+            else { checkmark();geenBom(xy);}//extra
         }
 
         function klikRechts(event, xy) {
             event.preventDefault();
-            if (sec == 0 && min == 0) { tijd = setInterval(klok, 1000); alert(tijd); }
+            if (sec == 0 && min == 0) { tijd = setInterval(klok, 1000); }
             if ($('#' + xy).hasClass('blokje')) {
                 $('#' + xy).removeClass('r' + p[xy]).addClass('r' + (p[xy] > 2 ? p[xy] = 0 : p[xy] += 1)).text(p[xy] == 1 ? "v" : p[xy] == 2 ? "?" : "");
+            checkmark();//extra
             }
         }
+        //extra
+        function checkmark(){let aantal=(b-$('.r1').length)+2;$('#bommen').html(aantal==0?'<p>Mischien zijn nu alle bommen gemarkeert!</p>':aantal<0?'<p>Er zijn nu meer markeringen dan er bommen kunnen zijn!</p>':'<p>Er zijn misschien nog '+aantal+' bommen te markeren.</p>');}
 
         function geenBom(xy) {
             $('#' + xy).removeClass().addClass("leeg o"); totaal++;
@@ -513,14 +520,14 @@
             $('#' + xy).text("" + a == 0 ? "" : a).css("color", "rgb(" + (0 + (60 * (a == 0 ? 1 : a > 4 ? 4.2 : a))) + "," + (255 - (60 * (a == 0 ? 1 : a > 4 ? 4.2 : a))) + ",0)");
             if (a > 0) { for (var i = 0; i < aa; i++) { gb.pop(); } };
             if (gb.length > 0) { let next = gb[0]; gb.splice(0, 1); geenBom(next); }
-            if (totaal == (x * y) - b) { $.when(showBom()).done(function () { $('#tekst').text('GEWONNEN!').css('margin-left', (-95 + (x * 16)) + 'px'); gewonnen(); }); }
+            if (totaal == (x * y) - b) { $.when(showBom()).done(function () { $('#tekst').text('GEWONNEN!').css('margin-left', (-95 + (x * 16)) + 'px');$('#bommen').html('<p>Het is je gelukt om alle bommen op te sporen!</p>'); gewonnen(); }); }
         }
 
         function bommen(b) {
             while (bom.length < b) {
                 var x = Math.floor(Math.random() * p.length);
                 if ($.inArray(x, bom) == -1) { bom.push(x) };
-            }; alert(bom);
+            };
         }
 
         function showBom() {
@@ -539,7 +546,7 @@
                 if (!stop) {
                     $('#pauze').text('continue'); stop = true; ci();
                     $('#bericht').removeClass().addClass('pauze'); $('#tekst').text('PAUZE').css('margin-left', (-50 + (x * 16)) + 'px');                
-}
+                }
                 else {
                     $('#pauze').text('pauze'); stop = false; tijd = setInterval(klok, 1000);
                     $('#bericht').removeClass().addClass('none');
@@ -550,7 +557,7 @@
         function gewonnen() {
             var id = ((b - m == 0 ? 0 : (b - m) / step) << 6) + (((x / 2) - 2) << 3) + ((y / 2) - 2) + 1;
             $.post("http://127.0.0.1:1337/zetScore", { name: usernameS, id: id, score: (min * 100) + sec }, function (data) {
-                alert(data);
+                console.log(data);
                 $.when(eigenrecords()).done(function () { records(); });
             });
         }
@@ -592,8 +599,8 @@
             $.get("http://127.0.0.1:1337/haalCatLijst", { user_id: user_id }, function (data) {
                 var html="",htmlHC="";
                 $.each(data, function (k, v) {
-                    html+="<option value='"+v.id+"'>"+(v.parend_id==0?'':'- ')+v.naam+"</option>";
-                    htmlHC+="<fieldset id='c"+v.id+"' data-hc='"+v.id+"' data-sc='"+v.parend_id+"' ondrop='drop(event)' ondragover='allowDrop(event)' draggable='true' ondragstart='drag(event)'><legend>"+v.naam+"</legend></fieldset>";
+                    html+="<option value='"+v.id+"'>"+(v.parent_id==0?'':'- ')+v.naam+"</option>";
+                    htmlHC+="<fieldset id='c"+v.id+"' data-hc='"+v.id+"' data-sc='"+v.parent_id+"' ondrop='drop(event)' ondragover='allowDrop(event)' draggable='true' ondragstart='drag(event)'><legend>"+v.naam+"</legend></fieldset>";
                 });
                 $('#c0').html(htmlHC);
                 var sub;$('[data-hc]').each(function () {sub=$(this).data("sc");
@@ -639,10 +646,10 @@
             if((ev.target.id).charAt(0)=="c" && ev.target.id!=data){
                 if(data.charAt(0)=="t" && ev.target.dataset.hc>0){
                     $.post("http://127.0.0.1:1337/updateTaak", { id: data.charAt(1), parent: ev.target.dataset.hc }, function (data) {}); 
-                    ev.target.appendChild(document.getElementById(data));console.log(ev.target.dataset.hc);}
+                    ev.target.appendChild(document.getElementById(data));}
                 else if(data.charAt(0)=="c"){
                     $.post("http://127.0.0.1:1337/updateCat", { id: data.charAt(1), parent: ev.target.dataset.hc }, function (data) {});
-                    ev.target.appendChild(document.getElementById(data));console.log(ev.target.dataset.hc);}
+                    ev.target.appendChild(document.getElementById(data));}
             }
             else if(ev.target.id=='prullenbak'){ev.target.appendChild(document.getElementById(data));
             $('#prullenbak').find('legend').siblings().hide();}
@@ -667,8 +674,10 @@
 	        $("#taakMaken").click(taakAanmaken);
             $('#c0 fieldset>legend').click(function(){$(this).parent().children('fieldset').toggle();})
         
+            $(".slide").click(function(){ $('#infotext').slideToggle();});
         });
 
+        
     </script>
 </head>
 
@@ -682,7 +691,7 @@
     <div id="menu" class="mainpart">
         <div class="info">
             <h3>Menu</h3>
-            <p>Hier komt nog een heleboel menuinformatie. Hoe je een keuze kan maken etc..</p>
+            <p>Kies hier uw gewenste programma.</p>
         </div>
         <div class="main">
             <div class="btn" onclick="mv()">MijnenVeger</div>
@@ -694,11 +703,20 @@
 
     <div id="mv" class="mainpart">
         <div id="info" class="info">
+            <div class="btn left slide alssmal">x</div>
             <div class="btn right" onclick="menu()">MENU</div>
+            <div id="infotext">
             <h3>Spelinformatie</h3>
-            <p>Hier komt nog een heleboel spelinformatie. Hoe moet je het spel spelen en hoe gebruik je de score tabellen.</p>
+            <p><b>Doel van het spel:</b> probeer in een zo kort mogelijke tijd alle verborgen mijnen op te sporen.</p>
+            <p><b>spelregels:</b> Klik met je rechtermuisknop om een vakje te markeren met een <b class="r1">v</b> als waarschijnlijk een bom</p>
+            <p>Na een tweede klik markeer je met een <b class="r2">?</b> als je het niet zeker weet.</p>
+            <p>Na een derde klik verwijder je de markering.</p>
+            <p>Klik met je linkermuisknop om een vakje te openen, een eventueel cijfer geeft aan hoeveel aangrenzende vakjes een bom bevat.</p>
+            <p>Speel je alle vakjes om de bommen leeg heb je <b class="r1">gewonnen</b> druk je op een bom dan heb je <b class="r2">verloren</b>.</p>
+            </div>
         </div>
         <div id="main">
+            <div id="bommen"></div>
             <div id="field"></div>
         </div>
         <div id="scores">
